@@ -25,17 +25,14 @@ import org.junit.Test;
 
 public class HDFSDemo {
 	
-	
 	Configuration conf = null;
 	FileSystem fs = null;
-	
 	
 	@Before
 	public void conn() throws Exception{
 		conf = new Configuration(true);
 		fs = FileSystem.get(conf);
 	}
-	
 	
 	@After
 	public void close() throws Exception{
@@ -62,11 +59,8 @@ public class HDFSDemo {
 		InputStream is = new BufferedInputStream(new FileInputStream(new File(desktop + "\\sql语句.sql")));
 		
 		
-		
 		IOUtils.copyBytes(is, output, conf, true);
 	}
-	
-	
 	
 	@Test
 	public void blk() throws Exception{
