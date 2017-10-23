@@ -3,6 +3,8 @@ package com.hello.mapreduce;
 import java.io.IOException;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 
 public class WordCountDemo {
@@ -32,8 +34,12 @@ public class WordCountDemo {
 		
 		job.setJarByClass(WordCountDemo.class);
 		
+		job.setJobName("myjob");
 		
 		job.setMapperClass(MyMapper.class);
+		job.setMapOutputKeyClass(Text.class);
+		job.setMapOutputValueClass(IntWritable.class);
+		
 		job.setReducerClass(MyReducer.class);
 		
 		job.waitForCompletion(true);

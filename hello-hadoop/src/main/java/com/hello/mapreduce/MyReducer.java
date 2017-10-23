@@ -9,8 +9,8 @@ import org.apache.hadoop.mapreduce.Reducer;
 public class MyReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 	
 	private IntWritable result = new IntWritable();
-	 
-	public void reduce(Key key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
+	
+	public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
 		int sum = 0;
 		for (IntWritable val : values) {
 			sum += val.get();
@@ -18,6 +18,6 @@ public class MyReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 		result.set(sum);
 		context.write(key, result);
 	}
-
-
+	
+	
 }

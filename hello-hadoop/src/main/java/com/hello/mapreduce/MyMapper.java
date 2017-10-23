@@ -18,5 +18,5 @@ public class MyMapper extends Mapper<Object, Text, Text, IntWritable>{
 			context.write(word, one);
 		}
 	}
-
+	
 }
