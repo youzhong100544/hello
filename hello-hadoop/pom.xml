@@ -32,19 +32,22 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-test -->
+        <!--
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-test</artifactId>
             <version>1.2.1</version>
             <scope>test</scope>
         </dependency>
-
+         -->
         <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-core -->
+        <!--
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-core</artifactId>
             <version>1.2.1</version>
         </dependency>
+         -->
         <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-core -->
         <!--
         <dependency>
