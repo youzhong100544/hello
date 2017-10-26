@@ -17,6 +17,7 @@ public class TQReducer extends Reducer<TQ, IntWritable, Text, IntWritable>{
 		for (IntWritable intWritable : values) {
 			
 		}
+		
 	}
 
 }
