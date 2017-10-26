@@ -31,33 +31,6 @@
             <!-- <scope>test</scope> -->
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-test -->
-        <!--
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-test</artifactId>
-            <version>1.2.1</version>
-            <scope>test</scope>
-        </dependency>
-         -->
-        <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-core -->
-        <!--
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-core</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-         -->
-        <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-core -->
-        <!--
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-core</artifactId>
-            <version>2.6.0-mr1-cdh5.13.0</version>
-            <type>pom</type>
-	    </dependency>
-	     -->
-
 	    <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-client -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
