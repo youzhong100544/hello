@@ -26,7 +26,7 @@ public class MyTQ {
 		//输出
 		Path output = new Path("/tq/output"); ;
 		if(output.getFileSystem(conf).exists(output)) {
-			output.getFileSystem(conf).removeAcl(output);
+			output.getFileSystem(conf).delete(output,true);
 		}
 		FileOutputFormat.setOutputPath(job, output);
 		
