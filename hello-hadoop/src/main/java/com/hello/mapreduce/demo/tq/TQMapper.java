@@ -21,7 +21,9 @@ public class TQMapper extends Mapper<LongWritable, Text, TQ, IntWritable>{
 			throws IOException, InterruptedException {
 		
 		//1949-10-01 14:21:02	34c
-		String[] split = StringUtils.split(value.toString(), "\t");
+		//String[] split = StringUtils.split(value.toString(), "\t");
+
+		String[] split = value.toString().split("\t");
 		
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		LocalDateTime localDateTime = LocalDateTime.parse(split[0],format);
