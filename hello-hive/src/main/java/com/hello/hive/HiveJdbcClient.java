@@ -24,11 +24,11 @@ public class HiveJdbcClient {
 		}
 		// replace "hive" here with the name of the user the queries should run
 		// as
-		Connection con = DriverManager.getConnection( "jdbc:hive2://node5:10000/default", "root", "");
+		Connection con = DriverManager.getConnection( "jdbc:hive2://node3:10000/default", "root", "");
 		
 		Statement stmt = con.createStatement();
 		
-		String sql = "select * from psn1 limit 5";
+		String sql = "select * from psn0 limit 5";
 		ResultSet res = stmt.executeQuery(sql);
 		while (res.next()) {
 			System.out.println(res.getString(1) + "-" + res.getString("name"));
