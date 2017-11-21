@@ -20,10 +20,6 @@ public class HTools {
 	 * @return 时间 格式：yyyyMMddHHmmss
 	 */
 	public String getDate(String year) {
-		return year
-				+ String.format(
-						"%02d%02d%02d%02d%02d",
-						new Object[] { r.nextInt(12) + 1, r.nextInt(28) + 1,
-								r.nextInt(24), r.nextInt(60), r.nextInt(60) });
+		return year + String.format( "%02d%02d%02d%02d%02d", new Object[] { r.nextInt(12) + 1, r.nextInt(28) + 1, r.nextInt(24), r.nextInt(60), r.nextInt(60) });
 	}
 }
