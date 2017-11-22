@@ -25,48 +25,11 @@
 			<!-- <scope>test</scope> -->
 		</dependency>
 
-		<!-- hadoop -->
-		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-client -->
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-client</artifactId>
-			<version>${hadoop.version}</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common -->
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-common</artifactId>
-			<version>${hadoop.version}</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-hdfs -->
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-hdfs</artifactId>
-			<version>${hadoop.version}</version>
-		</dependency>
-
 		<!-- hbase -->
-		<!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase -->
-		<dependency>
-			<groupId>org.apache.hbase</groupId>
-			<artifactId>hbase</artifactId>
-			<version>${hbase.version}</version>
-			<type>pom</type>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-client -->
 		<dependency>
 			<groupId>org.apache.hbase</groupId>
 			<artifactId>hbase-client</artifactId>
-			<version>${hbase.version}</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-common -->
-		<dependency>
-			<groupId>org.apache.hbase</groupId>
-			<artifactId>hbase-common</artifactId>
 			<version>${hbase.version}</version>
 		</dependency>
 
