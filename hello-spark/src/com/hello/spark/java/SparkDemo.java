@@ -32,8 +32,14 @@ public class SparkDemo {
 		intList.add(4);
 
 		// 将集合转换成RDD
-		JavaRDD<Integer> parallelize = sparkContext.parallelize(intList);// 只有这一种方式
+		JavaRDD<Integer> javaRDD = sparkContext.parallelize(intList);// 只有这一种方式
 
+		
+		
+		
+		
+		
+		
 
 		// 关闭资源
 		sparkContext.close();

@@ -62,9 +62,15 @@ object SparkDemo {
     println
 
     // 将集合转换成RDD
-    val value = context.makeRDD(intList,1)// 方式一
+    val scalaRDD1 = context.makeRDD(intList,1)// 方式一
 
-    val value1 = context.parallelize(intList)// 方式二
+    val scalaRDD2 = context.parallelize(intList)// 方式二
+
+
+
+
+
+
 
     // 关闭资源
     context.stop()
