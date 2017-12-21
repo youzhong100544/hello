@@ -1,8 +1,7 @@
-package java;
+package com.hello.spark.java;
 
-
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.spark.SparkConf;
@@ -36,8 +35,8 @@ public class WordCount {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public Iterable<String> call(String line) {
-				return Arrays.asList(line.split(" "));
+			public Iterator<String> call(String line) {
+				return Arrays.asList(line.split(" ")).iterator();
 			}
 		});
 
