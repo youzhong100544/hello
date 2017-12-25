@@ -1,4 +1,4 @@
-package test;
+package com.hello.test;
 
 
 public class HBaseTest {
