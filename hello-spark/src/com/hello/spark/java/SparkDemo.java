@@ -47,9 +47,9 @@ public class SparkDemo {
 		// TODO ????????????????????????????????????????
 		// List<Tuple2> tuple2List = new ArrayList<Tuple2>(); List<Tuple2> 会报错 ？？？？？
 		List coursesList = new ArrayList<Tuple2>();
-		coursesList.add(new Tuple2<Integer, String>(1, "Spark" ));
-		coursesList.add(new Tuple2<Integer, String>(2, "Java" ));
-		coursesList.add(new Tuple2<Integer, String>(3, "Hadoop" ));
+		coursesList.add(new Tuple2<Integer, String>(1, "Spark"));
+		coursesList.add(new Tuple2<Integer, String>(2, "Java"));
+		coursesList.add(new Tuple2<Integer, String>(3, "Hadoop"));
 
 
 		List scoresList = Arrays.asList (new Tuple2<Integer, Integer>(1, 100), new Tuple2<Integer, Integer>(2, 90), new Tuple2<Integer, Integer>(3, 70),
@@ -71,13 +71,13 @@ public class SparkDemo {
 			private static final long serialVersionUID = 1L;
 			@Override
 			public void call(Tuple2<Integer, Tuple2<Iterable<String>, Iterable<Integer>>> integerTuple2Tuple2) throws Exception {
-				System. out.println("Student ID:" + integerTuple2Tuple2 ._1 );
+				System. out.println("Student ID:" + integerTuple2Tuple2 ._1);
 
-				System. out.println("Student course:" + integerTuple2Tuple2 ._2 ._1 );
+				System. out.println("Student course:" + integerTuple2Tuple2 ._2 ._1);
 
-				System. out.println("Student Score:" + integerTuple2Tuple2 ._2 ._2 );
+				System. out.println("Student Score:" + integerTuple2Tuple2 ._2 ._2);
 
-				System. out.println("------------" );
+				System. out.println("------------");
 			}
 		});
 
