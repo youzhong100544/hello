@@ -57,9 +57,9 @@ public class SparkDemo {
 
 
 
-		JavaPairRDD<Integer, String> courses = sparkContext.parallelizePairs(coursesList );
+		JavaPairRDD<Integer, String> courses = sparkContext.parallelizePairs(coursesList);
 
-		JavaPairRDD<Integer, Integer> scroes = sparkContext.parallelizePairs(scoresList );
+		JavaPairRDD<Integer, Integer> scroes = sparkContext.parallelizePairs(scoresList);
 
 		// cogroup 算子
 		JavaPairRDD<Integer, Tuple2<Iterable<String>, Iterable<Integer>>> coursesScores = courses.cogroup(scroes);
