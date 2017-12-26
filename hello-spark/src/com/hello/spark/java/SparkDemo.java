@@ -56,7 +56,6 @@ public class SparkDemo {
 										new Tuple2<Integer, Integer>(1, 110), new Tuple2<Integer, Integer>(2, 95), new Tuple2<Integer, Integer>(3, 60));
 
 
-
 		JavaPairRDD<Integer, String> courses = sparkContext.parallelizePairs(coursesList);
 
 		JavaPairRDD<Integer, Integer> scroes = sparkContext.parallelizePairs(scoresList);
