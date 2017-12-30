@@ -1,4 +1,4 @@
-package com.hello.spark.java;
+package com.hello.spark.java.core;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
