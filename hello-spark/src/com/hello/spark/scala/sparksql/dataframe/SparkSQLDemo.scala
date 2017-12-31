@@ -42,7 +42,7 @@ object SparkSQLDemo {
     df.show();
     /**
       *
-    +---+------+---+
+      +---+------+---+
       | id|  name|age|
       +---+------+---+
       |  3|wangwu| 20|
