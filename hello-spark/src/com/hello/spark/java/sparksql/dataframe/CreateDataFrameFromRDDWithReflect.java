@@ -10,7 +10,7 @@ import org.apache.spark.sql.SQLContext;
 import com.hello.spark.java.bean.Student;
 
 
-public class SparkSQLDemo {
+public class CreateDataFrameFromRDDWithReflect {
 
 	public static void main(String[] args) {
 		SparkConf sparkConf = new SparkConf();
@@ -55,7 +55,8 @@ public class SparkSQLDemo {
 		 */
 		DataFrame dataFrame = sqlContext.createDataFrame(studentRDD, Student.class);
 		dataFrame.show();
-		dataFrame.printSchema();
+		// TODO
+		System.out.println("1----------------------------------------------------------------------------------------------------------------");
 		/**
 		 *
 		 	+---+---+--------+
@@ -65,7 +66,13 @@ public class SparkSQLDemo {
 			| 19|  2|    lisi|
 			| 20|  3|  wangwu|
 			+---+---+--------+
-			
+		 *
+		 * */
+		dataFrame.printSchema();
+		// TODO
+		System.out.println("2----------------------------------------------------------------------------------------------------------------");
+		/**
+		 *
 			root
 			 |-- age: integer (nullable = true)
 			 |-- id: string (nullable = true)
@@ -73,11 +80,12 @@ public class SparkSQLDemo {
 		 *
 		 * */
 		
+		// 注册表
 		dataFrame.registerTempTable("student_table");
 		// TODO
-		System.out.println("1-------------------------------------");
+		System.out.println("3----------------------------------------------------------------------------------------------------------------");
 		
-		
+		// 读取注册表中的数据
 		DataFrame selectResult = sqlContext.sql("select * from student_table where id = '1'");
 		
 		selectResult.show();
@@ -91,7 +99,7 @@ public class SparkSQLDemo {
 		 * 
 		 */
 		// TODO
-		System.out.println("2-------------------------------------");
+		System.out.println("4----------------------------------------------------------------------------------------------------------------");
 		
 		
 		selectResult = sqlContext.sql("select id, name, age from student_table where name = 'lisi'");
@@ -108,7 +116,7 @@ public class SparkSQLDemo {
 		 *  
 		 * */
 		// TODO
-		System.out.println("3-------------------------------------");
+		System.out.println("5----------------------------------------------------------------------------------------------------------------");
 		
 		selectResult = sqlContext.sql("select name, age from student_table where age > 18");
 		
@@ -124,7 +132,7 @@ public class SparkSQLDemo {
 		 *  
 		 * */
 		// TODO
-		System.out.println("4-------------------------------------");
+		System.out.println("6----------------------------------------------------------------------------------------------------------------");
 		
 		
 		// 关闭资源
