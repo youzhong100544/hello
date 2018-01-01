@@ -92,8 +92,8 @@ object CreateDataFrameFromJsonFile {
     /**
 		 * 将DataFrame注册成临时的一张表，这张表相当于临时注册到内存中，是逻辑上的表，不会雾化到磁盘
 		 */
-    dataFrame.registerTempTable("jtable")
-    val result  = sqlContext.sql("select  * from jtable")
+    dataFrame.registerTempTable("student_table")
+    val result  = sqlContext.sql("select * from student_table")
     result.show()
     
     // 关闭资源
