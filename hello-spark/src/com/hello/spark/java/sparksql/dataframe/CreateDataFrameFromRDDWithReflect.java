@@ -14,7 +14,7 @@ public class CreateDataFrameFromRDDWithReflect {
 
 	public static void main(String[] args) {
 		SparkConf sparkConf = new SparkConf();
-		sparkConf.setMaster("local").setAppName("SparkSQLDemo");
+		sparkConf.setMaster("local").setAppName("CreateDataFrameFromRDDWithReflect-Java");
 		JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
 		
 		SQLContext sqlContext = new SQLContext(sparkContext);

@@ -15,14 +15,12 @@ import org.apache.spark.sql.types.DataTypes;
 import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
 
-import com.hello.spark.java.bean.Student;
-
 
 public class SparkSQLDemo {
 
 	public static void main(String[] args) {
 		SparkConf sparkConf = new SparkConf();
-		sparkConf.setMaster("local").setAppName("CreateDataFrameFromRDDWithStruct-Java");
+		sparkConf.setMaster("local").setAppName("SparkSQLDemo-Java");
 		
 		JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
 			

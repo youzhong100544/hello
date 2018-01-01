@@ -6,32 +6,28 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 object CreateDataFrameFromRDDWithReflect {
   def main(args: Array[String]): Unit = {
+    
     val sparkConf = new SparkConf()
 
-    sparkConf.setMaster("local").setAppName("SparkSQLDemo")
+    sparkConf.setMaster("local").setAppName("CreateDataFrameFromRDDWithReflect-Scala")
 
     val sparkContext = new SparkContext(sparkConf)
 
     val sqlContext = new SQLContext(sparkContext)
 
-    val lineRDD = sparkContext.textFile("student")
+    val lineRDD = sparkContext.textFile("./student")
 
 
-    /**
-      * 将RDD隐式转换成DataFrame
-      */
-    //import sqlContext.implicits._
-
-    // 把普通格式的RDD创建DataFrame
     val studentRDD  = lineRDD.map(line => {
       val student = Student(line.split(",")(0), line.split(",")(1), Integer.valueOf(line.split(",")(2)))
       student
     })
     
 
-
+    /**
+     * 将RDD隐式转换成DataFrame
+     */
     //导入隐式转换，如果不导入无法将RDD转换成DataFrame
-    //将RDD转换成DataFrame
     import sqlContext.implicits._
 
     val studentDataFrame = studentRDD.toDF();
