@@ -15,8 +15,6 @@ import org.apache.spark.sql.types.DataTypes;
 import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
 
-import com.hello.spark.java.bean.Student;
-
 
 public class SparkSQLDemo {
 
