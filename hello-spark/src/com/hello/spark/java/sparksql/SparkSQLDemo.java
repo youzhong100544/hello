@@ -62,6 +62,10 @@ public class SparkSQLDemo {
 		
 		DataFrame dataFrame = sqlContext.createDataFrame(rowRDD, structType);
 		
+		/**
+		 * 显示 DataFrame中的内容，默认显示前20行。如果现实多行要指定多少行show(行数)
+		 * 注意：当有多个列时，显示的列先后顺序是按列的ascii码先后显示。
+		 */
 		dataFrame.show();
 		/**
 		 * 
@@ -89,7 +93,25 @@ public class SparkSQLDemo {
 		// TODO
 		System.out.println("2----------------------------------------------------------------------------------------------------------------");
 		
-		// 注册表
+		/**
+		 * dataFram自带的API 操作DataFrame
+		 */
+		//select name from table
+		dataFrame.select("name").show();
+		//select name ,age+10 as addage from table
+		dataFrame.select(dataFrame.col("name"), dataFrame.col("age").plus(10).alias("addage")).show();
+		//select name ,age from table where age>19
+		dataFrame.select(dataFrame.col("name"), dataFrame.col("age")).where(dataFrame.col("age").gt(19)).show();
+		//select age,count(*) from table group by age
+		dataFrame.groupBy(dataFrame.col("age")).count().show();
+		
+		
+		
+		
+		
+		/**
+		 * 将DataFrame注册成临时的一张表，这张表相当于临时注册到内存中，是逻辑上的表，不会雾化到磁盘
+		 */
 		dataFrame.registerTempTable("student_table");
 		// TODO
 		System.out.println("3----------------------------------------------------------------------------------------------------------------");

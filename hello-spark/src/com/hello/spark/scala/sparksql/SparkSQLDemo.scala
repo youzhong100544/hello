@@ -19,7 +19,9 @@ object SparkSQLDemo {
     lineRDD.map(line => {
       
     })
-    
+    // TODO
+		System.out.println("1----------------------------------------------------------------------------------------------------------------");
+		
 
     // 关闭资源
     sparkContext.stop()
