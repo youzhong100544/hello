@@ -1,5 +1,6 @@
 package com.hello.spark.scala
 
+import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
 object WordCount {
@@ -11,19 +12,19 @@ object WordCount {
 
     val context = new SparkContext(conf)
 
-    val lineRDD = context.textFile("C:\\Users\\dafochaodong\\Desktop\\wc.txt")
+    val lineRDD : RDD[String]  = context.textFile("C:\\Users\\dafochaodong\\Desktop\\wc.txt")
 
 
-    val wordRDD = lineRDD.flatMap((line : String) => {
+    val wordRDD : RDD[String] = lineRDD.flatMap((line : String) => {
       line.split(" ")
     })
 
-    val pairRDD = wordRDD.map(word => {
+    val pairRDD : RDD[Tuple2[String, Integer]] = wordRDD.map(word => {
       new Tuple2(word, 1)
     })
 
 
-    val resultRDD = pairRDD.reduceByKey(_+_)
+    val resultRDD : RDD[Tuple2[String, Integer]] = pairRDD.reduceByKey(_+_)
 
     // 一 输出到文件
     //resultRDD.saveAsTextFile("C:\\Users\\dafochaodong\\Desktop\\WordCountResult.txt")
