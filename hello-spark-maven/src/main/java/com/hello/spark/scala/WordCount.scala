@@ -12,7 +12,7 @@ object WordCount {
 
     val context = new SparkContext(conf)
 
-    val lineRDD : RDD[String]  = context.textFile("C:\\Users\\dafochaodong\\Desktop\\wc.txt")
+    val lineRDD : RDD[String] = context.textFile("C:\\Users\\dafochaodong\\Desktop\\wc.txt")
 
     val wordRDD : RDD[String] = lineRDD.flatMap((line : String) => {
       line.split(" ")
