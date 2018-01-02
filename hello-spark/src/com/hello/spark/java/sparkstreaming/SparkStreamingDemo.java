@@ -9,6 +9,7 @@ public class SparkStreamingDemo {
 		SparkConf sparkConf = new SparkConf();
 		sparkConf.setMaster("local").setAppName("SparkStreamingDemo-Java");
 
+		
 		JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
 		
 		// 关闭资源
