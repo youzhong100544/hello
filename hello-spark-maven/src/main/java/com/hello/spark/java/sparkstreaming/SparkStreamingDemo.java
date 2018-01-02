@@ -8,7 +8,7 @@ import org.apache.spark.streaming.api.java.JavaStreamingContext;
 
 public class SparkStreamingDemo {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		SparkConf sparkConf = new SparkConf();
 		/**
 		 * 1、local的模拟线程数必须大于等于2 因为一条线程被receiver(接受数据的线程)占用，另外一个线程是job执行
@@ -18,9 +18,9 @@ public class SparkStreamingDemo {
 		 */
 		sparkConf.setMaster("local[2]").setAppName("SparkStreamingDemo-Java");
 
-		// 方式一：sparkcontext
-		
 		JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
+
+		// 方式一：sparkcontext
 		JavaStreamingContext javaStreamingContext = new JavaStreamingContext(sparkContext, Durations.seconds(5));
 		
 		// 方式二：sparkconf
