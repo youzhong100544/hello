@@ -14,7 +14,6 @@ object WordCount {
 
     val lineRDD : RDD[String]  = context.textFile("C:\\Users\\dafochaodong\\Desktop\\wc.txt")
 
-
     val wordRDD : RDD[String] = lineRDD.flatMap((line : String) => {
       line.split(" ")
     })
