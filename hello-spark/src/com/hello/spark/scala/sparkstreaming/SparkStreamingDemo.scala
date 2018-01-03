@@ -13,7 +13,9 @@ object SparkStreamingDemo {
     val sparkConf = new SparkConf()
     sparkConf.setMaster("local[2]").setAppName("SparkStreamingDemo-Scala")
     
-    val sparkContext = new SparkContext()
+    sparkConf.set("spark.driver.allowMultipleContexts","true");
+    
+    val sparkContext = new SparkContext(sparkConf)
     
     val streamingContextBySparkContext = new StreamingContext(sparkContext,Durations.seconds(5))
     

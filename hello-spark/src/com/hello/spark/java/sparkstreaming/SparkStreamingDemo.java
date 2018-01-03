@@ -28,6 +28,8 @@ public class SparkStreamingDemo {
 		 */
 		sparkConf.setMaster("local[2]").setAppName("SparkStreamingDemo-Java");
 
+		sparkConf.set("spark.driver.allowMultipleContexts","true");
+		
 		JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
 
 		// 方式一：sparkconf
@@ -38,7 +40,7 @@ public class SparkStreamingDemo {
 
 		
 		
-		JavaReceiverInputDStream<String> lines = streamingContext.socketTextStream("node5", 9999);
+		JavaReceiverInputDStream<String> lines = streamingContext.socketTextStream("node1", 9999);
 
 		JavaDStream<String> words = lines.flatMap(new FlatMapFunction<String, String>() {
 			
