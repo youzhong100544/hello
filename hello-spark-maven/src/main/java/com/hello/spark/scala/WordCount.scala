@@ -1,7 +1,7 @@
 package com.hello.spark.scala
 
-import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
 
 object WordCount {
 
