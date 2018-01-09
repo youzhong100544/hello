@@ -1,7 +1,9 @@
-package com.hello.io.utils;
+package com.hello.io.util;
+
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+
 public enum Calculator {
 	Instance;
 	private final static ScriptEngine jse = new ScriptEngineManager().getEngineByName("JavaScript");

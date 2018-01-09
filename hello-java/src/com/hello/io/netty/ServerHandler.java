@@ -7,7 +7,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 import java.io.UnsupportedEncodingException;
 
-import com.hello.io.utils.Calculator;
+import com.hello.io.util.Calculator;
 
 /**
  * Handles a server-side channel.
