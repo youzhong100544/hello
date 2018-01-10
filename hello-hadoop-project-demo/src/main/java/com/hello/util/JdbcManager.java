@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import org.apache.hadoop.conf.Configuration;
 
-import com.sxt.common.GlobalConstants;
+import com.hello.common.GlobalConstants;
 
 /**
  * jdbc管理
