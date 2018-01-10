@@ -33,6 +33,7 @@
 			<!-- <scope>test</scope> -->
 		</dependency>
 
+		<!-- hadoop -->
 		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-client -->
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>

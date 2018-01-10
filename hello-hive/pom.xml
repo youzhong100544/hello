@@ -24,6 +24,7 @@
 			<!-- <scope>test</scope> -->
 		</dependency>
 
+		<!-- hive -->
 		<!-- https://mvnrepository.com/artifact/org.apache.hive/hive-exec -->
 		<dependency>
 			<groupId>org.apache.hive</groupId>
