@@ -32,6 +32,8 @@ public class WordCount implements Tool {
 
 		Job job = Job.getInstance(conf, "analyser_logdata");
 
+		job.setJarByClass(WordCount.class);
+
 		return 0;
 	}
 
