@@ -17,6 +17,12 @@ import org.apache.spark.api.java.function.VoidFunction;
 
 import scala.Tuple2;
 
+/**
+ * WordCount
+ *
+ * @author
+ * @version
+ */
 public class WordCount {
 
 	public static void main(String[] args) {

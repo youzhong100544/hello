@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * SparkDemo
+ *
+ * @author
+ * @version
+ */
 public class SparkDemo {
 
 	public static void main(String[] args) {
