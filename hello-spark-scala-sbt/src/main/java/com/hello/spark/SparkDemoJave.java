@@ -14,7 +14,7 @@ import java.util.List;
  * @author
  * @version
  */
-public class SparkDemo {
+public class SparkDemoJave {
 
 	public static void main(String[] args) {
 		SparkConf sparkConf = new SparkConf();

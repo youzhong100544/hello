@@ -23,7 +23,7 @@ import scala.Tuple2;
  * @author
  * @version
  */
-public class WordCount {
+public class WordCountJava {
 
 	public static void main(String[] args) {
 		SparkConf sparkConf = new SparkConf();
