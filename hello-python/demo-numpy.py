@@ -25,4 +25,4 @@ print(a)
 a = numpy.random.random(6)
 print(a)
 
-numpy.ones()
+
