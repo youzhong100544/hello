@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from click._compat import raw_input
 
-# 基础语法
+"""基础语法"""
 
 # Python注释  ==============================================================================================
 # python中单行注释采用 # 开头。
@@ -102,24 +102,51 @@ age = raw_input("请输出年龄：")
 print("姓名：%s" %(name))
 print("年龄：%s" %age)
 
-name = input("请输出姓名：")
-age = input("请输出年龄：")
-age_str = str(age)
-height = input("请输出身高：")
-height_str = str(height)
-print("姓名：%s" %name)
-#print("年龄：%d" %age) # TypeError: %d format: a number is required, not str
-print("年龄：%s" %age)
+
 
 # python3.X
 # python3.X 版本中,没有 raw_input() 函数，只有 input(); 并且 python3 中的 input 与 python2 中的 raw_input() 功能一样
-
+name = input("请输出姓名：")
+age = input("请输出年龄：")
+print(type(age))
+# age_str = str(age)
+height = input("请输出身高：")
+print(type(height))
+# height_str = str(height)
+print("姓名：%s" %name)
+#print("年龄：%d" %age) # TypeError: %d format: a number is required, not str
+print("年龄：%s \t 身高：%s" %(age,height))
 
 
 # 输出
+# print 默认输出是换行的，
+# print() 函数也可以接受多个字符串，用逗号 “,” 隔开
+x="a"
+y="b"
+# 换行输出
+print(x)
+print(y)
+print("xxxx",)
+print(x,y)
+
+# print() 也可以打印整数，或者计算结果：
+print(100)
+print(100 + 200)
+print('200 + 300 =', 200 + 300)
+
+# python3.x中如何实现print不换行
+# 大家应该知道python中print之后是默认换行的，
+# 那如何我们不想换行，且不想讲输出内容用一个print函数输出时，就需要改变print默认换行的属性，
+# 方法如下：
+print('contents', end='!@#$%^&*')
+
+# end就表示print将如何结束，默认为end="\n"（换行）
+print("祝各位身体健康")
+print("！")
 
 
-
+print("祝各位身体健康", end=' ')
+print("！")
 
 
 
