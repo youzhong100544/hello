@@ -112,9 +112,9 @@ print (list[2:])        # 输出从第三个元素开始的所有元素
 print (tinylist * 2)    # 输出两次列表
 print (list + tinylist) # 连接列表
 
-print (list.append('append'))
-
-
+print ('list.append = ',list.append('append'))
+print ('list.append = ',list.append(['append']))
+print (list)
 # Tuple（元组）==============================================
 tuple = ( 'abcd', 786 , 2.23, 'runoob', 70.2  )
 tinytuple = (123, 'runoob')
