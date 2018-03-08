@@ -12,9 +12,9 @@ print(a)
 a = numpy.array([[1,2,3], [4, 5, 6]], dtype=int)
 print(a)
 
-print(a.shape)
-print(a.size)
-print(a.dtype)
+print('shape',a.shape)
+print('size',a.size)
+print('dtype',a.dtype)
 
 a = numpy.arange(10).reshape(2, 5) # 创建2行5列的二维数组，
 # 也可以创建三维数组，
