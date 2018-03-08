@@ -76,3 +76,55 @@ def power(x, n = 2):
 print(power(5))
 
 
+
+"""""""""""""""""""""变量"""""""""""""""""""""
+print('变量')
+
+a = 400 # """全局变量"""
+names = ['jeck', 'rose'] # """全局变量"""
+def test(a):
+    return a + 100
+print(test(200)) # 输出 300
+print(a)# 输出 400
+print('-----------------------------')
+def test1():
+    a = 300
+    return a + 100
+print(test1()) # 输出 400
+print(a)# 输出 400
+print('-----------------------------')
+def test2():
+    global a
+    a = 300
+    
+    names.append("object")
+    print(names) # 输出['jeck', 'rose', 'object']
+    return a + 100
+print(test2()) # 输出 400
+print(a)# 输出300
+print(names) # 输出['jeck', 'rose', 'object']
+print('-----------------------------')
+
+"""可变参数""" #=========
+def test3(a, *b): 
+    return a ,b
+
+print(test3(1)) # 输出(1, ())
+print(test3(1,2,3)) # 输出(1, (2, 3))
+print(test3(1,2,3,4,5)) # 输出(1, (2, 3, 4, 5))
+print(test3(1,2,[3,4,5])) # 输出(1, (2, [3, 4, 5]))
+
+
+
+"""匿名函数""" #=========
+def test4(a, b): 
+    return a + b
+def test5(a, b): 
+    return a * b
+def test6(a, b, func): 
+    return func(a, b)
+
+      
+print(test6(6, 2, lambda x,y : x + y)) # 输出8
+
+print(test6(6, 2, test5))# 输出12
