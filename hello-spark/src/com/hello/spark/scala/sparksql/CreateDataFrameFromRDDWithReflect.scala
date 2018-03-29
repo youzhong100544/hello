@@ -1,8 +1,9 @@
-package com.hello.spark.scala.sparksql.dataframe
+package com.hello.spark.scala.sparksql
 
 import com.hello.spark.scala.bean.Student
-import org.apache.spark.sql.{DataFrameReader, SQLContext}
+import org.apache.spark.sql.{SQLContext
 import org.apache.spark.{SparkConf, SparkContext}
+import scala.reflect.api.materializeTypeTag
 
 object CreateDataFrameFromRDDWithReflect {
   def main(args: Array[String]): Unit = {

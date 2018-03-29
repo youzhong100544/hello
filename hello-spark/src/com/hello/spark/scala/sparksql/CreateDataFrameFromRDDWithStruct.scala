@@ -1,4 +1,4 @@
-package com.hello.spark.scala.sparksql.dataframe
+package com.hello.spark.scala.sparksql
 
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.SparkConf
