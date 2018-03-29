@@ -1,4 +1,4 @@
-package com.hello.spark.java.sparksql.dataframe;
+package com.hello.spark.java.sparksql;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;

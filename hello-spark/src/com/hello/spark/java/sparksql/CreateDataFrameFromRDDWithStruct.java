@@ -1,4 +1,4 @@
-package com.hello.spark.java.sparksql.dataframe;
+package com.hello.spark.java.sparksql;
 
 
 import java.util.Arrays;
