@@ -1,23 +1,23 @@
 package com.hello.spark.scala.sparksql
 
 import com.hello.spark.scala.bean.Student
-import org.apache.spark.sql.{SQLContext
+import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
-import scala.reflect.api.materializeTypeTag
+import org.apache.spark.sql.SQLContext
+
 
 object CreateDataFrameFromRDDWithReflect {
   def main(args: Array[String]): Unit = {
     
-    val sparkConf = new SparkConf()
-
-    sparkConf.setMaster("local").setAppName("CreateDataFrameFromRDDWithReflect-Scala")
+    val sparkConf = new SparkConf().setMaster("local").setAppName("CreateDataFrameFromRDDWithReflect-Scala")
 
     val sparkContext = new SparkContext(sparkConf)
 
     val sqlContext = new SQLContext(sparkContext)
 
-    val lineRDD = sparkContext.textFile("./student")
+    val path = "C:\\Users\\dell\\Desktop\\student.txt"
 
+    val lineRDD : RDD[String] = sparkContext.textFile(path)
 
     val studentRDD  = lineRDD.map(line => {
       val student = Student(line.split(",")(0), line.split(",")(1), Integer.valueOf(line.split(",")(2)))

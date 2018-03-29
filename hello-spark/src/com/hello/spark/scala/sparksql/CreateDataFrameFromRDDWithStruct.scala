@@ -1,9 +1,9 @@
 package com.hello.spark.scala.sparksql
 
-import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.{Row, RowFactory, SQLContext}
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
-import org.apache.spark.sql.RowFactory
+import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.types.StringType
 import org.apache.spark.sql.types.IntegerType
@@ -11,25 +11,27 @@ import org.apache.spark.sql.types.StructField
 
 object CreateDataFrameFromRDDWithStruct {
   def main(args: Array[String]): Unit = {
-    val sparkConf = new SparkConf()
-
-    sparkConf.setMaster("local").setAppName("CreateDataFrameFromRDDWithStruct-Scala")
+    val sparkConf = new SparkConf().setMaster("local").setAppName("CreateDataFrameFromRDDWithStruct-Scala")
 
     val sparkContext = new SparkContext(sparkConf)
 
     val sqlContext = new SQLContext(sparkContext)
 
-    val lineRDD = sparkContext.textFile("./student")
+    val path = "C:\\Users\\dell\\Desktop\\student.txt"
+
+    val lineRDD : RDD[String] = sparkContext.textFile(path)
     
-    val rowRDD = lineRDD.map(line => {
+    val rowRDD : RDD[Row] = lineRDD.map((line : String) => {
       RowFactory.create(line.split(",")(0), line.split(",")(1), Integer.valueOf(line.split(",")(2)))
     })
     
-    val schema : StructType = StructType(List(
-          StructField("id",StringType,true),
-          StructField("name",StringType,true),
-          StructField("age",IntegerType,true)
-          ))
+    val schema : StructType = StructType(
+      List(
+        StructField("id",StringType,true),
+        StructField("name",StringType,true),
+        StructField("age",IntegerType,true)
+      )
+    )
     
 
     val dataFrame = sqlContext.createDataFrame(rowRDD, schema)
