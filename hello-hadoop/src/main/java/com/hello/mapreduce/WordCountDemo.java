@@ -11,34 +11,23 @@ import org.apache.hadoop.mapreduce.lib.db.DBInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+/**
+ * WordCountDemo
+ *
+ * @author
+ * @date
+ */
 public class WordCountDemo {
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-		/*
-		// Create a new Job
-		Job job = Job.getInstance();
-		job.setJarByClass(MyJob.class);
-		
-		// Specify various job-specific parameters
-		job.setJobName("myjob");
-		
-		job.setInputPath(new Path("in"));
-		job.setOutputPath(new Path("out"));
-		
-		job.setMapperClass(MyJob.MyMapper.class);
-		job.setReducerClass(MyJob.MyReducer.class);
-		
-		// Submit the job, then poll for progress until the job is complete
-		job.waitForCompletion(true);
-		*/
-		
 		
 		Configuration conf = new Configuration(true);
 		Job job = Job.getInstance(conf);
 		
+		job.setJobName("myjob");
+		
 		job.setJarByClass(WordCountDemo.class);
 		
-		job.setJobName("myjob");
 		
 		// 输入
 		Path input = new Path("/user/root/wc.txt");
