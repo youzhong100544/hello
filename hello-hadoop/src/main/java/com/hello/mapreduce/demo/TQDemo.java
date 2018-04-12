@@ -50,17 +50,15 @@ public class TQDemo {
 		
 		Configuration conf = new Configuration(true);
 		
-		conf.set("fs.defaultFS", "hdfs://node:8020");
-		
 		Job job = Job.getInstance(conf, "TQDemo");
 	
 		job.setJarByClass(TQDemo.class);
 		
 		// 输入输出路径
-		Path input = new Path("/data/tq/input");
+		Path input = new Path("/user/root/tq.txt");
 		FileInputFormat.addInputPath(job, input);
 		
-		Path output = new Path("/data/tq/output");
+		Path output = new Path("/output");
 		if (output.getFileSystem(conf).exists(output)) {
 			output.getFileSystem(conf).delete(output, true);
 		}

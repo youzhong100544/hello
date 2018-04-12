@@ -42,8 +42,17 @@ public class WordCountWithCombinerDemo {
 		FileOutputFormat.setOutputPath(job, output);
 		
 		// Mapper
-		job.setMapperClass(WordCountMapper.class);
+		job.setMapperClass(WordCountWithCombinerMapper.class);
 		
+		/*
+		当mapper与reducer 的输出类型一致时可以用　job.setOutputKeyClass与job.setOutputValueClass这两个进行配置就行，
+		但是当mapper用于reducer两个的输出类型不一致的时候就需要分别进行配置了。
+		
+		如果加了job.setMapOutputKeyClass(**.class); job.setMapOutputValueClass(**.class);
+		
+		那job.setOutputKeyClass(**.class);job.setOutputValueClass(**.class);
+		设置为reducer的输出格式，如果没有设前者，那后者应该设置为mapper的输出格式
+		*/
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(IntWritable.class);
 		
@@ -51,15 +60,15 @@ public class WordCountWithCombinerDemo {
 //		job.setOutputValueClass(IntWritable.class);
 		
 		// Combiner
-		job.setCombinerClass(WordCountReducer.class);
+		job.setCombinerClass(WordCountWithCombinerReducer.class);
 		// Reducer
-		job.setReducerClass(WordCountReducer.class);
+		job.setReducerClass(WordCountWithCombinerReducer.class);
 		
 		System.exit(job.waitForCompletion(true) ? 0 : 1);
 		
 	}
 	
-	public static class WordCountMapper extends Mapper<Object, Text, Text, IntWritable>{
+	public static class WordCountWithCombinerMapper extends Mapper<Object, Text, Text, IntWritable>{
 			   
 		private final static IntWritable one = new IntWritable(1);
 		private Text word = new Text();
@@ -74,7 +83,7 @@ public class WordCountWithCombinerDemo {
 		}
 	}
 	
-	public static class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+	public static class WordCountWithCombinerReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 		
 		private IntWritable result = new IntWritable();
 		
