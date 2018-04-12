@@ -7,7 +7,6 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.lib.db.DBInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
@@ -22,9 +21,10 @@ public class WordCountDemo {
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 		
 		Configuration conf = new Configuration(true);
+		
 		Job job = Job.getInstance(conf);
 		
-		job.setJobName("myjob");
+		job.setJobName("WordCountDemo");
 		
 		job.setJarByClass(WordCountDemo.class);
 		
@@ -33,8 +33,6 @@ public class WordCountDemo {
 		Path input = new Path("/user/root/wc.txt");
 		FileInputFormat.addInputPath(job, input);
 		
-		//DBInputFormat.setInput(job, inputClass, inputQuery, inputCountQuery);
-		
 		// 输出
 		Path output = new Path("/output");
 		if (output.getFileSystem(conf).exists(output)) {
@@ -42,12 +40,13 @@ public class WordCountDemo {
 		}
 		FileOutputFormat.setOutputPath(job, output);
 		
-		
-		job.setMapperClass(MyMapper.class);
+		// Mapper
+		job.setMapperClass(WordCountMapper.class);
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(IntWritable.class);
 		
-		job.setReducerClass(MyReducer.class);
+		// Reducer
+		job.setReducerClass(WordCountReducer.class);
 		
 		job.waitForCompletion(true);
 		

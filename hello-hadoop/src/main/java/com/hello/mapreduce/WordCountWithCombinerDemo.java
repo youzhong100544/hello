@@ -23,7 +23,11 @@ public class WordCountWithCombinerDemo {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
-		Job job = Job.getInstance(conf, "word count");
+		
+		// 本地运行
+		// conf.set("fs.defaultFS", "hdfs://node:8020");
+		
+		Job job = Job.getInstance(conf, "WordCountWithCombinerDemo");
 		job.setJarByClass(WordCountWithCombinerDemo.class);
 		
 		// 输入
@@ -37,12 +41,19 @@ public class WordCountWithCombinerDemo {
 		}
 		FileOutputFormat.setOutputPath(job, output);
 		
+		// Mapper
 		job.setMapperClass(WordCountMapper.class);
-		job.setCombinerClass(WordCountReducer.class);
-		job.setReducerClass(WordCountReducer.class);
 		
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(IntWritable.class);
+		job.setMapOutputKeyClass(Text.class);
+		job.setMapOutputValueClass(IntWritable.class);
+		
+//		job.setOutputKeyClass(Text.class);
+//		job.setOutputValueClass(IntWritable.class);
+		
+		// Combiner
+		job.setCombinerClass(WordCountReducer.class);
+		// Reducer
+		job.setReducerClass(WordCountReducer.class);
 		
 		System.exit(job.waitForCompletion(true) ? 0 : 1);
 		
@@ -70,8 +81,8 @@ public class WordCountWithCombinerDemo {
 		@Override
 		public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
 			int sum = 0;
-			for (IntWritable val : values) {
-				sum += val.get();
+			for (IntWritable value : values) {
+				sum += value.get();
 			}
 			result.set(sum);
 			context.write(key, result);
