@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.DriverManager;
 
-public class HiveJdbcClient {
+public class HiveJDBCClient {
 
 	private static String driverName = "org.apache.hive.jdbc.HiveDriver";
 
