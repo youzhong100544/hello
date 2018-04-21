@@ -26,7 +26,7 @@ public class HBaseDemo {
 	public void begin(){
 		conf = HBaseConfiguration.create();
 
-		// 如果是伪分布式  zk指定hbase
+		// 如果是伪分布式  zk指定hbase的服务器
 		conf.set("hbase.zookeeper.quorum", "node2,node3,node4");
 
 		try {
