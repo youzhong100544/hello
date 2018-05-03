@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Logger;
 
-/*
+/**
 	final
 		final关键字的含义?
 			final在Java中是一个保留的关键字，可以声明类（不能被继承）、方法（不能被重写）、以及变量（不能被修改）（成员变量、本地变量（局部变量））。
