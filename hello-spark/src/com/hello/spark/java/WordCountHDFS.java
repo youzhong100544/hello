@@ -2,7 +2,11 @@ package com.hello.spark.java;
 
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.*;
+import org.apache.hadoop.fs.BlockLocation;
+import org.apache.hadoop.fs.FileStatus;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.FsStatus;
+import org.apache.hadoop.fs.Path;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -15,7 +19,6 @@ import scala.Tuple2;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class WordCountHDFS {
@@ -42,20 +45,17 @@ public class WordCountHDFS {
 			System.out.println(fileBlockLocations[i]);
 		}
 
-		JavaRDD<String> words = line.flatMap(new FlatMapFunction<String,String>(){
-
+		JavaRDD<String> words = line.flatMap(new FlatMapFunction<String, String>() {
 			/**
 			 *
 			 */
 			private static final long serialVersionUID = 1L;
 
-			public Iterator<String> call(String line) throws Exception {
-
-				return Arrays.asList(line.split(" ")).iterator();
+			@Override
+			public Iterable<String> call(String line) {
+				return Arrays.asList(line.split(" "));
 			}
-
 		});
-
 
 		JavaPairRDD<String,Integer> pair = words.mapToPair(new PairFunction<String, String, Integer>() {
 
@@ -65,6 +65,7 @@ public class WordCountHDFS {
 			private static final long serialVersionUID = 1L;
 
 
+			@Override
 			public Tuple2<String, Integer> call(String word) throws Exception {
 				return new Tuple2<String, Integer>(word, 1);
 			}
@@ -77,6 +78,7 @@ public class WordCountHDFS {
 			 */
 			private static final long serialVersionUID = 1L;
 
+			@Override
 			public Integer call(Integer i1, Integer i2) throws Exception {
 				return i1 + i2;
 			}
@@ -90,19 +92,21 @@ public class WordCountHDFS {
 			 */
 			private static final long serialVersionUID = 1L;
 
+			@Override
 			public void call(Tuple2<String, Integer> tuple) throws Exception {
 				System.out.println(tuple);
 			}
 		});
 		// 排序
 		// K V 倒置
-		JavaPairRDD<Integer, String> keyValueConvertResult = result.mapToPair(new PairFunction<Tuple2<String,Integer>, Integer, String>() {
+		JavaPairRDD<Integer,String> keyValueConvertResult = result.mapToPair(new PairFunction<Tuple2<String,Integer>, Integer, String>() {
 
 			/**
 			 *
 			 */
 			private static final long serialVersionUID = 1L;
 
+			@Override
 			public Tuple2<Integer, String> call(Tuple2<String, Integer> tuple) throws Exception {
 				return new Tuple2<Integer, String>(tuple._2, tuple._1);
 			}
@@ -118,6 +122,7 @@ public class WordCountHDFS {
 			 */
 			private static final long serialVersionUID = 1L;
 
+			@Override
 			public void call(Tuple2<Integer, String> tuple) throws Exception {
 
 				System.out.println(tuple._2 + "," + tuple._1);

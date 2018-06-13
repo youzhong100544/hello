@@ -9,10 +9,12 @@ object WordCount {
     val conf = new SparkConf()
     conf.setMaster("local").setAppName("WordCount")
 
+    val inputPath = "C:\\Users\\calm\\Desktop\\"
+    val outputPath = "C:\\Users\\calm\\Desktop\\output\\spark"
 
     val context = new SparkContext(conf)
 
-    val lineRDD : RDD[String] = context.textFile("C:\\Users\\dafochaodong\\Desktop\\wc.txt")
+    val lineRDD : RDD[String] = context.textFile(inputPath + "hello.txt")
 
     val wordRDD : RDD[String] = lineRDD.flatMap((line : String) => {
       line.split(" ")
@@ -22,13 +24,8 @@ object WordCount {
       new Tuple2(word, 1)
     })
 
-
     val resultRDD : RDD[Tuple2[String, Integer]] = pairRDD.reduceByKey(_+_)
 
-    // 一 输出到文件
-    //resultRDD.saveAsTextFile("C:\\Users\\dafochaodong\\Desktop\\WordCountResult.txt")
-
-    // 二 输出控制台
     resultRDD.collect().foreach(println)
 
     // 排序
@@ -36,6 +33,7 @@ object WordCount {
     val resultSort = resultRDD.sortBy(tuple => {tuple._2}, false)
 
     resultSort.collect().foreach(println)
+
 
     // 排序
     // 方式二

@@ -6,3 +6,17 @@
 print('demo - python 3.6')
 print("你好，3.6")
 
+
+print('-------------------------------------------------------')
+
+def demo_print():
+    print ("demo_print")
+
+def demo_print_arg(str):
+    print ("demo_print_arg: " + str)
+
+
+if __name__ == '__main__':
+    demo_print()
+    demo_print_arg('arg')
+

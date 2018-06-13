@@ -27,37 +27,41 @@ object WordCountHDFS {
     val sparkConf = new SparkConf().setMaster("local").setAppName("WordCount")
 
     val sc = new SparkContext(sparkConf)
-    
-    val hdfsInputPath = "/user/root/test.txt"
-    val hdfsOutputPath = "/user/root/test.txt"
-    
+
+    val hdfsInputPath = "hdfs://node:9000/user/root/wc.txt"
+    val hdfsOutputPath = "hdfs://node:9000/output/spark/wordcount"
+
     val path : Path = new Path(hdfsInputPath)
     val hc : Configuration = sc.hadoopConfiguration
-    val fs : FileSystem = FileSystem.get(hc) 
-		val file : FileStatus = fs.getFileStatus(path)
-		val fileBlockLocations : Array[BlockLocation] = fs.getFileBlockLocations(file, 0, file.getLen())
-		
-		for (i <- 0 until fileBlockLocations.length){
-			println(fileBlockLocations(i))
-		}
-		
-		val input : FSDataInputStream = fs.open(path)
-		val readByte : Byte = input.readByte()
-		println(readByte)
-		println(readByte.toChar)
-    
-//    sc.hadoopConfiguration.set("hbase.zookeeper.quorum ","zkNode1,zkNode2,zkNode3")  
-//    sc.hadoopConfiguration.set("zookeeper.znode.parent","/hbase")  
-//    sc.hadoopConfiguration.set(TableOutputFormat.OUTPUT_TABLE,"lxw1234")  
-//    
-//    val job = new Job(sc.hadoopConfiguration)  
-//    job.setOutputKeyClass(classOf[ImmutableBytesWritable])  
-//    job.setOutputValueClass(classOf[Result])  
-//    job.setOutputFormatClass(classOf[TableOutputFormat[ImmutableBytesWritable]])      
-//    val key = new LongWritable()  
-//    val value = new BytesWritable()  
+    val fs : FileSystem = FileSystem.get(hc)
+    val file : FileStatus = fs.getFileStatus(path)
+    val fileBlockLocations : Array[BlockLocation] = fs.getFileBlockLocations(file, 0, file.getLen())
+
+    for (i <- 0 until fileBlockLocations.length){
+      println(fileBlockLocations(i))
+    }
+
+    val input : FSDataInputStream = fs.open(path)
+    val readByte : Byte = input.readByte()
+    println(readByte)
+    println(readByte.toChar)
+
+    //    sc.hadoopConfiguration.set("hbase.zookeeper.quorum ","zkNode1,zkNode2,zkNode3")
+    //    sc.hadoopConfiguration.set("zookeeper.znode.parent","/hbase")
+    //    sc.hadoopConfiguration.set(TableOutputFormat.OUTPUT_TABLE,"lxw1234")
+    //
+    //    val job = new Job(sc.hadoopConfiguration)
+    //    job.setOutputKeyClass(classOf[ImmutableBytesWritable])
+    //    job.setOutputValueClass(classOf[Result])
+    //    job.setOutputFormatClass(classOf[TableOutputFormat[ImmutableBytesWritable]])
+    //    val key = new LongWritable()
+    //    val value = new BytesWritable()
 
     val lineRdd = sc.textFile(hdfsInputPath)
+    //  val lines = sc.textFile("D:/resources/README.md")   // 读取本地文件
+    //  val lines = sc.textFile("/library/wordcount/input")   // 读取HDFS文件，并切分成不同的Partition
+    //  val lines = sc.textFile("hdfs://master:9000/libarary/wordcount/input")  // 或者明确指明是从HDFS上获取数据
+
 
     val wordRDD = lineRdd.flatMap ( x => {
       x.split(" ")
@@ -69,6 +73,12 @@ object WordCountHDFS {
     val resultRDD = pairRDD.reduceByKey((v1:Int,v2:Int) => {
       v1 + v2
     })
+
+    val output = new Path(hdfsOutputPath);
+
+    // 删除输出目录
+    if (fs.exists(output))
+      fs.delete(output, true)
 
     resultRDD.saveAsTextFile(hdfsOutputPath)
 
