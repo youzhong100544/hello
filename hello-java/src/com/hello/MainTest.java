@@ -11,6 +11,7 @@ public class MainTest {
 		int b = 9;
 		b++;
 		System.out.println("b=" + b);//9
-		
+
+
 	}
 }
