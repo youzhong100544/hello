@@ -17,13 +17,13 @@ print(bool(''))
 # 空函数 ====================================================
 # 如果想定义一个什么事也不做的空函数，可以用pass语句：
 def nop():
-    pass
+	pass
 
 # pass语句什么都不做，那有什么用？实际上pass可以用来作为占位符，比如现在还没想好怎么写函数的代码，就可以先放一个pass，让代码能运行起来。
 # pass还可以用在其他语句里，比如：
 age = 19
 if age >= 18:
-    pass
+	pass
 
 # 缺少了pass，代码运行就会有语法错误。
 
@@ -36,9 +36,9 @@ if age >= 18:
 import math
 
 def move(x, y, step, angle=0):
-    nx = x + step * math.cos(angle)
-    ny = y - step * math.sin(angle)
-    return nx, ny
+	nx = x + step * math.cos(angle)
+	ny = y - step * math.sin(angle)
+	return nx, ny
 # 调用
 x, y = move(100, 100, 60, math.pi / 6)
 print(x, y)
@@ -49,16 +49,16 @@ print(r)
 
 
 def power(x):
-    return x * x
+	return x * x
 
 print(power(5))
 
 def power(x, n):
-    s = 1
-    while n > 0:
-        n = n - 1
-        s = s * x
-    return s
+	s = 1
+	while n > 0:
+		n = n - 1
+		s = s * x
+	return s
 print(power(5,3))
 # print(power(5))
 # TypeError: power() missing 1 required positional argument: 'n'
@@ -68,11 +68,11 @@ print(power(5,3))
 # 这个时候，默认参数就排上用场了。由于我们经常计算x2，所以，完全可以把第二个参数n的默认值设定为2：
 
 def power(x, n = 2):
-    s = 1
-    while n > 0:
-        n = n - 1
-        s = s * x
-    return s
+	s = 1
+	while n > 0:
+		n = n - 1
+		s = s * x
+	return s
 print(power(5))
 
 
@@ -83,23 +83,23 @@ print('变量')
 a = 400 # """全局变量"""
 names = ['jeck', 'rose'] # """全局变量"""
 def test(a):
-    return a + 100
+	return a + 100
 print(test(200)) # 输出 300
 print(a)# 输出 400
 print('-----------------------------')
 def test1():
-    a = 300
-    return a + 100
+	a = 300
+	return a + 100
 print(test1()) # 输出 400
 print(a)# 输出 400
 print('-----------------------------')
 def test2():
-    global a
-    a = 300
+	global a
+	a = 300
     
-    names.append("object")
-    print(names) # 输出['jeck', 'rose', 'object']
-    return a + 100
+	names.append("object")
+	print(names) # 输出['jeck', 'rose', 'object']
+	return a + 100
 print(test2()) # 输出 400
 print(a)# 输出300
 print(names) # 输出['jeck', 'rose', 'object']
@@ -107,7 +107,7 @@ print('-----------------------------')
 
 """可变参数""" #=========
 def test3(a, *b): 
-    return a ,b
+	return a ,b
 
 print(test3(1)) # 输出(1, ())
 print(test3(1,2,3)) # 输出(1, (2, 3))
@@ -118,11 +118,11 @@ print(test3(1,2,[3,4,5])) # 输出(1, (2, [3, 4, 5]))
 
 """匿名函数""" #=========
 def test4(a, b): 
-    return a + b
+	return a + b
 def test5(a, b): 
-    return a * b
+	return a * b
 def test6(a, b, func): 
-    return func(a, b)
+	return func(a, b)
 
       
 print(test6(6, 2, lambda x,y : x + y)) # 输出8
