@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from click._compat import raw_input
+# from click._compat import raw_input
 
 """""""""""""""""""""基础语法"""""""""""""""""""""
 
@@ -97,10 +97,10 @@ print(days)
 
 # 区别嘛，就是raw_input()随便输都是字符串，而input()必须按照Python的规则来，其接受的输入作为是表达式
 
-name = raw_input("请输出姓名：")
-age = raw_input("请输出年龄：")
-print("姓名：%s" %(name))
-print("年龄：%s" %age)
+# name = raw_input("请输出姓名：")
+# age = raw_input("请输出年龄：")
+# print("姓名：%s" %(name))
+# print("年龄：%s" %age)
 
 
 # python3.X
