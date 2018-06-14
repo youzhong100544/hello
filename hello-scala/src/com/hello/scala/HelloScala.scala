@@ -18,10 +18,16 @@ object HelloScala {
     另一方面,如果一行里写多个语句那么分号是需要的。
     */
     val s = "hello"; println(s)
+
   }
 
 }
 class HelloScala {
 
+  def addInt( a: Int, b: Int ): Int = {
+    var sum: Int = 0
+    sum = a + b
 
+    return sum
+  }
 }
