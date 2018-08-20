@@ -18,12 +18,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class WordCountHDFS {
+public class SparkJavaWordCountHDFS {
 
 	public static void main(String[] args) throws IOException {
 		SparkConf sparkConf = new SparkConf();
 
-		sparkConf.setMaster("local").setAppName("WordCountHDFS");
+		sparkConf.setMaster("local").setAppName("SparkJavaWordCountHDFS");
 
 		JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
 
