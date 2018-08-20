@@ -19,10 +19,10 @@ import org.apache.hadoop.fs.BlockLocation
 import org.apache.hadoop.fs.FileStatus
 import org.apache.hadoop.fs.FSDataInputStream
 
-object SparkScalaWordCount {
+object SparkScalaWordCountHDFS {
 
   def main(args: Array[String]): Unit = {
-    val sparkConf = new SparkConf().setMaster("local").setAppName("SparkScalaWordCount")
+    val sparkConf = new SparkConf().setMaster("local").setAppName("SparkScalaWordCountHDFS")
 
     val sc = new SparkContext(sparkConf)
 
