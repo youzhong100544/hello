@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
 import os
 
-class util:
-	
+class util(object):
