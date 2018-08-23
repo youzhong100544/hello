@@ -35,6 +35,7 @@ object DemoArray {
     var a = Array("Runoob", "Baidu", "Google")
 
     // 多维数组----------------------------------------------------------
+    println("多维数组")
     import Array._
     var multidimensionalArray = ofDim[Int](2,3)
 
@@ -45,6 +46,7 @@ object DemoArray {
       }
     }
     // 打印二维阵列
+    println("打印二维阵列");
     for (i <- 0 to 1) {
       for ( j <- 0 to 2) {
         print(" " + multidimensionalArray(i)(j));

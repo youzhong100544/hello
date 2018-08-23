@@ -116,7 +116,6 @@ object DemoMap {
     println("排序a1：")
     var a1: Seq[(String, Int)] =  a.toSeq.sortBy(_._1)//升序排序 key
     println("遍历a1：")
-    a1.is
 
     var a11: List[(String, Int)] =  a.toList.sortBy(_._1)//升序排序 key
     println("遍历a11：")
@@ -131,6 +130,7 @@ object DemoMap {
     println("遍历：")
     a2.foreach{case (e,i) => println(e,i)} //遍历打印
 
+    /*
     println("排序：")
     var a1: Seq[(String, Int)] =  a.toSeq.sortWith(_._1>_._1) //降序排序 key
     println("遍历：")
@@ -150,6 +150,7 @@ object DemoMap {
       }
     }
     println(a.toSeq.sorted)
+     */
   }
 
   def mutable_Map(): Unit ={
