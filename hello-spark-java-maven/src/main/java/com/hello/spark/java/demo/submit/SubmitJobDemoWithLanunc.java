@@ -1,4 +1,4 @@
-package com.hello.spark.java.submit;
+package com.hello.spark.java.demo.submit;
 
 import org.apache.spark.launcher.SparkAppHandle;
 import org.apache.spark.launcher.SparkLauncher;
