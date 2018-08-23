@@ -27,6 +27,7 @@
             <version>${hadoop.version}</version>
         </dependency>
 
+
         <!-- scala -->
         <!-- https://mvnrepository.com/artifact/org.scala-lang/scala-library -->
         <dependency>
@@ -34,6 +35,7 @@
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
+
 
         <!-- spark -->
         <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
