@@ -1,0 +1,12 @@
+# SERVER CONFIG
+server:
+  port: 8080
+  servlet:
+    context-path: /hell-spring-boot-2.0.4
+
+# SPRING 配置
+spring:
+  http:
+    encoding.charset: UTF-8
+    encoding.enable: true
+    encoding.force: true
