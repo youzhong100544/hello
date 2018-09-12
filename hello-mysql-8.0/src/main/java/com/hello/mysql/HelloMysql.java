@@ -17,8 +17,7 @@ public class HelloMysql {
 		Statement stmt=null;
 		ResultSet rs=null;
 
-		try
-		{
+		try{
 			Class.forName(driver);
 			con=DriverManager.getConnection(url, user, password);
 			stmt=con.createStatement();
@@ -32,47 +31,35 @@ public class HelloMysql {
 			ResultSetMetaData rsmd=rs.getMetaData();
 			int j=0;
 			j=rsmd.getColumnCount();
-			for(int k=0;k<j;k++)
-			{
+			for(int k=0;k<j;k++){
 				System.out.print(rsmd.getColumnName(k+1));
 				System.out.print("\t");
 			}
 
 			System.out.println();
 
-			while(rs.next())
-			{
-				for(int i=0;i<j;i++)
-				{
+			while(rs.next()){
+				for(int i=0;i<j;i++){
 					System.out.print(rs.getString(i+1));
 					System.out.print("\t");
 				}
 				System.out.println();
 			}
-		}
-		catch(ClassNotFoundException e1)
-		{
+		} catch(ClassNotFoundException e1){
 			System.out.print("数据库驱动不存在！");
 			System.out.print(e1.toString());
-		}
-		catch(SQLException e2)
-		{
+		} catch(SQLException e2){
 			System.out.print("数据库存在异常！");
 			System.out.print(e2.toString());
-		}
-		finally
-		{
-			try
-			{
+		} finally{
+			try{
 				if(rs!=null)
 					rs.close();
 				if(stmt!=null)
 					stmt.close();
 				if(con!=null)
 					con.close();
-			}
-			catch(SQLException e)
-			{
+			} catch(SQLException e){
 				System.out.print(e.toString());
 			}
 		}
