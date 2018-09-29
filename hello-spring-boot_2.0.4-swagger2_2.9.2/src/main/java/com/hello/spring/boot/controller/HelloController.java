@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -106,12 +107,12 @@ public class HelloController {
 	 * @return success or error
 	 */
 	@ApiOperation(value = "更新用户",notes = "根据用户id更新用户",httpMethod = "PUT")
+	@PutMapping(value = "user/{id}")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "id",value = "用户id",required = true,dataType = "String"),
+			@ApiImplicitParam(name = "id",value = "用户id", required = true, paramType = "path", dataType = "Integer"),
 			@ApiImplicitParam(name = "user",value = "用户实体,传入更改后的数据",required = true,dataType = "User")
 	})
-	@PutMapping("user/{id}")
-	public String updateUser(@PathVariable String id,@RequestBody UserModel user){
+	public String updateUser(@PathVariable Integer id, @RequestBody UserModel user){
 		return "success";
 	}
 
