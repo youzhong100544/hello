@@ -30,9 +30,10 @@ public class Swagger2Config {
 	public Docket createRestApi() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.apiInfo(apiInfo())
+				.enable(true)		//生产环境，可关闭Swagger2
 				.select()
 				//为当前包路径
-				.apis(RequestHandlerSelectors.basePackage("om.hello.springboot.controller"))
+				.apis(RequestHandlerSelectors.basePackage("com.hello.spring.boot.controller"))
 				.paths(PathSelectors.any())
 				.build();
 	}
@@ -42,11 +43,12 @@ public class Swagger2Config {
 				//页面标题
 				.title("Spring Boot 测试使用 Swagger2 构建RESTful API")
 				//创建人
-				.contact(new Contact("hello", "http://www.baidu.com", "email@email.com"))
+				//.contact(new Contact("hello", "http://www.baidu.com", "email@email.com"))
+				.termsOfServiceUrl("http://www.baidu.com")
 				//版本号
 				.version("1.0")
 				//描述
-				.description("用户管理")
+				.description("hello spring boot swagger")
 				.build();
 	}
 

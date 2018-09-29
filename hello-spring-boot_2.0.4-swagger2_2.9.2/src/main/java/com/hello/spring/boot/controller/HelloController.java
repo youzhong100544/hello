@@ -1,6 +1,7 @@
 package com.hello.spring.boot.controller;
 
 import com.hello.spring.boot.bean.User;
+import com.hello.spring.boot.model.UserModel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -62,7 +63,8 @@ public class HelloController {
 	 * @return list
 	 */
 	@ApiOperation(value ="查询所有用户",notes ="",httpMethod = "GET")
-	@GetMapping("/user")
+	@GetMapping("/userList")
+	@ResponseBody
 	public List<User> userList(){
 
 		List<User> list = new ArrayList<>();
@@ -76,7 +78,7 @@ public class HelloController {
 
 	/**
 	 * 查询用户根据id
-	 * @return USer对象
+	 * @return User对象
 	 * @param  id
 	 */
 	@ApiOperation(value = "查询用户",notes = "根据用户id查询用户",httpMethod = "GET")
@@ -109,7 +111,7 @@ public class HelloController {
 			@ApiImplicitParam(name = "user",value = "用户实体,传入更改后的数据",required = true,dataType = "User")
 	})
 	@PutMapping("user/{id}")
-	public String updateUser(@PathVariable String id,@RequestBody User user){
+	public String updateUser(@PathVariable String id,@RequestBody UserModel user){
 		return "success";
 	}
 

@@ -1,13 +1,8 @@
-package com.hello.spring.boot.bean;
+package com.hello.spring.boot.model;
 
 import java.util.Date;
 
-public class User {
-
-	/**
-	 * 主键id
-	 */
-	private Integer id;
+public class UserModel {
 
 	/** 姓名 */
 	private String name;
@@ -16,28 +11,13 @@ public class User {
 	/** 出生日期 */
 	private Date birthday;
 
-	public User() {
+	public UserModel() {
 	}
 
-	public User(String name, Integer age, Date birthday) {
+	public UserModel(String name, Integer age, Date birthday) {
 		this.name = name;
 		this.age = age;
 		this.birthday = birthday;
-	}
-
-	public User(Integer id, String name, Integer age, Date birthday) {
-		this.id = id;
-		this.name = name;
-		this.age = age;
-		this.birthday = birthday;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getName() {
