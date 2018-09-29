@@ -1,4 +1,4 @@
-package com.hello.springboot.configuration;
+package com.hello.spring.boot.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,7 +42,7 @@ public class Swagger2Config {
 				//页面标题
 				.title("Spring Boot 测试使用 Swagger2 构建RESTful API")
 				//创建人
-				.contact(new Contact("cookie", "http://www.baidu.com", "2118119173@qq.com"))
+				.contact(new Contact("hello", "http://www.baidu.com", "email@email.com"))
 				//版本号
 				.version("1.0")
 				//描述

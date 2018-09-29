@@ -1,4 +1,4 @@
-package com.hello.springboot.controller;
+package com.hello.spring.boot.controller;
 
 import org.springframework.web.bind.annotation.*;
 

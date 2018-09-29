@@ -1,6 +1,6 @@
-package com.hello.springboot.configuration;
+package com.hello.spring.boot.configuration;
 
-import com.hello.springboot.bean.TestBean;
+import com.hello.spring.boot.bean.TestBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;

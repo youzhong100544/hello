@@ -1,4 +1,4 @@
-package com.hello.springboot.bean;
+package com.hello.spring.boot.bean;
 
 public class TestBean {
 	private String username;
