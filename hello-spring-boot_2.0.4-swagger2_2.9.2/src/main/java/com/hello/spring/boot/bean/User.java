@@ -2,6 +2,7 @@ package com.hello.spring.boot.bean;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Range;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,6 +17,7 @@ public class User implements Serializable {
 	private Integer id;
 
 	/** 姓名 */
+	@Range(max=32, message = "最大长度32")
 	@ApiModelProperty(value="姓名", name="id", example="小强")
 	private String name;
 	/** 年龄 */
