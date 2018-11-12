@@ -1,5 +1,5 @@
-# hello-python-3.6
 # -*- coding: utf-8 -*-
+# hello-python-3.6
 
 # 注意在python2中print不是函数，不能通过help获得相关信息
 # print在python3中是一个内建函数
@@ -12,11 +12,11 @@ print('你好，3.6')
 
 import sys as system
 
-print(system.platform)
+print('system.platform:' + system.platform)
 
 
 import math
 
 content = dir(math)
-print(content);
+print(content)
 
