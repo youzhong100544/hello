@@ -18,11 +18,11 @@ conf = SparkConf().setMaster("local").setAppName("word_count_demo")
 sc = SparkContext(conf = conf)
 
 # 输入的数据
-data=["hello","world","hello","word","count","count","hello"]
+data=["hello world","hello c","hello java","hello scala","hello python","hello hadoop","hello spark","world is good"]
 
 # 将Collection的data转化为spark中的rdd并进行操作
 rdd=sc.parallelize(data)
-resultRdd = rdd.map(lambda word: (word, 1)).reduceByKey(lambda a, b: a + b)
+resultRdd = rdd.flatMap(lambda line: line.split(" ")).map(lambda word: (word, 1)).reduceByKey(lambda a, b: a + b)
 
 # rdd转为collecton并打印
 resultColl = resultRdd.collect()
