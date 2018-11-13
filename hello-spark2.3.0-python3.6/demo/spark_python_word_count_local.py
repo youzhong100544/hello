@@ -2,8 +2,8 @@
 
 from pyspark import SparkContext, SparkConf
 
-input_path = 'C:/Users/admin/Desktop/hello.txt'
-output_path = 'C:/Users/admin/Desktop/output'
+input_path = 'C://Users/calm/Desktop/hello.txt'
+output_path = 'C://Users/calm/Desktop/output'
 
 sc = SparkContext("local", "wordCountPython")
 

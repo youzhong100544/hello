@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>hello</groupId>
-    <artifactId>hello-mysql-8.0</artifactId>
+    <artifactId>hello-mysql_8.0</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
