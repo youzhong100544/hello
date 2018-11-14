@@ -29,8 +29,8 @@ object SparkScalaWordCountHDFS {
     val hdfsInputPath = "hdfs://node:9000/user/root/wc.txt"
     val hdfsOutputPath = "hdfs://node:9000/output/spark/wordcount"
 
-    val path : Path = new Path(hdfsInputPath)
     val hc : Configuration = sc.hadoopConfiguration
+    val path : Path = new Path(hdfsInputPath)
     val fs : FileSystem = FileSystem.get(hc)
     val file : FileStatus = fs.getFileStatus(path)
     val fileBlockLocations : Array[BlockLocation] = fs.getFileBlockLocations(file, 0, file.getLen())
