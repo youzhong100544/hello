@@ -12,8 +12,8 @@ os.environ['JAVA_HOME'] = "C:\\develop\\Java\\jdk1.8.0_161"
 sys.path.append("C:\\develop\\spark-2.3.0-bin-hadoop2.7")
 os.environ['HADOOP_HOME'] = "C:\\develop\\hadoop-3.1.0"
 
-input_path = 'C://Users/calm/Desktop/hello.txt'
-output_path = 'C://Users/calm/Desktop/output'
+input_path = 'C:/Users/calm/Desktop/hello/hello.txt'
+output_path = 'C:/Users/calm/Desktop/hello/output'
 
 sc = SparkContext("local", "wordCountPython")
 
