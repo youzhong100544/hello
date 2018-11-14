@@ -13,9 +13,15 @@ sys.path.append("C:\\develop\\spark-2.3.0-bin-hadoop2.7")
 os.environ['HADOOP_HOME'] = "C:\\develop\\hadoop-3.1.0"
 
 input_path = 'C:/Users/calm/Desktop/hello/hello.txt'
-output_path = 'C:/Users/calm/Desktop/hello/output'
+output_path = 'C:/Users/calm/Desktop/hello/output/spark/python'
 
-sc = SparkContext("local", "wordCountPython")
+
+import shutil
+if os.path.exists(output_path):
+    shutil.rmtree(output_path)
+
+sc = SparkContext(master="local", appName="spark_word_Count_Python_local")
+# sc = SparkContext(master="local[*]", appName="spark_word_Count_Python_local")
 
 text_file = sc.textFile(input_path)
 

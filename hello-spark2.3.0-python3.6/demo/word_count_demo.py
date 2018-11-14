@@ -14,7 +14,7 @@ os.environ['HADOOP_HOME'] = "C:\\develop\\hadoop-3.1.0"
 
 
 # 创建SparkConf和SparkContext
-conf = SparkConf().setMaster("local").setAppName("word_count_demo")
+conf = SparkConf().setMaster("local").setAppName("spark_word_Count_Python_demo")
 sc = SparkContext(conf = conf)
 
 # 输入的数据
