@@ -9,11 +9,13 @@ import com.hello.spark.scala.util.CommomUtil
 object SparkScalaWordCountLocal {
 
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf()
-    conf.setMaster("local").setAppName("SparkScalaWordCount")
 
     val inputPath = "C:\\Users\\calm\\Desktop\\hello\\"
     val outputPath = "C:\\Users\\calm\\Desktop\\hello\\output\\spark\\scala"
+
+    val conf = new SparkConf()
+    //conf.setMaster("local").setAppName("SparkScalaWordCount")
+    conf.setMaster("local[*]").setAppName("SparkScalaWordCount")
 
     val sc = new SparkContext(conf)
 
@@ -43,7 +45,7 @@ object SparkScalaWordCountLocal {
     if (output.exists())
       CommomUtil.deleteDir(output)
 
-    resultRDD.saveAsTextFile(outputPath)
+    result.saveAsTextFile(outputPath)
 
 
 
