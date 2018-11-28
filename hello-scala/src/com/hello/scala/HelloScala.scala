@@ -19,6 +19,10 @@ object HelloScala {
     */
     val s = "hello"; println(s)
 
+    val helloScala = new HelloScala
+    val result = helloScala.addInt(1, 2)
+
+    println(result)
   }
 
 }
