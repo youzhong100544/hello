@@ -1,9 +1,9 @@
-package com.hello.spark.scala.core
+package com.hello.spark.scala
 
 import org.apache.spark.{SparkConf, SparkContext}
 
 object HelloSpark {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     /**
       * SparkConf对象,是spark的一个配置对象
       * 在sparkconf对象中
@@ -27,4 +27,11 @@ object HelloSpark {
 
     sc.stop()
   }
+}
+class HelloSpark {
+
+  //def aggregate[U: ClassTag](zeroValue: U)(seqOp: (U, T) => U, combOp: (U, U) => U): U = {}
+
+
+
 }

@@ -20,18 +20,44 @@ object HelloScala {
     val s = "hello"; println(s)
 
     val helloScala = new HelloScala
-    val result = helloScala.addInt(1, 2)
+    val result = helloScala.add(1, 10)
 
     println(result)
+
+
+
+    println(max(1,10))
+
+    println(min(1)(10))
+
   }
+
+
+  def max(a: Int, b: Int ): Int = {
+    if(a > b)
+      a
+    else
+      b
+  }
+
+  def min(a: Int)(b: Int): Int = {
+    if(a > b)
+      b
+    else
+      a
+  }
+
 
 }
 class HelloScala {
 
-  def addInt( a: Int, b: Int ): Int = {
+  def add(a: Int, b: Int ): Int = {
     var sum: Int = 0
     sum = a + b
 
     return sum
   }
+
+
+
 }

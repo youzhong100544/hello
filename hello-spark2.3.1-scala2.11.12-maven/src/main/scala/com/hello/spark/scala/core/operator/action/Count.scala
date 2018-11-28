@@ -3,7 +3,7 @@ package com.hello.spark.scala.core.operator.action
 import org.apache.spark.{SparkConf, SparkContext}
 
 object Count {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("CollectOperator").setMaster("local")
     val sc = new SparkContext(conf)
 
