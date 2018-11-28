@@ -2,6 +2,8 @@ package com.hello.spark.scala.core.operator.transformation
 
 import org.apache.spark.{SparkConf, SparkContext}
 
+import scala.collection.mutable.ListBuffer
+
 
 /**
   * Aggregate the elements of each partition, and then the results for all the partitions, using
@@ -50,9 +52,19 @@ object Aggregate {
   def main(args: Array[String]) {
     val sc = new SparkContext(new SparkConf().setAppName("Aggregate").setMaster("local"))
 
-    val data = sc.parallelize(List(1 to 10), 2)
-/*
-    data.mapPartitionsWithIndex((index, x) => {})
+    val data = sc.parallelize(1 to 10, 3)
+
+    val result = data.mapPartitionsWithIndex((index: Int, iterator: Iterator[Int]) => {
+      val list: scala.collection.mutable.ListBuffer[String] = new ListBuffer[String]()
+
+      while (iterator.hasNext){
+        list +=  "[partitionID: " + index + ", value: " + iterator.next() + "]"
+      }
+      list.iterator
+    })
+
+    result.foreach(println)
+
 
     def seqOP(a: Int, b: Int): Int = {
       println("seqOp: " + a + "\t" + b)
@@ -64,10 +76,15 @@ object Aggregate {
       a + b
     }
 
-    data.aggregate(3)(seqOP, combOp))
+    val i: Int = data.aggregate(0)(seqOP, combOp)
 
-    println(data.aggregate(3)(seqOP, combOp)*/
+    println(i)
 
+    val j: Tuple2[Int, Int] = data.aggregate((0, 0))((acc,number) => (acc._1 + number, acc._2 + 1), (par1,par2) => (par1._1 + par2._1, par1._2 + par2._2))
+    println(j)
+
+    val k: Tuple3[Int, Int, Int] = data.aggregate((0, 0, 0))((acc, number) => (acc._1 * number, acc._2 + number, acc._3 + 1), (x, y) => (x._1 * y._1, x._2 + y._2, x._3 + y._3))
+    println(k)
 
 
   }
