@@ -49,7 +49,7 @@ import scala.collection.mutable.ListBuffer
   *
   */
 object Aggregate {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val sc = new SparkContext(new SparkConf().setAppName("Aggregate").setMaster("local"))
 
     val data = sc.parallelize(1 to 10, 3)
