@@ -14,10 +14,11 @@ sys.path.append("C:/develop/spark-2.3.0-bin-hadoop2.7/python/lib/py4j-0.10.6-src
 from pyspark import SparkConf, SparkContext
 
 # 创建SparkConf和SparkContext
+# 方式一:
 # conf = SparkConf().setMaster("local").setAppName("spark_word_Count_Python_demo")
 # sc = SparkContext(conf = conf)
 
-# 或者
+# 方式二:
 sys.path.append(r'./../util')
 import SparkUtil
 
