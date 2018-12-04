@@ -21,6 +21,11 @@ content = dir(math)
 print(content)
 
 if __name__ == '__main__':
-    para1 = system.argv[1]
+    # para1 = system.argv[1]
 
-    print(para1)
+    # print(para1)
+
+
+
+    str1 = ' 132 4232'
+    print(str1.strip()) #132 4232
