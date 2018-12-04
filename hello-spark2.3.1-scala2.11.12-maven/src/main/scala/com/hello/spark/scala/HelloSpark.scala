@@ -58,6 +58,7 @@ class HelloSpark {
     rdd.collect().foreach(println)
 
     sc.stop()
+
   }
 
 
