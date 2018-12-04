@@ -54,12 +54,12 @@ public class HBaseDemo {
 
 		HTableDescriptor hTableDescriptor = new HTableDescriptor(tableName);
 		
-		HColumnDescriptor family1 = new HColumnDescriptor(familyName1.toString());
+		HColumnDescriptor family1 = new HColumnDescriptor(familyName1);
 		family1.setBlockCacheEnabled(true);// 开启读缓存，默认true
 		family1.setInMemory(true);// 开启缓存，默认false
 		family1.setMaxVersions(1);// 最大版本数，默认1
 		
-		HColumnDescriptor family2 = new HColumnDescriptor(familyName2.toString());
+		HColumnDescriptor family2 = new HColumnDescriptor(familyName2);
 		hTableDescriptor.addFamily(family1);
 		hTableDescriptor.addFamily(family2);
 
@@ -72,6 +72,7 @@ public class HBaseDemo {
 	/**
 	 * 添加数据
 	 * @throws IOException
+	 * 				io异常
 	 */
 	@Test
 	public void insertData1() throws IOException {
@@ -89,6 +90,7 @@ public class HBaseDemo {
 	/**
 	 * 添加数据
 	 * @throws IOException
+	 * 				io异常
 	 */
 	@Test
 	public void insertData2() throws IOException {

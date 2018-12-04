@@ -1,4 +1,4 @@
-package com.hello.hbase.util;
+package com.hello.hbase;
 
 import java.io.IOException;
 import java.util.ArrayList;
