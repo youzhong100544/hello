@@ -70,12 +70,12 @@ def datingClassTest():
     for i in range(numTestVecs):
         classifierResult = classify(normMat[i,:],normMat[numTestVecs:m,:],\
                                 datingLabels[numTestVecs:m],4)
-        print '模型预测值: %d ,真实值 : %d' \
-            %(classifierResult,datingLabels[i])
+        print('模型预测值: %d ,真实值 : %d' \
+            %(classifierResult,datingLabels[i]))
         if (classifierResult != datingLabels[i]):
             errorCount += 1.0
     errorRate = errorCount / float(numTestVecs)
-    print '正确率 : %f' %(1-errorRate)
+    print('正确率 : %f' %(1-errorRate))
     return 1-errorRate
 
 '''
@@ -121,7 +121,7 @@ def classifyperson():
     datingDataMat,datingLabels = file2matrix('datingTestSet2.txt')
     normMat,ranges,minVals = autoNorm(datingDataMat) 
     result = classify((input_man - minVals)/ranges,normMat,datingLabels,3)   
-    print '你即将约会的人是:' ,  resultList[result-1]                             
+    print('你即将约会的人是:' ,  resultList[result-1])
 if __name__ == '__main__':
 #     createScatterDiagram观察数据的分布情况
     createScatterDiagram()
