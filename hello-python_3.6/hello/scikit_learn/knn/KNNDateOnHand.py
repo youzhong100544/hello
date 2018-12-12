@@ -122,6 +122,8 @@ def classifyperson():
     normMat,ranges,minVals = autoNorm(datingDataMat) 
     result = classify((input_man - minVals)/ranges,normMat,datingLabels,3)   
     print('你即将约会的人是:' ,  resultList[result-1])
+
+
 if __name__ == '__main__':
 #     createScatterDiagram观察数据的分布情况
     createScatterDiagram()
