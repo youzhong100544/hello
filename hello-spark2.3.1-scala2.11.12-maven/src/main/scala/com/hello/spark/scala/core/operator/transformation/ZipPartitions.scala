@@ -76,7 +76,7 @@ object ZipPartitions {
     println("zipPartitions:-----------------------------------------------------" )
 
 
-
+    sc.stop()
 
   }
 }
