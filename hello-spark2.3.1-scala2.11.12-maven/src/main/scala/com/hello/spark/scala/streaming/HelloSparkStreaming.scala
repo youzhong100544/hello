@@ -29,6 +29,7 @@ object HelloSparkStreaming {
     * @param args
     */
   def main(args: Array[String]): Unit = {
+    val checkpointPath : String  = "d://SparkStreaming/checkpointPath";
     val sparkConf = new SparkConf().setMaster("local[2]").setAppName("HelloSparkStreaming")
 
     // sparkConf.set("spark.streaming.receiver.writeAheadLog.enable","true")
@@ -36,16 +37,15 @@ object HelloSparkStreaming {
     // 方式一：
     val sparkContext = new SparkContext(sparkConf)
     val ssc = new StreamingContext(sparkContext,Durations.seconds(5))
-
+    sparkContext.setCheckpointDir(checkpointPath)
 
     // 方式二：
     // val ssc = new StreamingContext(sparkConf,Durations.seconds(5))
+    // ssc.checkpoint(checkpointPath)
 
 
 
-    val checkpointPath : String  = "d://SparkStreaming/checkpointPath";
 
-    ssc.checkpoint(checkpointPath)
   }
 }
 
