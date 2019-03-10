@@ -1,6 +1,7 @@
 package com.hello.spark.java.streaming;
 
 import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
@@ -17,15 +18,21 @@ import org.apache.spark.streaming.api.java.JavaStreamingContext;
  */
 public class HelloSparkStreaming {
     public static void main(String[] args) {
-        SparkConf conf = new SparkConf().setMaster("local[2]").setAppName("HelloSparkStreaming");
+        SparkConf sparkConf = new SparkConf().setMaster("local[2]").setAppName("HelloSparkStreaming");
 
+        // 方式一：
+        JavaSparkContext javaSparkContext = new JavaSparkContext(sparkConf);
+        JavaStreamingContext jsc = new JavaStreamingContext(sparkConf, Durations.seconds(5));
+
+
+        // 方式二：
         /**
          * 在创建streaminContext的时候 设置batch Interval
          */
-        JavaStreamingContext jsc = new JavaStreamingContext(conf, Durations.seconds(5));
+        // JavaStreamingContext jsc = new JavaStreamingContext(sparkConf, Durations.seconds(5));
 
 
-        JavaReceiverInputDStream<String> lines = jsc.socketTextStream("hadoop1", 9999);
+        JavaReceiverInputDStream<String> lines = jsc.socketTextStream("node", 9999);
 
     }
 

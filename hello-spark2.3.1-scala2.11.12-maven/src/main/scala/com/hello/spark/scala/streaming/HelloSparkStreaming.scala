@@ -1,6 +1,6 @@
 package com.hello.spark.scala.streaming
 
-import org.apache.spark.SparkConf
+import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.streaming.{Durations, StreamingContext}
 
 /**
@@ -33,7 +33,15 @@ object HelloSparkStreaming {
 
     // sparkConf.set("spark.streaming.receiver.writeAheadLog.enable","true")
 
-    val ssc = new StreamingContext(sparkConf,Durations.seconds(5))
+    // 方式一：
+    val sparkContext = new SparkContext(sparkConf)
+    val ssc = new StreamingContext(sparkContext,Durations.seconds(5))
+
+
+    // 方式二：
+    // val ssc = new StreamingContext(sparkConf,Durations.seconds(5))
+
+
 
     val checkpointPath : String  = "d://SparkStreaming/checkpointPath";
 
