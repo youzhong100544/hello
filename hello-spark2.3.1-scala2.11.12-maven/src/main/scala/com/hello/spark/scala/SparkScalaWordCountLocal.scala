@@ -25,11 +25,11 @@ object SparkScalaWordCountLocal {
       line.split(" ")
     })
 
-    val pairRDD : RDD[Tuple2[String, Integer]] = wordRDD.map(word => {
-      new Tuple2(word, 1)
-    })
+    // val pairRDD : RDD[Tuple2[String, Integer]] = wordRDD.map(word => {new Tuple2(word, 1)})
+    val pairRDD : RDD[(String, Integer)] = wordRDD.map(word => {new Tuple2(word, 1)})
 
-    val resultRDD : RDD[Tuple2[String, Integer]] = pairRDD.reduceByKey(_+_)
+    // val resultRDD : RDD[Tuple2[String, Integer]] = pairRDD.reduceByKey(_+_)
+    val resultRDD : RDD[(String, Integer)] = pairRDD.reduceByKey(_+_)
 
     resultRDD.collect().foreach(println)
 
