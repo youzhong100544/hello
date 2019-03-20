@@ -23,6 +23,8 @@ object MapPartitions {
 
     println(result.count())
 
+    println(result.collect().length)
+
     result.foreach(println)
 
 
