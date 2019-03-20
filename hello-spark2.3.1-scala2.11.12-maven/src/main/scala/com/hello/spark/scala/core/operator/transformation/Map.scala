@@ -13,7 +13,7 @@ object Map {
     val rdd : RDD[Int] = sc.parallelize(1 to 9, 3)
 
     // val rdd1 : RDD[Int] = rdd.map(num => {num * 2})
-    val rdd1 : RDD[Int] = rdd.map(num * 2)
+    val rdd1 : RDD[Int] = rdd.map(num => num * 2)
 
     rdd1.collect().foreach(println)
 
