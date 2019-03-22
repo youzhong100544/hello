@@ -27,17 +27,20 @@ object MapPartitionsWithIndex {
     result.foreach(println)
     result.collect().foreach(println)
 
+    println("++++++++++++++++++++++++++++++++++++++++++++")
 
     val result1: RDD[(Int, List[Int])]= rdd.mapPartitionsWithIndex((index: Int, iterator: Iterator[Int]) => {
 
       var map = scala.collection.mutable.Map[Int,List[Int]]()
       map += (index -> iterator.toList)
 
+      map.iterator.foreach(println)
+
       map.iterator
 
     })
-
-    result1.collect().foreach(println)
+    result1.collect()
+    //result1.collect().foreach(println)
   }
 
 }
