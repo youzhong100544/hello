@@ -18,6 +18,8 @@ object MapPartitions {
 
       println("当前partitionId：" + TaskContext.get.partitionId)
 
+      println("当前分区的数据量：" + TaskContext.get.partitionId)
+
       val list = new ListBuffer[String]()
 
       while (x.hasNext){

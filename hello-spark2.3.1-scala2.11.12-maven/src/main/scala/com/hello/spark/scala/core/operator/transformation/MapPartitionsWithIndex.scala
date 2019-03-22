@@ -16,21 +16,28 @@ object MapPartitionsWithIndex {
 
     val result: RDD[String] = rdd.mapPartitionsWithIndex((index: Int, iterator: Iterator[Int]) => {
       val list: scala.collection.mutable.ListBuffer[String] = new ListBuffer[String]()
-
       while (iterator.hasNext){
         list +=  "[partitionID: " + index + ", value: " + iterator.next() + "]"
       }
-      list.iterator
+      val iterator1 : Iterator[String] = list.iterator
+
+      iterator1
     })
-
     println(result.count())
-
     result.foreach(println)
-
     result.collect().foreach(println)
 
 
+    val result1: RDD[(Int, List[Int])]= rdd.mapPartitionsWithIndex((index: Int, iterator: Iterator[Int]) => {
 
+      var map = scala.collection.mutable.Map[Int,List[Int]]()
+      map += (index -> iterator.toList)
+
+      map.iterator
+
+    })
+
+    result1.collect().foreach(println)
   }
 
 }

@@ -15,6 +15,9 @@ object ForeachPartition {
     rdd.foreachPartition((word :Iterator[String])=>{
       println("当前partitionId：" + TaskContext.get.partitionId)
       word.foreach(println)
+
+
+
     })
   }
 }
