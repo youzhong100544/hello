@@ -1,6 +1,6 @@
 package com.hello.spark.scala.core.operator.transformation
 
-import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.{SparkConf, SparkContext, TaskContext}
 
 import scala.collection.mutable.ListBuffer
 
@@ -12,7 +12,12 @@ object MapPartitions {
 
     val rdd = sc.parallelize(1 to 10,3)
 
+    println("分区数：" + rdd.getNumPartitions)
+
     val result = rdd.mapPartitions((x: Iterator[Int]) => {
+
+      println("当前partitionId：" + TaskContext.get.partitionId)
+
       val list = new ListBuffer[String]()
 
       while (x.hasNext){
