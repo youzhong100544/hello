@@ -9,14 +9,3 @@ class DemoClass {
 }
 
 
-class Person {
-
-}
-
-class Man extends Person {
-
-}
-
-class Woman extends Person {
-
-}

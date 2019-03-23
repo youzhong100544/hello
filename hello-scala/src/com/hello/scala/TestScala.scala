@@ -1,5 +1,10 @@
 package com.hello.scala
 
+
+object TestScala{
+
+}
+
 class TestScala {
 
   def m(x: Int) = x + 3
