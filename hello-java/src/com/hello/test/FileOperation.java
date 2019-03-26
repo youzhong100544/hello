@@ -1,4 +1,4 @@
-package com.hello;
+package com.hello.test;
 
 import java.io.File;
 

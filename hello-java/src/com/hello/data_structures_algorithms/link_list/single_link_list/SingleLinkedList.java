@@ -112,7 +112,7 @@ class LinkList{
             cur = cur.next;
         }
         sb.append("null");
-        return sb.toString();
+        // return sb.toString();
 
     }
 
