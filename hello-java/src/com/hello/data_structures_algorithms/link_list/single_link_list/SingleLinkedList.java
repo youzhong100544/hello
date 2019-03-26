@@ -18,11 +18,11 @@ class Link{
 
 
     public Link() {
-        this(0,null);
+        this(0, null);
     }
 
     public Link(int data) {
-        this(data,null);
+        this(data, null);
     }
 
     public Link(int data, Link next) {
@@ -35,17 +35,15 @@ class Link{
 
 class LinkList{
 
+    public int size = 0;        //链表大小
+
     public Link first;
 
-    public int size;        //链表大小
 
     /**
      * 无参构造函数，初始化一个虚拟头结点，数据域、指针域都为null。
      */
-    public LinkList() {
-        first = new Link();
-        size = 0;
-    }
+    public LinkList() { }
     /**
      * 获取链表中元素个数
      */
@@ -79,8 +77,11 @@ class LinkList{
      * 在链表的指定位置添加元素
      * （不是常用操作，练习用）
      * pre的作用：找到要插入索引位置的前一个Node节点
+     *
      * @param index
+     *          索引位置
      * @param data
+     *          数据
      */
     public void add(int index, int data) {
         if(index < 0 || index > size) {
@@ -88,7 +89,7 @@ class LinkList{
         }
 
         Link pre = first;
-        for(int i=0; i<index; i++) {
+        for(int i=0; i < index; i++) {
             pre = pre.next;
         }
 
