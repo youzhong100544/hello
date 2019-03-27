@@ -3,6 +3,37 @@ package com.hello.data_structures_algorithms.link_list.single_link_list;
 public class SingleLinkedList {
 
     public static void main(String[] args) {
+        LinkList linkList = new LinkList();
+
+        linkList.display();
+
+        linkList.addLast(2);
+        linkList.display();
+
+        linkList.addLast(4);
+        linkList.display();
+
+        linkList.addLast(7);
+        linkList.display();
+
+        linkList.addFirst(5);
+        linkList.display();
+
+        linkList.addLast(7);
+        linkList.display();
+
+
+        linkList.addFirst(50);
+        linkList.display();
+
+        linkList.addFirst(53);
+        linkList.display();
+
+        linkList.addFirst(54);
+        linkList.display();
+
+        linkList.addLast(71);
+        linkList.display();
 
     }
 
@@ -43,7 +74,9 @@ class LinkList{
     /**
      * 无参构造函数，初始化一个虚拟头结点，数据域、指针域都为null。
      */
-    public LinkList() { }
+    public LinkList() {
+        // first = null;
+    }
     /**
      * 获取链表中元素个数
      */
@@ -55,7 +88,9 @@ class LinkList{
      * 判断链表是否为空
      */
     public boolean isEmpty() {
-        return size == 0;
+        return first == null;
+        // or
+        // return size == 0;
     }
 
     /**
@@ -88,33 +123,49 @@ class LinkList{
             throw new IllegalArgumentException("添加失败，不合法的索引值");
         }
 
-        Link pre = first;
-        for(int i=0; i < index; i++) {
-            pre = pre.next;
+        Link node = new Link(data);
+
+        if (first == null) {
+            this.first = node;
+        } else {
+            Link before = first;
+            if (index == 0){
+                node.next = before;
+                this.first = node;
+            } else {
+                for (int i = 1; i < index; i++) {
+                    before = before.next;
+                }
+
+                if(before.next != null){
+                    node.next = before.next;
+                }
+                before.next = node;
+
+            }
         }
 
-
-        Link node = new Link(data);
-        node.next = pre.next;
-        pre.next = node;
-
-        //以上3句等价于这1句：
-        //pre.next = new Link(data, pre.next);
         size++;
     }
 
+    public void reversal() {
 
+    }
 
     public void display() {
-        StringBuilder sb=new StringBuilder();
-        Link cur = first.next;
-        while(cur != null) {
-            sb.append(cur+"-->");
-            cur = cur.next;
-        }
-        sb.append("null");
-        // return sb.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
 
+        if (first != null){
+            Link current = first;
+            sb.append(first.data);
+            while(current.next != null){
+                current = current.next;
+                sb.append(", " + current.data);
+            }
+        }
+        sb.append("]");
+        System.out.println(sb.toString());
     }
 
 }
