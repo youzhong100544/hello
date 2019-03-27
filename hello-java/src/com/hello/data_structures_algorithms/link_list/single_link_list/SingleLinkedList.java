@@ -32,9 +32,23 @@ public class SingleLinkedList {
         linkList.addFirst(54);
         linkList.display();
 
+        linkList.add(2, 24);
+        linkList.display();
+
         linkList.addLast(71);
         linkList.display();
 
+        linkList.addLast(63);
+        linkList.display();
+
+        linkList.addLast(24);
+        linkList.display();
+
+        linkList.add(2, 24);
+        linkList.display();
+
+        linkList.reversal();
+        linkList.display();
     }
 
 }
@@ -72,7 +86,7 @@ class LinkList{
 
 
     /**
-     * 无参构造函数，初始化一个虚拟头结点，数据域、指针域都为null。
+     * 无参构造函数,初始化一个虚拟头结点,数据域、指针域都为null。
      */
     public LinkList() {
         // first = null;
@@ -110,7 +124,7 @@ class LinkList{
 
     /**
      * 在链表的指定位置添加元素
-     * （不是常用操作，练习用）
+     * （不是常用操作,练习用）
      * pre的作用：找到要插入索引位置的前一个Node节点
      *
      * @param index
@@ -120,7 +134,7 @@ class LinkList{
      */
     public void add(int index, int data) {
         if(index < 0 || index > size) {
-            throw new IllegalArgumentException("添加失败，不合法的索引值");
+            throw new IllegalArgumentException("添加失败,不合法的索引值");
         }
 
         Link node = new Link(data);
@@ -149,7 +163,94 @@ class LinkList{
     }
 
     public void reversal() {
+        // this.first = reversal_1(first);
 
+        this.first = reversal_2_1(first, null);
+
+        // this.first = reversal_2_2(first);
+    }
+
+    /**
+     * 迭代法
+     *      先将下一节点纪录下来,
+     *      然后让当前节点指向上一节点,
+     *      再将当前节点纪录下来,
+     *      再让下一节点变为当前节点
+     *
+     * @param node
+     * @return
+     */
+    public Link reversal_1(Link node) {
+        if (node == null || node.next == null){
+            return node;
+        }
+
+        Link previous = null;
+        Link current = node;
+
+        while (current != null) {
+            Link next = current.next;
+
+            current.next = previous;
+
+            previous = current;
+            current = next;
+
+        }
+
+        return previous;
+    }
+
+    /**
+     *  递归方法1
+     *      先找到最后一个节点,
+     *      然后从最后一个开始反转,
+     *      然后当前节点反转时其后面的节点已经进行反转了,不需要管。
+     *
+     *      最后返回原来的最后一个节点
+     * @param node
+     * @return
+     */
+    public Link reversal_2_1(Link node, Link previous) {
+        if (node == null ) {
+            return node;
+        }
+        if (node.next == null) {
+            node.next = previous;
+            return node;
+        } else {
+            Link last = reversal_2_1(node.next, node);
+            node.next = previous;
+            return last;
+        }
+
+    }
+
+    /**
+     * 递归方法2
+     *      先找到最后一个节点,
+     *      然后从最后一个节点之前的那个节点的方法体中开始将下一个指向当前一个,
+     *      然后当前节点反转时其后面的节点已经进行反转了,不需要管。
+     *
+     *      最后返回原来的最后一个节点。
+     * 
+     * @param node
+     * @return
+     */
+    public Link reversal_2_2(Link node) {
+        if (node == null || node.next == null){
+            return node;
+        }
+
+        Link next = node.next;
+
+        node.next = null;
+
+        Link last = reversal_2_2(next);
+
+        next.next = node;
+
+        return last;
     }
 
     public void display() {
