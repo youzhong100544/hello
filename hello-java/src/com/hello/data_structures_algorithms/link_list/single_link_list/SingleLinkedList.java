@@ -184,15 +184,20 @@ class LinkList{
         if (node == null || node.next == null){
             return node;
         }
-
+        // 上一结点
         Link previous = null;
+        // 当前节点
         Link current = node;
+        // 用于存储下一节点
+        Link next;
 
+        // current==null 即尾结点
         while (current != null) {
-            Link next = current.next;
-
+            // 下一节点存入临时结点
+            next = current.next;
+            // 将当前结点指针指向上一节点
             current.next = previous;
-
+            // 移动指针
             previous = current;
             current = next;
 
