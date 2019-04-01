@@ -10,7 +10,7 @@ object Join {
     val sc = new SparkContext(conf)
 
 
-    val nameList : Array[(Int, String)] = Array(Tuple2(1,"Angelababy"),Tuple2(2,"hanhong"),Tuple2(3,"dilireba"),(4,"gaoyuanyuan"))
+    val nameList : Array[(Int, String)] = Array(Tuple2(1,"Angelababy"),Tuple2(2,"hanhong"),Tuple2(3,"dilireba"),Tuple2(3,"dilireba111"),(4,"gaoyuanyuan"))
     val scoreList : Array[(Int, Int)] = Array((1,101), (2,66), (3,100), (3,103), (5,108))
     /**
       * makeRDD:可以将一个本地集合变成一个RDD
@@ -49,6 +49,11 @@ object Join {
     id:3	name:dilireba	score:100
     (3,(dilireba,103))
     id:3	name:dilireba	score:103
+    (3,(dilireba111,100))
+    id:3	name:dilireba111	score:100
+    (3,(dilireba111,103))
+    id:3	name:dilireba111	score:103
+
     (1,(Angelababy,101))
     id:1	name:Angelababy	score:101
 
@@ -109,10 +114,38 @@ object Join {
     /*
     id:3	name:dilireba	score:Some(100)
     id:3	name:dilireba	score:Some(103)
+    id:3	name:dilireba111	score:Some(100)
+    id:3	name:dilireba111	score:Some(103)
+
     id:4	name:gaoyuanyuan	score:None
     id:1	name:Angelababy	score:Some(101)
+    id:2	name:hanhong	score:Some(66)
     */
     println("leftOuterJoin:-----------------------------------------------------" )
+
+
+
+    /**
+      * fullOuterJoin()
+      */
+
+    println("fullOuterJoin:-----------------------------------------------------" )
+    val fullOuterJoinResultRDD = nameRDD.fullOuterJoin(scoreRDD)
+    fullOuterJoinResultRDD.foreach(println)
+
+    /*
+    (3,(Some(dilireba),Some(100)))
+    (3,(Some(dilireba),Some(103)))
+    (3,(Some(dilireba111),Some(100)))
+    (3,(Some(dilireba111),Some(103)))
+
+    (4,(Some(gaoyuanyuan),None))
+
+    (1,(Some(Angelababy),Some(101)))
+
+    (5,(None,Some(108)))
+    (2,(Some(hanhong),Some(66)))
+    */
 
     sc.stop()
   }
