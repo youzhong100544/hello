@@ -46,5 +46,33 @@ object Cogroup {
     (2,(CompactBuffer(小强),CompactBuffer(59),CompactBuffer(幼儿园)))
     */
 
+    resultRdd.collect().foreach((result : (Int, (Iterable[String], Iterable[Int], Iterable[String]))) => {
+
+      val id : Int = result._1
+      val name : Iterable[String] = result._2._1
+      val score : Iterable[Int] = result._2._2
+      val grade : Iterable[String] = result._2._3
+
+      println("id:" +id +"\tname:" +name + "\tscore:" + score + "\tgrade:" + grade)
+    })
+    /*
+    id:6	name:CompactBuffer()	score:CompactBuffer()	grade:CompactBuffer(六年级)
+    id:3	name:CompactBuffer(小红)	score:CompactBuffer(12, 14)	grade:CompactBuffer(五年级)
+    id:4	name:CompactBuffer(小明)	score:CompactBuffer(14)	grade:CompactBuffer()
+    id:1	name:CompactBuffer(校长)	score:CompactBuffer(100)	grade:CompactBuffer(三年级)
+    id:5	name:CompactBuffer()	score:CompactBuffer(14)	grade:CompactBuffer()
+    id:2	name:CompactBuffer(小强)	score:CompactBuffer(59)	grade:CompactBuffer(幼儿园)
+    */
+
+
+    nameRdd.cogroup(scoreRdd).collect().foreach(println)
+    /*
+    (3,(CompactBuffer(小红),CompactBuffer(12, 14)))
+    (4,(CompactBuffer(小明),CompactBuffer(14)))
+    (1,(CompactBuffer(校长),CompactBuffer(100)))
+    (5,(CompactBuffer(),CompactBuffer(14)))
+    (2,(CompactBuffer(小强),CompactBuffer(59)))
+    */
+
   }
 }
