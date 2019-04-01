@@ -1,4 +1,4 @@
-package com.hello.test;
+package com.hello;
 
 import java.util.Stack;
 

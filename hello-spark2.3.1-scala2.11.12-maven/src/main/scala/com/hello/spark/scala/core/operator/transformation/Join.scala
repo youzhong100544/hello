@@ -10,8 +10,8 @@ object Join {
     val sc = new SparkContext(conf)
 
 
-    val nameList = Array(Tuple2(1,"Angelababy"),Tuple2(2,"hanhong"),Tuple2(3,"dilireba"),(4,"gaoyuanyuan"))
-    val scoreList = Array(Tuple2(1,101),Tuple2(2,66),Tuple2(3,100),Tuple2(3,103),Tuple2(5,108))
+    val nameList : Array[(Int, String)] = Array(Tuple2(1,"Angelababy"),Tuple2(2,"hanhong"),Tuple2(3,"dilireba"),(4,"gaoyuanyuan"))
+    val scoreList : Array[(Int, Int)] = Array((1,101), (2,66), (3,100), (3,103), (5,108))
     /**
       * makeRDD:可以将一个本地集合变成一个RDD
       * parallilize:可以将一个本地集合变成一个RDD
@@ -30,10 +30,10 @@ object Join {
       */
     println("join:-----------------------------------------------------" )
     val resultRDD :RDD[(Int,(String,Int))] = nameRDD.join(scoreRDD)
-    println("resultRDD.partitions.size=" + resultRDD.partitions.size)
+    println("resultRDD.partitions.size=" + resultRDD.partitions.size)// resultRDD.partitions.size=3
 
     println("join-foreach:-----------------------------------------------------" )
-    resultRDD.foreach(result=>{
+    resultRDD.foreach( (result : (Int,(String,Int)))=>{
       println(result)
 
       val id = result._1
@@ -43,11 +43,23 @@ object Join {
       println("id:" +id +"\tname:" +name + "\tscore:" + score)
 
     })
+
+    /*
+    (3,(dilireba,100))
+    id:3	name:dilireba	score:100
+    (3,(dilireba,103))
+    id:3	name:dilireba	score:103
+    (1,(Angelababy,101))
+    id:1	name:Angelababy	score:101
+
+    (2,(hanhong,66))
+    id:2	name:hanhong	score:66
+    */
     println("join-foreach:-----------------------------------------------------" )
 
     println("join-foreachPartition:-----------------------------------------------------" )
-    resultRDD.foreachPartition(partiton=> {
-      // println(partiton.size)
+    resultRDD.foreachPartition((partiton : Iterator[(Int,(String,Int))])=> {
+      //      // println(partiton.size)
       // partiton.size 不能执行这个方法，否则下面的foreach方法里面会没有数据，
       // 因为iterator只能被执行一次
       partiton.foreach(line => {
@@ -57,6 +69,14 @@ object Join {
       })
 
     })
+    /*
+    (3,(dilireba,100))
+    (3,(dilireba,103))
+
+    (1,(Angelababy,101))
+
+    (2,(hanhong,66))
+    */
     println("join-foreachPartition:-----------------------------------------------------" )
 
     println("join:-----------------------------------------------------" )
@@ -85,6 +105,13 @@ object Join {
         println("id:" +id +"\tname:" +name + "\tscore:" + score)
       }
     })
+
+    /*
+    id:3	name:dilireba	score:Some(100)
+    id:3	name:dilireba	score:Some(103)
+    id:4	name:gaoyuanyuan	score:None
+    id:1	name:Angelababy	score:Some(101)
+    */
     println("leftOuterJoin:-----------------------------------------------------" )
 
     sc.stop()
