@@ -1,11 +1,9 @@
 package com.hello;
 
-public class TestMain {
+public class MainTest {
     public static void main(String[] args) {
 
-        System.out.println("TestMain");
+        System.out.println("MainTest");
 
     }
-
 }
-

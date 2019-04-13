@@ -1,9 +1,15 @@
 package com.hello;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 
 public class IDUtil {
+
+    public static void main(String[] args) {
+        genImageNameId();
+    }
 
     /**
      * 图片名生成
@@ -22,10 +28,7 @@ public class IDUtil {
     }
 
     public static String genImageNameId() {
-
-
-
-        return "";
+        return DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS").format(LocalDateTime.now()) + String.format("%04d", new Random().nextInt(9999));
     }
 
     /**
@@ -44,8 +47,5 @@ public class IDUtil {
         return id;
     }
 
-    public static void main(String[] args) {
-        for(int i=0;i< 100;i++)
-            System.out.println(genItemId());
-    }
+
 }
