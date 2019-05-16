@@ -13,13 +13,13 @@ object DemoKmeans {
   }
 }
 class DemoKmeans {
+  val inputPath = "C:\\Users\\calm\\Desktop\\hello\\"
+  val outputPath = "C:\\Users\\calm\\Desktop\\hello\\output\\spark\\scala\\mllib\\kmeans\\"
+
   def demo_mllib(): Unit = {
     // 初始化
     val conf = new SparkConf().setMaster("local[4]").setAppName("DemoKmeans")
     val sc = new SparkContext(conf)
-
-    val inputPath = "C:\\Users\\calm\\Desktop\\hello\\"
-    val outputPath = "C:\\Users\\calm\\Desktop\\hello\\output\\spark\\scala\\mllib\\kmeans\\"
 
     // 装载数据集
     val data = sc.textFile(inputPath + "kmeans.txt", 1)
@@ -83,12 +83,10 @@ class DemoKmeans {
   }
 
 
+
   def demo_ml(): Unit = {
     val sparkSession: SparkSession = SparkSession.builder().master("local[*]").appName("DemoFeature").getOrCreate()
-    // import sparkSession.implicits._
 
-    val inputPath = "C:\\Users\\calm\\Desktop\\hello\\"
-    val outputPath = "C:\\Users\\calm\\Desktop\\hello\\output\\spark\\scala\\mllib\\kmeans\\"
 
     val output: File = new File(outputPath)
     // 删除输出目录

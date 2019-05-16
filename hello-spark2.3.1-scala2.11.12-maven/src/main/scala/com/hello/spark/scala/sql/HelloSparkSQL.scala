@@ -4,23 +4,35 @@ import com.hello.spark.scala.clazz.Student
 import com.hello.spark.scala.sql.HelloSparkSQL.inputPath
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
-import org.apache.spark.sql.{DataFrame, SQLContext, SparkSession}
+import org.apache.spark.sql._
 
 object HelloSparkSQL {
 
   val inputPath = "C:\\Users\\calm\\Desktop\\hello\\"
-  val outputPath = "C:\\Users\\calm\\Desktop\\hello\\output\\spark\\scala"
+  val outputPath = "C:\\Users\\calm\\Desktop\\hello\\output\\spark\\scala\\sql"
 
   val helloSparkSQL : HelloSparkSQL = new HelloSparkSQL
 
   def main(args: Array[String]): Unit = {
 
-    helloSparkSQL.demo_1()
+    // helloSparkSQL.demo_1()
     // helloSparkSQL.demo_2()
+
+    // helloSparkSQL.readTextFile_1(inputPath + "hello.txt")
+
+    helloSparkSQL.readTextFile_2(inputPath + "hello.txt")
+
   }
 
 }
 class HelloSparkSQL {
+
+  def demo_init_1(): Unit ={
+    val sparkConf = new SparkConf().setMaster("local[4]").setAppName("hello spark sql")
+    val sparkContext = new SparkContext(sparkConf)
+    val sqlContext = new SQLContext(sparkContext)
+  }
+
   def demo_1() : Unit = {
     val sparkConf : SparkConf = new SparkConf().setMaster("local[*]").setAppName("hello spark sql")
 
@@ -125,7 +137,7 @@ class HelloSparkSQL {
 
     sparkContext.stop()
   }
-
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
   def demo_2() : Unit = {
 
     // val warehouseLocation: String = System.getProperty("user.dir") + "spark-warehouse" //用户的当前工作目录
@@ -256,14 +268,160 @@ class HelloSparkSQL {
     val resule = sparkSession.sql("SELECT * FROM student ");
     resule.show();
 
-
-
-
-
-
-
     sparkContext.stop()
 
   }
+
+
+  def demo_init_2(): SparkSession ={
+    val sparkSession: SparkSession = SparkSession.builder().master("local[*]").appName("hello spark sql").getOrCreate()
+    return sparkSession
+  }
+
+  def demo_init_2_1(): SparkSession ={
+    val sparkSession: SparkSession = SparkSession.builder().master("local[*]").appName("hello spark sql").getOrCreate()
+
+    //可以得到之前的版本定义的sc,sqlContext对象,特点...
+    val sparkContext: SparkContext = sparkSession.sparkContext
+    // Supplied level WARN, console did not match one of: ALL,DEBUG,ERROR,FATAL,TRACE,WARN,INFO,OFF
+    sparkContext.setLogLevel("WARN")
+    val sparkConf: SparkConf = sparkContext.getConf
+    val sqlContext: SQLContext = sparkSession.sqlContext
+
+    return sparkSession
+  }
+  def demo_init_2_2(): Unit ={
+    val conf = new SparkConf().setMaster("local[*]").setAppName("hello spark sql")
+    conf.set("", "")
+    val sparkSession: SparkSession = SparkSession.builder().config(conf).getOrCreate()
+
+  }
+
+  def demo_init_2_3(): Unit ={
+    val sparkSession: SparkSession = SparkSession.builder().master("local[*]").appName("hello spark sql hive").enableHiveSupport().getOrCreate()
+  }
+
+  def init(): SparkSession ={
+    // val sparkSession: SparkSession = demo_init_2()
+    val sparkSession: SparkSession = demo_init_2_1()
+    return sparkSession
+  }
+
+  def readTextFile_1(path: String): Unit ={
+    val sparkSession: SparkSession = init()
+
+    val line: Dataset[String] = sparkSession.read.textFile(path)
+    println("line.show-----------------------------------------------------------------")
+    line.show()
+
+    /*
+    val arr: Array[String] = line.collect()
+    arr.foreach(println)
+    */
+
+    import sparkSession.implicits._
+    // 需要导入session对象中的隐式转换
+    // 否则会报错
+    val word: Dataset[String] = line.flatMap(_.split(" "))
+    println("word.show-----------------------------------------------------------------")
+    word.show()
+
+
+    /* 写到这一步我们就有两种选择，一种是写sql，另一种就是写DSL. */
+    /* 1 */
+    /* 1.1 */
+    /*
+      我们接下来先写DSL:
+      我们在语句中写的$意思是告诉他这是一列
+      为了可以使用agg中的聚合函数，我们还需要导入spark sql中的函数
+    */
+
+    import org.apache.spark.sql.functions._
+    val result: Dataset[Row] = word.groupBy($"value" as "word").agg(count("*") as "counts").sort($"counts" desc)
+    println("result.show-----------------------------------------------------------------")
+    result.show()
+    /* 1.2 */
+    // 或者我们也可以这样实现：
+    val groupedDataset: RelationalGroupedDataset = word.groupBy($"value" as "word")
+    val cou: DataFrame = groupedDataset.count()
+    val result1: Dataset[Row] = cou.sort($"count" desc)
+    println("result.show-----------------------------------------------------------------")
+    result1.show()
+
+    /* 2 */
+    // 接着我们通过sql的方式来写WordCount
+    val df: DataFrame = word.withColumnRenamed("value","word")
+    //先创建视图，再执行sql
+    df.createTempView("v_wc")
+    val result2: DataFrame = sparkSession.sql("select word, count(*) as counts from v_wc group by word order by counts desc")
+    println("result.show-----------------------------------------------------------------")
+    result2.show()
+
+    sparkSession.stop()
+  }
+
+  def readTextFile_2(path: String): Unit ={
+    val sparkSession: SparkSession = init()
+
+    // val line: Dataset[String] = sparkSession.read.textFile(path)
+    val line: DataFrame = sparkSession.read.format("text").load(path)
+    println("line.show-----------------------------------------------------------------")
+    line.show()
+
+    //导入sparksession中的隐式转换
+    import sparkSession.implicits._
+    val word: Dataset[String] = line.flatMap(_.getAs[String]("value").split(" "))
+    println("word.show-----------------------------------------------------------------")
+    word.show()
+
+    val dataFrame: DataFrame = word.withColumnRenamed("value","word")
+    //先创建视图，再执行sql
+    dataFrame.createTempView("v_wc")
+    val result: DataFrame = sparkSession.sql("select word,count(*) as counts from v_wc group by word order by counts desc")
+    println("result.show-----------------------------------------------------------------")
+    result.show()
+
+    //DSL方式
+    import org.apache.spark.sql.functions._
+    val result1: Dataset[Row] = word.groupBy($"value").agg(count("*") as "counts").sort($"counts" desc)
+    println("result.show-----------------------------------------------------------------")
+    result1.show()
+
+    //SQL方式：
+    val df: DataFrame = word.toDF()
+    df.createTempView("wc")
+    val result2: DataFrame = sparkSession.sql("select value as word,count(*) as counts from wc group by word order by counts desc")
+    println("result.show-----------------------------------------------------------------")
+    result2.show()
+
+
+    sparkSession.stop()
+
+
+  }
+
+  def prepareData_textFile(path: String): Unit ={
+    val sparkSession: SparkSession = init()
+
+    val line: Dataset[String] = sparkSession.read.textFile(path)
+
+    val frame: DataFrame = line.select()
+
+    frame.show()
+  }
+
+  def prepareData_csv(path: String): Unit ={
+    val sparkSession: SparkSession = init()
+
+    val frame: DataFrame = sparkSession.read.format("csv").option("header", "true").option("mode", "DROPMALFORMED").csv(path)
+  }
+
+
+
+  def prepareData(): Unit ={
+    val sparkSession: SparkSession = init()
+
+  }
+
 
 }
