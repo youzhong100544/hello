@@ -61,7 +61,31 @@ public class DemoOverrideAndOverload {
 
         d.move("");
 
+
+        DemoOverload overload = new DemoOverload();
+        overload.invoke(null );
+        overload.invoke(null, null);
+        overload.invoke(null , 1);
+        overload.invoke(null , 1, 2);
+        overload.invoke(null , 1, null);
+        overload.invoke(null , null, null);
+        overload.invoke(null , new Object[]{1});
+
+
     }
 }
 
+class DemoOverload {
+    public static void main(String args[]){
+        System.out.println("demo");
+    }
+
+    void invoke(Object obj, Object ... args){
+        System.out.println("1");
+    }
+
+    void invoke(String str, Object obj, Object ... args){
+        System.out.println("2");
+    }
+}
 
