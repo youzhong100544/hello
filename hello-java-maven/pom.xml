@@ -1,30 +1,161 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<!-- 声明项目描述符遵循哪一个POM模型版本.模型本身的版本很少改变,虽然如此,但它仍然是必不可少的,这是为了当Maven引入了新的特性或者其他模型变更的时候,确保稳定性. -->
 	<modelVersion>4.0.0</modelVersion>
 
+	<!-- 项目的全球唯一标识符,通常使用全限定的包名区分该项目和其他项目.并且构建时生成的路径也是由此生成, 如com.mycompany.app生成的相对路径为:/com/mycompany/app -->
 	<groupId>hello</groupId>
+	<!--
+		构件的标识符,它和group ID一起唯一标识一个构件.
+		换句话说,你不能有两个不同的项目拥有同样的artifact ID和groupID；
+		在某个 特定的group ID下,artifact ID也必须是唯一的.
+		构件是项目产生的或使用的一个东西,Maven为项目产生的构件包括:JARs,源 码,二进制发布和WARs等.
+	 -->
 	<artifactId>hello-java-maven</artifactId>
+	<!-- 项目当前版本,格式为:主版本.次版本.增量版本-限定版本号 -->
 	<version>0.0.1-SNAPSHOT</version>
+	<!-- 项目产生的构件类型,例如jar、war、ear、pom.插件可以创建他们自己的构件类型,所以前面列的不是全部构件类型 -->
 	<packaging>jar</packaging>
 
+	<!-- 项目的名称, Maven产生的文档用 -->
 	<name>hello-java-maven</name>
+	<!-- 项目主页的URL, Maven产生的文档用 -->
 	<url>http://maven.apache.org</url>
+	<!--
+		项目的详细描述, Maven 产生的文档用.
+		当这个元素能够用HTML格式描述时（例如,CDATA中的文本会被解析器忽略,就可以包含HTML标 签）, 不鼓励使用纯文本描述.
+		如果你需要修改产生的web站点的索引页面,你应该修改你自己的索引页文件,而不是调整这里的文档.
+	 -->
+	<description>A maven project to study maven.</description>
 
+	<!-- 为pom定义一些常量，在pom中的其它地方可以直接引用 使用方式 如下:${file.encoding} -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.source.version>1.8</java.source.version>
+		<java.target.version>1.8</java.target.version>
 	</properties>
 
+	<!-- 定义本项目的依赖关系 -->
 	<dependencies>
+		<!--
+			dependency里属性介绍:
+				type:默认为jar类型,常用的类型有:jar,ejb-client,test-jar...,可设置plugins中的extensions值为true后在增加 新的类型,
+				scope:是用来指定当前包的依赖范围,maven的依赖范围
+				optional:设置指依赖是否可选,默认为false,即子项目默认都继承,为true,则子项目必需显示的引入,与dependencyManagement里定义的依赖类似 .
+				exclusions:如果X需要A,A包含B依赖,那么X可以声明不要B依赖,只要在exclusions中声明exclusion.
+				exclusion:是将B从依赖树中删除,如上配置,alibaba.apollo.webx不想使用com.alibaba.external,但是alibaba.apollo.webx是集成了com.alibaba.external,r所以就需要排除掉.
+		 -->
 		<dependency>
+			<!--
+				一般情况下,maven是通过groupId、artifactId、version这三个元素值（俗称坐标）来检索该构件, 然后引入你的工程.
+				如果别人想引用你现在开发的这个项目（前提是已开发完毕并发布到了远程仓库）,就需要在他的pom文件中新建一个dependency节点,将本项目的groupId、artifactId、version写入,maven就会把你上传的jar包下载到他的本地
+			 -->
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
+
+			<type>jar</type>
+			<!--
+				maven认为,程序对外部的依赖会随着程序的所处阶段和应用场景而变化,所以maven中的依赖关系有作用域(scope)的限制.
+				scope包含如下的取值:compile（编译范围）、provided（已提供范围）、runtime（运行时范围）、test（测试范围）、system（系统范围）
+			 -->
 			<scope>test</scope>
+			<!-- 设置指依赖是否可选,默认为false,即子项目默认都继承:为true,则子项目必需显示的引入,与dependencyManagement里定义的依赖类似  -->
+			<optional>false</optional>
+
+			<!-- 屏蔽依赖关系。 比如项目中使用的libA依赖某个库的1.0版，libB依赖某个库的2.0版，现在想统一使用2.0版，就应该屏蔽掉对1.0版的依赖 -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
 			<version>4.1.4.Final</version>
 		</dependency>
 	</dependencies>
+
+	<!--构建设置 -->
+	<build>
+		<!--
+			共用的基本build元素
+				finalName: 构建的最终结果的名字,该名字可能在其他plugin中被改变
+					<finalName>${project.artifactId}-${project.version}</finalName>
+					或者
+					<finalName>${artifactId}-${version}</finalName>
+
+				directory: 构建的结果所在的路径,默认为${basedir}/target目录
+
+				defaultGoal: 执行构建时默认的goal或phase,如jar或者package等
+		  -->
+		<!-- 产生的构件的文件名，默认值是${artifactId}-${version}。 -->
+		<finalName>${project.artifactId}-${project.version}</finalName>
+
+		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+		<testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+
+		<!-- 构建产生的所有文件存放的目录,默认为${basedir}/target，即项目根目录下的target -->
+		<directory>${project.basedir}/target</directory>
+		<outputDirectory>${project.build.directory}/classes</outputDirectory>
+
+		<testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
+
+		<!-- 当项目没有规定目标（Maven2叫做阶段（phase））时的默认值，必须跟命令行上的参数相同例如jar:jar，或者与某个阶段（phase）相同例如install、compile等 -->
+		<defaultGoal>install</defaultGoal>
+
+		<!-- 当filtering开关打开时，使用到的过滤器属性文件列表。项目配置信息中诸如${spring.version}之类的占位符会被属性文件中的实际值替换掉 -->
+		<filters>
+			<filter>../filter.properties</filter>
+		</filters>
+
+		<!--项目相关的所有资源路径列表，例如和项目相关的配置文件、属性文件，这些资源被包含在最终的打包文件里。 -->
+		<resources>
+			<resource>
+				<!--描述了资源的目标路径。该路径相对target/classes目录（例如${project.build.outputDirectory}）。 -->
+				<!--举个例子，如果你想资源在特定的包里(org.apache.maven.messages)，你就必须该元素设置为org/apache/maven/messages。 -->
+				<!--然而，如果你只是想把资源放到源码目录结构里，就不需要该配置。 -->
+				<targetPath>${project.build.outputDirectory}</targetPath>
+				<directory>${project.basedir}/src/main/java</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<testResources>
+			<testResource>
+				<directory>${project.basedir}/src/test/java</directory>
+			</testResource>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+		</testResources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
