@@ -122,7 +122,7 @@ public class SparkJavaWordCountLocal {
 
 		List<Tuple2<Integer,String>> take = resultSortByKey.take(3);
 		for (Tuple2<Integer, String> tuple : take) {
-			System.out.println(tuple._2 + "," + tuple._1);;
+			System.out.println(tuple._2 + "," + tuple._1);
 		}
 
 		if (new File(outputPath).exists()){
