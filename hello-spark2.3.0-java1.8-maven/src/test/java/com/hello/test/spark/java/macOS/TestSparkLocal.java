@@ -8,7 +8,7 @@ import org.apache.spark.sql.SparkSession;
 import java.util.List;
 
 public class TestSparkLocal {
-    private static String filePath = "/Users/hiahia/develop/hello/hello.txt";
+    private static String filePath = "file:///Users/hiahia/develop/hello/hello.txt";
 
     public static void main(String[] args) {
         test_spark_1x();
