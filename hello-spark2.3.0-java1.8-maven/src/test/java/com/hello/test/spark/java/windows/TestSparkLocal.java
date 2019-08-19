@@ -12,11 +12,11 @@ public class TestSparkLocal {
     private static String filePath = "C:\\Users\\calm\\Desktop\\hello\\hello.txt";
 
     public static void main(String[] args) {
-        demo_spark_1();
-        demo_spark_2();
+        demo_spark_1x();
+        demo_spark_2x();
     }
 
-    public static void demo_spark_1() {
+    public static void demo_spark_1x() {
         SparkConf sparkConf = new SparkConf();
         sparkConf.setMaster("local");
         sparkConf.setAppName("windows-TestSparkLocal");
@@ -34,7 +34,7 @@ public class TestSparkLocal {
         sparkContext.stop();
     }
 
-    public static void demo_spark_2() {
+    public static void demo_spark_2x() {
 
         SparkSession spark = SparkSession.builder()
                 .master("local")

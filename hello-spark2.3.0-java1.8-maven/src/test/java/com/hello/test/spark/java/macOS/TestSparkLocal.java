@@ -11,12 +11,12 @@ public class TestSparkLocal {
     private static String filePath = "/Users/hiahia/develop/hello/hello.txt";
 
     public static void main(String[] args) {
-        test_spark_1();
+        test_spark_1x();
         System.out.println("-----------------------------");
-        test_spark_2();
+        test_spark_2x();
     }
 
-    public static void test_spark_1() {
+    public static void test_spark_1x() {
         SparkConf sparkConf = new SparkConf();
         sparkConf.setMaster("local");
         sparkConf.setAppName("macOS-TestSparkLocal");
@@ -34,7 +34,7 @@ public class TestSparkLocal {
         sparkContext.stop();
     }
 
-    public static void test_spark_2() {
+    public static void test_spark_2x() {
 
         SparkSession spark = SparkSession.builder()
                 .master("local")
