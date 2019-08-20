@@ -1,4 +1,4 @@
-package com.hello
+package com.hello.scala
 
 object HelloScala {
 
