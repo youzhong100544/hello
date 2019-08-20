@@ -18,7 +18,7 @@ object FastJsonUtilTest {
 "resultData":[
 				{"binlog":"mysql_binlog.000","column":[{"name":"single","type":"int(5)"},{"name":"single3","type":"int(5)"}]},
 				{"binlog1":"redis_binlog.000","column":[{"name":"single3","type":"int(5)"},{"name":"single3","type":"int(5)"}]},
-]
+		]
 }
 	* */
 	val str1: String = "{\n\t\"dataId\":123,\n\t\"dataType\":\"mysql\",\n\t\"resultData\":[\n\t\t\t\t  {\"binlog\":\"mysql_binlog.000\",\"column\":[{\"name\":\"single\",\"type\":\"int(5)\"},{\"name\":\"single3\",\"type\":\"int(5)\"}]},\n\t\t\t\t  {\"binlog1\":\"redis_binlog.000\",\"column\":[{\"name\":\"single3\",\"type\":\"int(5)\"},{\"name\":\"single3\",\"type\":\"int(5)\"}]},\n\t\t\t     ]\n}"
