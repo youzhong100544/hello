@@ -4,7 +4,7 @@ import java.io.File
 
 import org.apache.spark.{SparkConf, SparkContext}
 import com.hello.spark.scala.util.CommomUtil
-import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.sql.{DataFrame, Dataset, Row, SparkSession}
 
 object DemoKmeans {
   def main(args: Array[String]): Unit = {
@@ -82,11 +82,52 @@ class DemoKmeans {
     sc.stop()
   }
 
+  def prepareData_1(sparkSession:SparkSession): DataFrame = {
 
+    val date : DataFrame = sparkSession.createDataFrame(Seq(
+      (1, org.apache.spark.ml.linalg.Vectors.dense(1.0, 12.5, -108.0)),
+      (2, org.apache.spark.ml.linalg.Vectors.dense(2.5, 36.0, 198.0)),
+      (3, org.apache.spark.ml.linalg.Vectors.dense(6.8, 24.0, 459.0))
+    )).toDF("id","features")
+
+    return date
+  }
+
+  def prepareData_2(sparkSession:SparkSession, path: String): DataFrame = {
+
+    // val date : DataFrame = sparkSession.read.format("csv").load(path)
+    val date : DataFrame = sparkSession.read.csv(path)
+
+      // 推断数据类型
+      // .option("inferSchema", "true")
+      // 可设置分隔符，默认，
+      //.option("delimiter",",")
+      // 设置空值
+      // .option("nullValue", "?")
+      // 表示有表头，若没有则为false
+    // .option("header", true)
+      // 文件路径
+
+    val line: DataFrame = sparkSession.read.option("header", "true")csv(path)
+    println("line.show-----------------------------------------------------------------")
+    line.show()
+
+    /*val arr: Array[Row] = line.collect()
+    println("println-----------------------------------------------------------------")
+    arr.foreach(println)
+    println("println-----------------------------------------------------------------")
+    line.head(2).foreach(println)*/
+
+    //sparkSession.createDataFrame()
+
+
+    return date
+  }
 
   def demo_ml(): Unit = {
     val sparkSession: SparkSession = SparkSession.builder().master("local[*]").appName("DemoFeature").getOrCreate()
-
+    val sparkContext: SparkContext = sparkSession.sparkContext
+    sparkContext.setLogLevel("WARN")
 
     val output: File = new File(outputPath)
     // 删除输出目录
@@ -94,13 +135,10 @@ class DemoKmeans {
       CommomUtil.deleteDir(output)
     }
 
-    // val date : DataFrame = sparkSession.read.format("libsvm").load(inputPath + "feature-libsvm.txt")
+    // val date : DataFrame = prepareData_1(sparkSession:SparkSession)
 
-    val date : DataFrame = sparkSession.createDataFrame(Seq(
-      (1, org.apache.spark.ml.linalg.Vectors.dense(1.0, 12.5, -108.0)),
-      (2, org.apache.spark.ml.linalg.Vectors.dense(2.5, 36.0, 198.0)),
-      (3, org.apache.spark.ml.linalg.Vectors.dense(6.8, 24.0, 459.0))
-    )).toDF("id","features")
+    val date : DataFrame = prepareData_2(sparkSession, inputPath + "test1.csv")
+
 
     val kmeansmodel = new org.apache.spark.ml.clustering.KMeans().
       setK(3).
@@ -111,23 +149,23 @@ class DemoKmeans {
 
     // 与MLlib中的实现不同，KMeansModel作为一个Transformer，不再提供predict()样式的方法，而是提供了一致性的transform()方法，用于将存储在DataFrame中的给定数据集进行整体处理，生成带有预测簇标签的数据集：
     val results = kmeansmodel.transform(date)
-
+    println("result.show-----------------------------------------------------------------")
     results.show(false)
 
 
     // 为了方便观察，我们可以使用collect()方法，该方法将DataFrame中所有的数据组织成一个Array对象进行返回：
-    results.collect().foreach(
+    /*results.collect().foreach(
       row => {
         println( row(0) + " is predicted as cluster " + row(1))
       }
-    )
+    )*/
 
     // 也可以通过KMeansModel类自带的clusterCenters属性获取到模型的所有聚类中心情况：
-    kmeansmodel.clusterCenters.foreach(
+    /*kmeansmodel.clusterCenters.foreach(
       center => {
         println("Clustering Center:"+center)
       }
-    )
+    )*/
 
 
 

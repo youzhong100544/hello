@@ -9,7 +9,7 @@ import org.apache.spark.sql._
 object HelloSparkSQL {
 
   val inputPath = "C:\\Users\\calm\\Desktop\\hello\\"
-  val outputPath = "C:\\Users\\calm\\Desktop\\hello\\output\\spark\\scala\\sql"
+  val outputPath = "C:\\Users\\calm\\Desktop\\hello\\output\\spark\\scala\\sql\\save"
 
   val helloSparkSQL : HelloSparkSQL = new HelloSparkSQL
 
@@ -20,7 +20,7 @@ object HelloSparkSQL {
 
     // helloSparkSQL.readTextFile_1(inputPath + "hello.txt")
 
-    helloSparkSQL.readTextFile_2(inputPath + "hello.txt")
+    helloSparkSQL.demoTextFile(inputPath + "hello.txt", outputPath + "text")
 
   }
 
@@ -273,6 +273,12 @@ class HelloSparkSQL {
   }
 
 
+  def demoTextFile(inputPath: String, outputPath: String): Unit ={
+    val dataFrame: DataFrame = readTextFile_1(inputPath)
+    saveDataAsTextFile(dataFrame, outputPath)
+
+  }
+
   def demo_init_2(): SparkSession ={
     val sparkSession: SparkSession = SparkSession.builder().master("local[*]").appName("hello spark sql").getOrCreate()
     return sparkSession
@@ -307,7 +313,12 @@ class HelloSparkSQL {
     return sparkSession
   }
 
-  def readTextFile_1(path: String): Unit ={
+  def prepareData(): Unit ={
+    val sparkSession: SparkSession = init()
+
+  }
+
+  def readTextFile_1(path: String): DataFrame ={
     val sparkSession: SparkSession = init()
 
     val line: Dataset[String] = sparkSession.read.textFile(path)
@@ -357,10 +368,18 @@ class HelloSparkSQL {
     println("result.show-----------------------------------------------------------------")
     result2.show()
 
-    sparkSession.stop()
+    //sparkSession.stop()
+
+    // Exception in thread "main" org.apache.spark.sql.AnalysisException: Text data source supports only a single column, and you have 2 columns.;
+    // 所以合并成一列
+    result2.createTempView("wc")
+    val result3: DataFrame = sparkSession.sql("select concat(concat(word,'-'),counts) as value from wc")
+    println("result.show-----------------------------------------------------------------")
+    result3.show()
+    return result3
   }
 
-  def readTextFile_2(path: String): Unit ={
+  def readTextFile_2(path: String): DataFrame ={
     val sparkSession: SparkSession = init()
 
     // val line: Dataset[String] = sparkSession.read.textFile(path)
@@ -395,20 +414,41 @@ class HelloSparkSQL {
     result2.show()
 
 
-    sparkSession.stop()
+    //sparkSession.stop()
+
+    return result
+  }
+
+  def saveDataAsTextFile(dataFrame:DataFrame, path: String): Unit ={
+    dataFrame.write.mode(SaveMode.Overwrite).format("text").save(path)
+
+    //dataFrame.write.mode(SaveMode.Overwrite).text(path)
+
+  }
+
+  def saveDataAsParquet(dataFrame:DataFrame, path: String): Unit ={
+
+    /**
+      * 将DF保存为parquet文件
+      */
+
+    /**
+      * 将DataFrame保存成parquet文件，
+      * SaveMode指定存储文件时的保存模式:
+      *         Overwrite：覆盖
+      *         Append:追加
+      *         ErrorIfExists:如果存在就报错
+      *         Ignore:如果存在就忽略
+      * 保存成parquet文件有以下两种方式：
+      */
+    //方式一：save
+    dataFrame.write.mode(SaveMode.Overwrite).format("parquet").save(path);
+    //方式二：parquet
+    dataFrame.write.mode(SaveMode.Ignore).parquet(path);
 
 
   }
 
-  def prepareData_textFile(path: String): Unit ={
-    val sparkSession: SparkSession = init()
-
-    val line: Dataset[String] = sparkSession.read.textFile(path)
-
-    val frame: DataFrame = line.select()
-
-    frame.show()
-  }
 
   def prepareData_csv(path: String): Unit ={
     val sparkSession: SparkSession = init()
@@ -416,12 +456,13 @@ class HelloSparkSQL {
     val frame: DataFrame = sparkSession.read.format("csv").option("header", "true").option("mode", "DROPMALFORMED").csv(path)
   }
 
-
-
-  def prepareData(): Unit ={
-    val sparkSession: SparkSession = init()
-
+  def saveDataAsCSV(dataFrame:DataFrame, path: String): Unit ={
+    //2.x
+    // data.write.option("header", "true").csv("outpath/test.csv")
   }
+
+
+
 
 
 }
