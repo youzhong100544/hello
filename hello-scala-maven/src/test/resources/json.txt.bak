@@ -1,0 +1,36 @@
+{
+    "dataId":123,
+    "dataType":"redis",
+    "resultData":[
+                    {
+                        "binlog":"mysql_binlog.000",
+                        "column":[
+                                {"columnname":"single_cloum0","columntype":"varchar(10)","index":0,"modified":false,"pk":false,"sqlType":0,"value":"7"},
+                                {"columnname":"single_cloum1","columntype":"varchar(10)","index":1,"modified":false,"pk":false,"sqlType":0,"value":"7"},
+                                {"columnname":"single_cloum2","columntype":"int(5)","index":2,"modified":false,"pk":false,"sqlType":0,"value":"7"},
+                                {"columnname":"single_cloum3","columntype":"int(5)","index":3,"modified":false,"pk":false,"sqlType":0,"value":"7"}
+                        ],
+                        "db":"demo",
+                        "eventType":"insert",
+                        "pkValue":"7",
+                        "sql":"woshisql",
+                        "table":"student",
+                        "time":80146942099474
+                    },
+                    {
+                        "binlog":"mysql_binlog.001",
+                        "column":[
+                                {"columnname":"single_cloum0","columntype":"varchar(10)","index":0,"modified":false,"pk":false,"sqlType":0,"value":"9"},
+                                {"columnname":"single_cloum1","columntype":"varchar(10)","index":1,"modified":false,"pk":false,"sqlType":0,"value":"9"},
+                                {"columnname":"single_cloum2","columntype":"int(5)","index":2,"modified":false,"pk":false,"sqlType":0,"value":"9"},
+                                {"columnname":"single_cloum3","columntype":"int(5)","index":3,"modified":false,"pk":false,"sqlType":0,"value":"9"}
+                        ],
+                        "db":"demo",
+                        "eventType":"insert",
+                        "pkValue":"9",
+                        "sql":"woshisql",
+                        "table":"student",
+                        "time":80146943574276
+                    },
+    ]
+}
