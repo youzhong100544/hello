@@ -39,7 +39,8 @@ object FastJsonUtilTest {
 		test.test03()
 		test.test04()
 
-
+		println()
+		println()
 		println("test05------------")
 		println()
 		test.test05()
@@ -135,7 +136,14 @@ class FastJsonUtilTest{
 	}
 
 	def test05(): Unit = {
-		val lines: Iterator[String] = Source.fromFile("json.txt").getLines()
+		// val lines: Iterator[String] = Source.fromFile("json.txt").getLines()
+		// 上面的语句会报错
+
+		// test/resources/json.txt
+		val lines: Iterator[String] = Source.fromURL(getClass.getResource("/json.txt")).getLines()
+		lines.foreach(println)
+		println(lines)
+
 		val list: List[String] = lines.toList
 		val jSONObjects: immutable.Seq[JSONObject] = list.map(x => {  //取出每一条数据，把数据转换成JSONObject类型
 			println(x)
