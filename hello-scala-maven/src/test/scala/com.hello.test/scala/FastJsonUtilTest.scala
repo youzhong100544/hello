@@ -31,6 +31,7 @@ object FastJsonUtilTest {
 	val str4: String = "{\"data\":[{\"label\":\"789\",\"acc\":1,\"version\":\"4.3.1\"},{\"label\":\"78\",\"acc\":100,\"version\":\"4.3.1\"}]}"
 
 
+
 	def main(args: Array[String]): Unit = {
 		val test = new FastJsonUtilTest
 
@@ -46,7 +47,11 @@ object FastJsonUtilTest {
 		test.test05()
 
 
-
+		println()
+		println()
+		println("test06------------")
+		println()
+		test.test06()
 
 
 	}
@@ -179,6 +184,26 @@ class FastJsonUtilTest{
 
 	@Test
 	def test06(): Unit = {
+
+		val str1: String = "{}"
+		val str2: String = "[]"
+		val str3: String = "["
+		val str4: String = "{\"name\":\"张三\",\"age\":10}"
+		val str5: String = "[{\"name\":\"张三\",\"age\":10},{\"name\":\"李四\",\"age\":15}]"
+		val str6: String = "{\"data\":[{\"label\":\"123\",\"acc\":1,\"version\":\"4.3.1\"}]}"
+		val str7: String = ""
+		val str8: String = " "
+
+
+		println(FastJsonUtil.isJSONValid(str1))
+		println(FastJsonUtil.isJSONValid(str2))
+		println(FastJsonUtil.isJSONValid(str3))
+		println(FastJsonUtil.isJSONValid(str4))
+		println(FastJsonUtil.isJSONValid(str5))
+		println(FastJsonUtil.isJSONValid(str6))
+		println(FastJsonUtil.isJSONValid(str7))
+		println(FastJsonUtil.isJSONValid(str8))
+
 
 	}
 }
