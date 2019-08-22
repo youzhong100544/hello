@@ -6,13 +6,13 @@ import org.apache.spark.{SparkConf, SparkContext}
 import com.hello.spark.scala.util.CommomUtil
 import org.apache.spark.sql.{DataFrame, Dataset, Row, SparkSession}
 
-object DemoKmeans {
+object DemoKMeans {
   def main(args: Array[String]): Unit = {
-    val demoKmeans = new DemoKmeans
+    val demoKmeans = new DemoKMeans
     demoKmeans.demo_ml()
   }
 }
-class DemoKmeans {
+class DemoKMeans {
   val inputPath = "C:\\Users\\calm\\Desktop\\hello\\"
   val outputPath = "C:\\Users\\calm\\Desktop\\hello\\output\\spark\\scala\\mllib\\kmeans\\"
 

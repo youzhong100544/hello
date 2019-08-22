@@ -4,17 +4,17 @@ import org.apache.spark.SparkConf
 import org.apache.spark.ml.Pipeline
 import org.apache.spark.ml.clustering.KMeans
 import org.apache.spark.ml.feature.{StringIndexer, VectorAssembler}
-import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.sql.{DataFrame, Dataset, Row, SparkSession}
 
 
-object DemoKmeansFromMySQL {
+object DemoKMeansFromMySQL {
   def main(args: Array[String]): Unit = {
-    val demo = new DemoKmeansFromMySQL
+    val demo = new DemoKMeansFromMySQL
     demo.demo()
   }
 }
 
-class DemoKmeansFromMySQL {
+class DemoKMeansFromMySQL {
 
   def demo(): Unit = {
     val spark = new SparkSession.Builder()
@@ -55,6 +55,7 @@ class DemoKmeansFromMySQL {
 
     //Step 6
     //Randomly split the input data by 8:2, while 80% is for training, the rest is for testing.
+    //var array: Array[Dataset[Row]] = df.randomSplit(Array(0.7, 0.3))
     val Array(trainingData, testData) = df.randomSplit(Array(0.7, 0.3))
 
     /**
