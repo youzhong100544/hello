@@ -18,7 +18,7 @@ class DemoKMeansFromMySQL {
 
   def demo(): Unit = {
     val spark = new SparkSession.Builder()
-      .master("local")
+      .master("local[*]")
       .appName("source_data_mysql001")
       .getOrCreate()
 
