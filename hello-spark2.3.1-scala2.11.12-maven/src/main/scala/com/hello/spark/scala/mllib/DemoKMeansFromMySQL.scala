@@ -22,6 +22,10 @@ class DemoKMeansFromMySQL {
       .appName("source_data_mysql001")
       .getOrCreate()
 
+    var applicationId: String = spark.sparkContext.applicationId
+
+    println("applicationId:" + applicationId)
+
     val jdbc_conf: Map[String, String] = Map(
       "url" -> "jdbc:mysql://192.168.15.70:23306/dmp-data?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&autoReconnect=true",   //设置mysql的链接地址和指定数据库
       // "driver" -> "com.mysql.jdbc.Driver",    //设置MySQL的链接驱动
