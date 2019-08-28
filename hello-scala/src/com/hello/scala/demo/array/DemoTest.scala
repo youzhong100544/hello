@@ -7,7 +7,7 @@ object DemoArray {
 
 	def main(args: Array[String]): Unit = {
 
-		var z: Array[String] = new Array[String](3)
+		val z: Array[String] = new Array[String](3)
 
 		z(0) = "Runoob"; z(1) = "Baidu"; z(4/2) = "Google"
 
