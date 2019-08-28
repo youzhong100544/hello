@@ -52,7 +52,7 @@ public class UserDao {
 	 */
 	public User findById(String id){
 		try {
-			return new User("1", "xiaoming", "123456", "man", "21");
+			return new User(id, "xiaoming", "123456", "man", "21");
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

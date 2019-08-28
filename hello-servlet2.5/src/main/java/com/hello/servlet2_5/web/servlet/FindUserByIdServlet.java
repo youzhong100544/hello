@@ -19,9 +19,10 @@ public class FindUserByIdServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		//1 获得请求参数id的值
 		String id = request.getParameter("id");
+		System.out.println("id: " + id);
 		//2 通过service 查询用户
 		UserService userService = new UserService();
 		User user = userService.findUserById(id);
