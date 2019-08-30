@@ -158,6 +158,8 @@ class FastJsonUtilTest{
 			val str: String = t.getString("resultData")  //取出resultData的数据，
 			val oNArray: JSONArray = t.getJSONArray("resultData")
 			//result对应的数据是一个 数组中 存的是 [{json字符串},{json字符串}]
+			println("oNArray" + oNArray)
+
 
 			// /想要遍历JSONArray中的数据可以使用
 			import scala.collection.JavaConversions._  //可以把Java中的集合转成Scala中的集合

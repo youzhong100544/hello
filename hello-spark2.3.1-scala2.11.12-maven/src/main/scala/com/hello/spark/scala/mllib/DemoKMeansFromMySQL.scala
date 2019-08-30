@@ -118,10 +118,12 @@ root
       .setOutputCol("indexedLabel")
 
 
+
     // val vectorAssembler: VectorAssembler
     val vectorAssembler = new VectorAssembler()
       // .setInputCols(Array("salary_decimal","salary_double","c_1","c_2","c_3"))// Exception in thread "main" java.lang.IllegalArgumentException: Data type StringType of column c_2 is not supported.
-      .setInputCols(Array("salary_decimal","salary_double","c_1"))
+      // .setInputCols(df.columns) // 所有列
+      .setInputCols(Array("name","salary_decimal","salary_double","c_1"))
       // .setOutputCol("features11") // ***
       .setOutputCol("features") // ***
 
@@ -139,6 +141,16 @@ root
       epsilon  表示 K-means 算法迭代收敛的阀值。
       seed  表示集群初始化时的随机种子。
      */
+    /*ML包下的KMeans方法也有
+    Seed（随机数种子）、
+    Tol（收敛阈值）、
+    K（簇个数）、
+    MaxIter（最大迭代次数）、
+    initMode（初始化方式）、
+    initStep（KMeans||方法的步数）等参数可供设置，
+    和其他的ML框架算法一样，用户可以通过相应的setXXX()方法来进行设置，
+    或以ParamMap的形式传入参数，这里为了简介期间，
+    使用setXXX()方法设置了参数K，其余参数均采用默认值。*/
     val trainer = new KMeans()
       //.setFeaturesCol("features11") // ***必须和上面一样
       .setFeaturesCol("features") // ***必须和上面一样
@@ -147,6 +159,7 @@ root
       .setMaxIter(5)
       .setInitMode("k-means||")
       .setTol(0.01)
+      .setPredictionCol("prediction")
 
     //Step 6
     //Randomly split the input data by 8:2, while 80% is for training, the rest is for testing.
@@ -163,9 +176,22 @@ root
     val pipeline: Pipeline = new Pipeline().setStages(Array(labelIndexer, vectorAssembler, trainer))
 
     // train the model
+
     val model: PipelineModel = pipeline.fit(trainingData)
 
+    /*var model: PipelineModel  = null
+    try {
+      model= pipeline.fit(trainingData)
+    } catch {
+      case ex: IllegalArgumentException =>
+        println("IllegalArgumentException:" + ex)
+        return
+      case ex: Exception =>
+        println("Exception:" + ex)
 
+      case _ =>
+        println("未知异常:")
+    }*/
 
     // compute precision on the test set
     val result: DataFrame = model.transform(testData)
