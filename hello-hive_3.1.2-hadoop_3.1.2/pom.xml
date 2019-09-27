@@ -5,28 +5,18 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>hello</groupId>
-	<artifactId>hello-hadoop_3.1.0</artifactId>
+	<artifactId>hello-hive_3.1.2-hadoop_3.1.2</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
 	<packaging>jar</packaging>
 
-
-	<repositories>
-		<repository>
-			<id>apache</id>
-			<url>http://maven.apache.org</url>
-		</repository>
-	</repositories>
-
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<hadoop.version>3.1.0</hadoop.version>
+		<hadoop.version>3.1.2</hadoop.version>
+		<hive.version>3.1.2</hive.version>
 	</properties>
 
-
 	<dependencies>
-
 		<!-- hadoop -->
 		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-client -->
 		<dependency>
@@ -34,27 +24,58 @@
 			<artifactId>hadoop-client</artifactId>
 			<version>${hadoop.version}</version>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common -->
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-common</artifactId>
 			<version>${hadoop.version}</version>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-hdfs -->
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-hdfs</artifactId>
 			<version>${hadoop.version}</version>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-mapreduce-client-core -->
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-mapreduce-client-core</artifactId>
 			<version>${hadoop.version}</version>
 		</dependency>
+
+
+		<!-- hive -->
+		<!-- https://mvnrepository.com/artifact/org.apache.hive/hive-exec -->
+		<dependency>
+			<groupId>org.apache.hive</groupId>
+			<artifactId>hive-exec</artifactId>
+			<version>${hive.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.hive/hive-metastore -->
+		<dependency>
+			<groupId>org.apache.hive</groupId>
+			<artifactId>hive-metastore</artifactId>
+			<version>${hive.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.hive/hive-common -->
+		<dependency>
+			<groupId>org.apache.hive</groupId>
+			<artifactId>hive-common</artifactId>
+			<version>${hive.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.hive/hive-jdbc -->
+		<dependency>
+			<groupId>org.apache.hive</groupId>
+			<artifactId>hive-jdbc</artifactId>
+			<version>${hive.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.hive/hive-service -->
+		<dependency>
+			<groupId>org.apache.hive</groupId>
+			<artifactId>hive-service</artifactId>
+			<version>${hive.version}</version>
+		</dependency>
+
 
 	</dependencies>
 
