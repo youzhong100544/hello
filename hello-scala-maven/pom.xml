@@ -142,17 +142,18 @@
     <sourceDirectory>src/main/scala</sourceDirectory>
     <testSourceDirectory>src/test/scala</testSourceDirectory>
 
-    <directory>${project.basedir}/target</directory>
-    <outputDirectory>${project.build.directory}/classes</outputDirectory>
-    <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
+    <!--<directory>${project.basedir}/target</directory>-->
+    <!--<outputDirectory>${project.build.directory}/classes</outputDirectory>-->
+    <!--<testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>-->
 
     <resources>
       <resource>
         <!--描述了资源的目标路径。该路径相对target/classes目录（例如${project.build.outputDirectory}）。 -->
         <!--举个例子，如果你想资源在特定的包里(org.apache.maven.messages)，你就必须该元素设置为org/apache/maven/messages。 -->
         <!--然而，如果你只是想把资源放到源码目录结构里，就不需要该配置。 -->
-        <targetPath>${project.build.outputDirectory}</targetPath>
-        <directory>${project.basedir}/src/main/scala</directory>
+        <!--<targetPath>${project.build.outputDirectory}</targetPath>-->
+        <!--<directory>${project.basedir}/src/main/scala</directory>-->
+        <directory>src/main/scala</directory>
         <filtering>false</filtering>
         <includes>
           <include>**/*.properties</include>
@@ -173,7 +174,8 @@
 
     <testResources>
       <testResource>
-        <directory>${project.basedir}/src/test/scala</directory>
+        <!--<directory>${project.basedir}/src/test/scala</directory>-->
+        <directory>src/test/scala</directory>
         <includes>
           <include>**/*.properties</include>
           <include>**/*.xml</include>
