@@ -152,14 +152,6 @@
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
-
-        <outputDirectory>target/classes</outputDirectory>
-        <testOutputDirectory>target/test-classes</testOutputDirectory>
-
-        <!--scala待编译的文件目录-->
-        <sourceDirectory>src/main/scala</sourceDirectory>
-        <testSourceDirectory>src/test/scala</testSourceDirectory>
 
         <resources>
             <resource>
