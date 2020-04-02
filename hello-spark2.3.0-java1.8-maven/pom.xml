@@ -167,6 +167,7 @@
 				<directory>src/main/scala</directory>
 				<filtering>false</filtering>
 				<includes>
+					<include>**/*</include>
 					<include>**/*.properties</include>
 					<include>**/*.xml</include>
 				</includes>
@@ -175,6 +176,7 @@
 				<directory>src/main/resources</directory>
 				<filtering>false</filtering>
 				<includes>
+					<include>**/*</include>
 					<include>**/*.properties</include>
 					<include>**/*.xml</include>
 				</includes>
