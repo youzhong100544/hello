@@ -1,5 +1,6 @@
 package com.hello.spark.java.common;
 
+import com.hello.spark.java.entity.Iris;
 import org.apache.spark.Partition;
 import org.apache.spark.Partitioner;
 import org.apache.spark.SparkConf;
@@ -11,6 +12,7 @@ import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.VoidFunction;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.RowFactory;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.types.DataTypes;
 import org.apache.spark.sql.types.StructField;
@@ -100,8 +102,7 @@ public class SparkCommon {
      *
      * @return JavaSparkContext
      */
-    private static JavaSparkContext initJavaSparkContextBySparkConf() {
-        SparkConf sparkConf = initSparkConf();
+    private static JavaSparkContext initJavaSparkContextBySparkConf(SparkConf sparkConf) {
         JavaSparkContext javaSparkContext = new JavaSparkContext(sparkConf);
         return javaSparkContext;
     }
@@ -133,8 +134,7 @@ public class SparkCommon {
      *
      * @return JavaSparkContext
      */
-    private static JavaSparkContext initJavaSparkContextBySparkSession() {
-        SparkSession sparkSession = initSparkSession();
+    private static JavaSparkContext initJavaSparkContextBySparkSession(SparkSession sparkSession) {
         JavaSparkContext javaSparkContext = new JavaSparkContext(sparkSession.sparkContext());
         return javaSparkContext;
     }
@@ -177,7 +177,6 @@ public class SparkCommon {
      * 通常使用𝑚表示样本量的大小，𝑛表示每个样本所具有的特征数。因此在该数据集中，𝑚=150,𝑛=4
      *
      *
-     * @return JavaSparkContext
      */
     private static void getIrisDataSet() {
         getIrisDataSetFromResourcesDirectory();
@@ -214,7 +213,7 @@ public class SparkCommon {
 
         InputStream in = SparkCommon.class.getClassLoader().getResourceAsStream("dataset/iris.data");
 
-        InputStreamReader isr = new InputStreamReader (in);
+        InputStreamReader isr = new InputStreamReader(in);
         BufferedReader br = new BufferedReader(isr);
         String line;
         List<String> lines = new ArrayList<>();
@@ -224,19 +223,188 @@ public class SparkCommon {
         }
 
 
-        JavaSparkContext javaSparkContext = initJavaSparkContextBySparkSession();
+        SparkSession sparkSession = initSparkSession();
+        JavaSparkContext javaSparkContext = initJavaSparkContextBySparkSession(sparkSession);
 
         JavaRDD<String> linesRDD = javaSparkContext.parallelize(lines);
 
-        int numPartitions = linesRDD.getNumPartitions();
-        System.out.println("getNumPartitions:" + numPartitions);
+        /** - begin - filter */
+        JavaRDD<String> filter;
 
-        linesRDD.map(new Function<String, Object>() {
-
+        JavaRDD<String> filter_1 = linesRDD.filter(new Function<String, Boolean>() {
+            @Override
+            public Boolean call(String line) throws Exception {
+                if (line != null && line.length() > 0 && line.trim().length() > 0) {
+                    return true;
+                }
+                return false;
+            }
         });
 
-        linesRDD
+        JavaRDD<String> filter_2 = linesRDD.filter((String line_1) -> {
+            if (line_1 != null && line_1.length() > 0 && line_1.trim().length() > 0) {
+                return true;
+            }
+            return false;
+        });
 
+        filter = filter_2;
+
+        /** - end - filter */
+
+        /** - begin - map */
+
+
+
+        /** - end - map */
+
+        /** - begin - get DataFrame */
+
+        // Dataset<Row> dataFrame = reflectTransform(sparkSession, filter);
+        Dataset<Row> dataFrame = dataFrame = dynamicTransform(sparkSession, filter);
+
+        /** - end - get DataFrame */
+
+        System.out.println("- printSchema ------------------------------------");
+
+        dataFrame.printSchema();
+
+        System.out.println("- show --------------------------------------------");
+
+        dataFrame.show(); // 只显示前20条记录。
+
+        System.out.println("- show --------------------------------------------");
+
+        dataFrame.show(10); // 显示numRows条
+
+        System.out.println("- show --------------------------------------------");
+
+        dataFrame.show(false); // 是否最多只显示20个字符，默认为true。
+
+        System.out.println("- show --------------------------------------------");
+
+        dataFrame.show(10, false); // 综合前面的显示记录条数，以及对过长字符串的显示格式。
+
+
+    }
+
+    /**
+     * 通过Java反射转换
+     * @param sparkSession
+     *          sparkSession
+     * @return Dataset<Row>
+     */
+    private static Dataset<Row> reflectTransform(SparkSession sparkSession, JavaRDD<String> linesRDD) {
+        JavaRDD<Iris> irisRDD;
+
+        JavaRDD<Iris> irisRDD_1 = linesRDD.map(new Function<String, Iris>() {
+
+            @Override
+            public Iris call(String line) throws Exception {
+                String[] split = line.split(",");
+                Iris iris = new Iris();
+
+                iris.setSepalLengthCm(Float.parseFloat(split[0].trim()));
+                iris.setSepalWidthCm(Float.parseFloat(split[1].trim()));
+                iris.setPetalLengthCm(Float.parseFloat(split[2].trim()));
+                iris.setPetalWidthCm(Float.parseFloat(split[3].trim()));
+
+                iris.setSpecies(split[4].trim());
+
+                return iris;
+            }
+        });
+
+        JavaRDD<Iris> irisRDD_2 = linesRDD.map(line -> {
+            String[] split = line.split(",");
+            Iris iris = new Iris();
+
+            iris.setSepalLengthCm(Float.parseFloat(split[0].trim()));
+            iris.setSepalWidthCm(Float.parseFloat(split[1].trim()));
+            iris.setPetalLengthCm(Float.parseFloat(split[2].trim()));
+            iris.setPetalWidthCm(Float.parseFloat(split[3].trim()));
+
+            iris.setSpecies(split[4].trim());
+
+            return iris;
+        });
+
+        irisRDD = irisRDD_2;
+
+        Dataset<Row> dataFrame = sparkSession.createDataFrame(irisRDD, Iris.class);
+
+        return dataFrame;
+    }
+
+    /**
+     * 动态转换
+     * @param sparkSession
+     *          sparkSession
+     * @return Dataset<Row>
+     */
+    private static Dataset<Row> dynamicTransform(SparkSession sparkSession, JavaRDD<String> linesRDD) {
+
+        JavaRDD<Row> rowRDD;
+
+        JavaRDD<Row> rowRDD_1 = linesRDD.map(new Function<String, Row>() {
+
+            @Override
+            public Row call(String line) throws Exception {
+                String[] split = line.split(",");
+
+                float sepalLengthCm = Float.parseFloat(split[0].trim());
+                float sepalWidthCm = Float.parseFloat(split[1].trim());
+                float petalLengthCm = Float.parseFloat(split[2].trim());
+                float petalWidthCm = Float.parseFloat(split[3].trim());
+
+                String species = split[4].trim();
+
+                Row row = RowFactory.create(sepalLengthCm, sepalWidthCm, petalLengthCm, petalWidthCm, species);
+
+                return row;
+            }
+        });
+
+        JavaRDD<Row> rowRDD_2 = linesRDD.map((String line) -> {
+            String[] split = line.split(",");
+
+            float sepalLengthCm = Float.parseFloat(split[0].trim());
+            float sepalWidthCm = Float.parseFloat(split[1].trim());
+            float petalLengthCm = Float.parseFloat(split[2].trim());
+            float petalWidthCm = Float.parseFloat(split[3].trim());
+
+            String species = split[4].trim();
+
+            Row row = RowFactory.create(sepalLengthCm, sepalWidthCm, petalLengthCm, petalWidthCm, species);
+
+            return row;
+        });
+
+        rowRDD = rowRDD_2;
+
+        List<StructField> fields = new ArrayList<>();
+        StructField field = null;
+
+        field = DataTypes.createStructField("sepalLength", DataTypes.FloatType, true);
+        fields.add(field);
+
+        field = DataTypes.createStructField("sepalWidth", DataTypes.FloatType, true);
+        fields.add(field);
+
+        field = DataTypes.createStructField("petalLength", DataTypes.FloatType, true);
+        fields.add(field);
+
+        field = DataTypes.createStructField("petalWidth", DataTypes.FloatType, true);
+        fields.add(field);
+
+        field = DataTypes.createStructField("species", DataTypes.StringType, true);
+        fields.add(field);
+
+        StructType schema = DataTypes.createStructType(fields);
+
+        Dataset<Row> dataFrame = sparkSession.createDataFrame(rowRDD, schema);
+
+        return dataFrame;
 
     }
 
