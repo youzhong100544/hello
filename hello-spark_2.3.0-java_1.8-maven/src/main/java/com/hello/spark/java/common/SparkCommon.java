@@ -39,7 +39,7 @@ public class SparkCommon {
 
         // demo();
 
-        // getIrisDataSet();
+        getIrisDataSet();
 
         String filePath = "dataset/iris.data";
         getIrisDataSetFromResourcesDirectory(filePath);
@@ -178,8 +178,9 @@ public class SparkCommon {
      *
      *
      */
-    private static void getIrisDataSet() {
-        getIrisDataSetFromResourcesDirectory();
+    private static void getIrisDataSet() throws IOException {
+        String filePath = "dataset/iris.data";
+        getIrisDataSetFromResourcesDirectory(filePath);
     }
 
     /**
@@ -253,8 +254,6 @@ public class SparkCommon {
         /** - end - filter */
 
         /** - begin - map */
-
-
 
         /** - end - map */
 
