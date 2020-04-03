@@ -25,6 +25,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 参考博文
+ *      Spark中RDD、DataFrame和DataSet的区别
+ *      https://blog.csdn.net/weixin_39793644/article/details/79050762
+ */
 public class SparkCommon {
 
     private static String appName;
