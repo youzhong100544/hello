@@ -19,6 +19,7 @@ import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
 import scala.collection.Iterator;
 import scala.io.Source;
+import shapeless.Tuple;
 
 import java.io.*;
 import java.net.URL;
@@ -29,11 +30,21 @@ import java.util.List;
  * 参考博文
  *      Spark中RDD、DataFrame和DataSet的区别
  *      https://blog.csdn.net/weixin_39793644/article/details/79050762
+ *
+ *      什么是过拟合和欠拟合
+ *      https://blog.csdn.net/xuaho0907/article/details/88649141
  */
 public class SparkCommon {
 
+    private static final String filePathTrainSetOfTitanic = "C:\\Users\\calm\\Desktop\\hello\\titanic\\train.csv";
+    private static final String filePathTestSetOfTitanic = "C:\\Users\\calm\\Desktop\\hello\\titanic\\test.csv";
+
     private static String appName;
     private static String master;
+
+    private static SparkConf sparkConf;
+    private static JavaSparkContext javaSparkContext;
+    private static SparkSession sparkSession;
 
     static {
         appName = "HelloSpark";
@@ -44,11 +55,24 @@ public class SparkCommon {
 
         // demo();
 
-        getIrisDataSet();
+        /* 鸢尾花数据集 */
+//        Dataset<Row> irisDataSet = getIrisDataSet();
+//
+//        showDatasetInfo(irisDataSet);
+//        statisticalInformation(irisDataSet);
 
-        String filePath = "dataset/iris.data";
-        getIrisDataSetFromResourcesDirectory(filePath);
+        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
 
+        /* 泰坦尼克号数据集 */
+        Dataset<Row>[] titanicDataSet = getTitanicDataSet();
+        Dataset<Row> titanicTrainSet = titanicDataSet[0];
+        Dataset<Row> titanicTestSet = titanicDataSet[1];
+
+        // showDatasetInfo(titanicTrainSet);
+        // showDatasetInfo(titanicTestSet);
+
+        statisticalInformation(titanicTrainSet);
+        statisticalInformation(titanicTestSet);
 
     }
 
@@ -183,9 +207,10 @@ public class SparkCommon {
      *
      *
      */
-    private static void getIrisDataSet() throws IOException {
+    private static Dataset<Row> getIrisDataSet() throws IOException {
         String filePath = "dataset/iris.data";
-        getIrisDataSetFromResourcesDirectory(filePath);
+        Dataset<Row> dataFrame = getIrisDataSetFromResourcesDirectory(filePath);
+        return dataFrame;
     }
 
     /**
@@ -211,11 +236,15 @@ public class SparkCommon {
     }
 
     /**
-     * java spark list 转为 RDD 转为 dataset 写入表中
-     * https://www.cnblogs.com/Allen-rg/p/11365013.html
+     * 参考博文
+     *      java spark list 转为 RDD 转为 dataset 写入表中
+     *      https://www.cnblogs.com/Allen-rg/p/11365013.html
+     *
+     * @param filePath
+     * @return
      * @throws IOException
      */
-    private static void getIrisDataSetFromResourcesDirectory(String filePath) throws IOException {
+    private static Dataset<Row> getIrisDataSetFromResourcesDirectory(String filePath) throws IOException {
 
         InputStream in = SparkCommon.class.getClassLoader().getResourceAsStream("dataset/iris.data");
 
@@ -269,26 +298,9 @@ public class SparkCommon {
 
         /** - end - get DataFrame */
 
-        System.out.println("- printSchema ------------------------------------");
 
-        dataFrame.printSchema();
 
-        System.out.println("- show --------------------------------------------");
-
-        dataFrame.show(); // 只显示前20条记录。
-
-        System.out.println("- show --------------------------------------------");
-
-        dataFrame.show(10); // 显示numRows条
-
-        System.out.println("- show --------------------------------------------");
-
-        dataFrame.show(false); // 是否最多只显示20个字符，默认为true。
-
-        System.out.println("- show --------------------------------------------");
-
-        dataFrame.show(10, false); // 综合前面的显示记录条数，以及对过长字符串的显示格式。
-
+        return dataFrame;
 
     }
 
@@ -306,6 +318,7 @@ public class SparkCommon {
             @Override
             public Iris call(String line) throws Exception {
                 String[] split = line.split(",");
+
                 Iris iris = new Iris();
 
                 iris.setSepalLengthCm(Float.parseFloat(split[0].trim()));
@@ -321,6 +334,7 @@ public class SparkCommon {
 
         JavaRDD<Iris> irisRDD_2 = linesRDD.map(line -> {
             String[] split = line.split(",");
+
             Iris iris = new Iris();
 
             iris.setSepalLengthCm(Float.parseFloat(split[0].trim()));
@@ -412,6 +426,111 @@ public class SparkCommon {
 
     }
 
+
+    private static Dataset<Row>[] getTitanicDataSet() throws IOException {
+
+        // 训练集
+        Dataset<Row> titanicTrainSet = getTitanicTrainSet();
+
+        // double[] split = {0.9d, 0.1d};
+        // Dataset<Row>[] datasets = titanicTrainSet.randomSplit(split);
+
+        // 测试集
+        Dataset<Row> titanicTestSet = getTitanicTestSet();
+
+        // 合并数组
+        Dataset<Row>[] datasets = new Dataset[]{titanicTrainSet, titanicTestSet};
+
+        return datasets;
+    }
+    private static Dataset<Row> getTitanicTrainSet() throws IOException {
+        Dataset<Row> titanicTrainSet = getTitanicTrainSetFromFileCSV(filePathTrainSetOfTitanic);
+        return titanicTrainSet;
+    }
+    private static Dataset<Row> getTitanicTestSet() throws IOException {
+        Dataset<Row> titanicTestSet = getTitanicTestSetFromFileCSV(filePathTestSetOfTitanic);
+        return titanicTestSet;
+    }
+
+    private static Dataset<Row> getTitanicDataSetFromResourcesDirectory(String filePath) throws IOException {
+        return null;
+    }
+
+    private static Dataset<Row> getTitanicTrainSetFromFileCSV(String filePath) throws IOException {
+        SparkSession sparkSession = initSparkSession();
+        Dataset<Row> dataset = sparkSession.read()
+
+                // .format("com.databricks.spark.csv")
+                // 或者
+                .format("csv")
+
+                // 推断数据类型
+                // .option("inferSchema", "true")
+
+                // 可设置分隔符，默认，
+                // .option("delimiter",",")
+
+                // 设置空值
+                // .option("nullValue", "?")
+
+                // 表示有表头，若没有则为false
+                .option("header", true)
+
+                // 文件路径
+                .load("file:///" + filePath);
+
+        return dataset;
+    }
+
+    private static Dataset<Row> getTitanicTestSetFromFileCSV(String filePath) throws IOException {
+        SparkSession sparkSession = initSparkSession();
+        Dataset<Row> dataset = sparkSession.read()
+                // 推断数据类型
+                // .option("inferSchema", "true")
+
+                // 可设置分隔符，默认，
+                // .option("delimiter",",")
+
+                // 设置空值
+                // .option("nullValue", "?")
+
+                // 表示有表头，若没有则为false
+                .option("header", true)
+
+                // 文件路径
+                .csv("file:///" + filePath);
+
+        return dataset;
+    }
+
+    private static void showDatasetInfo(Dataset<Row> dataset) {
+        System.out.println("- printSchema() ------------------------------------");
+        dataset.printSchema();
+
+        System.out.println("- show() --------------------------------------------");
+        dataset.show(); // 只显示前20条记录。
+
+        System.out.println("- show(10) --------------------------------------------");
+        dataset.show(10); // 显示numRows条
+
+        System.out.println("- show(false) --------------------------------------------");
+        dataset.show(false); // 是否最多只显示20个字符，默认为true。
+
+        System.out.println("- show(10, false) --------------------------------------------");
+        dataset.show(10, false); // 综合前面的显示记录条数，以及对过长字符串的显示格式。
+
+
+    }
+    /**
+     * 统计信息
+     *
+     * @param dataFrame
+     */
+    private static Dataset<Row> statisticalInformation(Dataset<Row> dataFrame) {
+        Dataset<Row> dataFrameDescribe = dataFrame.describe();
+        dataFrame.describe().show(100, false);
+        return dataFrameDescribe;
+    }
 
 
 }
