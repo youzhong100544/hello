@@ -46,3 +46,4 @@ print(a)
 a = np.random.random(6)
 print(a)
 
+
