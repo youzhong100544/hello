@@ -3,6 +3,7 @@
 import pandas as pd
 
 print("pandas version: {}".format(pd.__version__))
+print()
 
 # True就是可以换行显示。设置成False的时候不允许换行
 pd.set_option('expand_frame_repr', False)
@@ -34,120 +35,92 @@ pd.set_option('max_colwidth', 10000)
 # 横向最多显示多少个字符， 一般80不适合横向的屏幕，平时多用200.
 pd.set_option('display.width', 1024)
 
-
-print("1、- " + "read train data" + " -" * 25)
-data_train = pd.read_csv('../../dataset/titanic/train.csv')
-
-print("2、- " + "read test data" + " -" * 25)
-data_test = pd.read_csv('../../dataset/titanic/test.csv')
-
-
-print()
-print("|" * 100)
 print()
 
+print("1、- " + "读取 csv 文件" + " -" * 25)
+"""
+# header=0——表示csv文件的第一行默认为dataframe数据的行名称,
+# index_col=0——表示使用第0列作为dataframe的行索引,
+# squeeze=True——表示如果文件只包含一列，则返回一个序列。
 
-print("3、- " + "查询训练集数据信息" + " -" * 25)
-print("3.1 - " + "train data type" + " -" * 25)
+sep分隔符，encoding编码header=None自动列名，names自定义列名，index_col作为行索引的列（主键）,skiprows跳过行索引,na_values缺失值的替代字符串
+"""
 
-print(type(data_train))
+CSV_FILE_PATH = '../../data/iris.csv'
+CSV_FILE_NO_HEADER_PATH = '../../data/iris-no-header.csv'
+
+print("1.1、- " + "读取 csv 文件，带标题行" + " -" * 25)
+df = pd.read_csv(CSV_FILE_PATH)
+print(df.head(5))
+df.info()
+
+del df
+
 print()
-
-print("3.2 - " + "train data info" + " -" * 25)
-# def info(self, verbose=None, buf=None, max_cols=None, memory_usage=None, null_counts=None)
-print(data_train.info())
-print()
-
-print("3.3 - " + "train data describe" + " -" * 25)
-# def describe(self: FrameOrSeries, percentiles=None, include=None, exclude=None)
-# print(data_train.describe(include='all'))
-print()
-
-print("3.4 - " + "train data isnull sum" + " -" * 25)
-print(data_train.isnull().sum())
-print()
-
-print("3.5 - " + "train data sample" + " -" * 25)
-# def sample(self: FrameOrSeries, n=None, frac=None, replace=False, weights=None, random_state=None, axis=None,)
-print(data_train.sample(10))
+print("-"*40)
 print()
 
 
-print()
-print("|" * 100)
-print()
+print("1.2、- " + "读取 csv 文件, 不带标题行" + " -" * 25)
+df = pd.read_csv(CSV_FILE_NO_HEADER_PATH)
+print(df.head(5))
+df.info()
 
-
-print("4、- " + "查询测试集数据信息" + " -" * 25)
-print("4.1 - " + "test data type" + " -" * 25)
-print(type(data_test))
-print()
-
-print("4.2 - " + "test data info" + " -" * 25)
-print(data_test.info())
-print()
-
-print("4.3 - " + "test data describe" + " -" * 25)
-print(data_test.describe(include = 'all'))
-print()
-
-print("4.4 - " + "test data isnull sum" + " -" * 25)
-print(data_test.isnull().sum())
-print()
-
-print("4.5 - " + "test data sample" + " -" * 25)
-print(data_test.sample(10))
-print()
+del df
 
 print()
-print("|" * 100)
+print("-"*40)
 print()
 
 
-print("5、- " + "copy 训练集数据" + " -" * 25)
-# copy（） 和 copy（deep= False）都是浅拷贝
-# copy（deep = True）深拷贝
-data_train_copy = data_train.copy(deep = True)
-print(id(data_train))
-print(id(data_train_copy))
-
+print("1.3、- " + "读取 csv 文件, 不带标题行，添加列名" + " -" * 25)
+df = pd.read_csv(CSV_FILE_NO_HEADER_PATH)
+print(df.head(5))
+df.info()
 
 print()
-print("|" * 100)
+print("- 设置列名" + " -" * 25)
 print()
+df.columns = ['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Species']
+print(df.head(5))
+df.info()
 
-
-print("6、- " + "copy 测试集信息" + " -" * 25)
-print("浅拷贝" + " -" * 25)
-data_test_copy_shallow = data_test.copy()
-print("id(data_test):" + str(id(data_test)))
-print("id(data_test_copy_shallow):" + str(id(data_test_copy_shallow)))
-
-print("深拷贝" + " -" * 25)
-data_test_copy_deep = data_test.copy(deep = True)
-print("id(data_test):" + str(id(data_test)))
-print("id(data_test_copy_deep):" + str(id(data_test_copy_deep)))
-
-data_test_copy = data_test_copy_deep
+del df
 
 print()
-print("|" * 100)
+print("-"*40)
 print()
 
 
-print("7、- " + "合并训练集、测试集数据" + " -" * 25)
-# data_all = [data_train, data_test]
+print("1.4、- " + "读取 csv 文件, 不带标题行，添加列名" + " -" * 25)
+df = pd.read_csv(CSV_FILE_NO_HEADER_PATH, header=None)
+print(df.head(5))
+df.info()
 
-data_all = pd.concat([data_train, data_test])
+print()
+print("- 设置列名" + " -" * 25)
+print()
+df.columns = ['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Species']
+print(df.head(5))
+df.info()
 
-print("7.1 - " + "all data describe" + " -" * 25)
-print(data_all.describe(include = 'all'))
+del df
+
+print()
+print("-"*40)
 print()
 
-print("7.2 - " + "all data isnull sum" + " -" * 25)
-print(data_all.isnull().sum())
+
+
+
+
+print()
+print("|"*50)
 print()
 
-print("7.3 - " + "all data sample" + " -" * 25)
-print(data_all.sample(10))
-print()
+print("2、- " + "查看 dataframe 信息" + " -" * 25)
+
+
+
+
+
