@@ -2,6 +2,7 @@
 
 import pandas as pd
 
+print("pandas version: {}".format(pd.__version__))
 
 # True就是可以换行显示。设置成False的时候不允许换行
 pd.set_option('expand_frame_repr', False)
