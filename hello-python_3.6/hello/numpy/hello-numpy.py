@@ -2,6 +2,7 @@
 
 import numpy as np
 
+print("numpy version: {}".format(np.__version__))
 
 # NumPy Ndarray 对象
 a = np.array([1, 2, 3])
