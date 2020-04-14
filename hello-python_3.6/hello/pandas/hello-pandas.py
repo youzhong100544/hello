@@ -35,9 +35,6 @@ pd.set_option('max_colwidth', 10000)
 pd.set_option('display.width', 1024)
 
 
-
-
-
 print("1、- " + "read train data" + " -" * 25)
 data_train = pd.read_csv('../../dataset/titanic/train.csv')
 
