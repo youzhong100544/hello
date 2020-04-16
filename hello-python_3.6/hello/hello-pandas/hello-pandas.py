@@ -105,9 +105,7 @@ df.columns = ['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Species
 print(df.head(5))
 df.info()
 
-
 del df
-
 
 print()
 print("-"*40)
