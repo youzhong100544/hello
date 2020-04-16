@@ -2,6 +2,9 @@
 
 import pandas as pd
 
+import hello.hello_common.common
+from hello.hello_common import common
+
 print("pandas version: {}".format(pd.__version__))
 print()
 
@@ -124,6 +127,25 @@ del df
 
 print()
 print("-"*40)
+print()
+
+
+print()
+print("|"*50)
+print()
+
+
+frame = hello.hello_common.common.get_data_frame()
+print(frame)
+print()
+
+
+print()
+print("|"*50)
+print()
+
+frame = common.get_data_frame()
+print(frame)
 print()
 
 
