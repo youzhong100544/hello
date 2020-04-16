@@ -51,7 +51,23 @@ CSV_FILE_NO_HEADER_PATH = '../../data/iris-no-header.csv'
 
 print("1.1、- " + "读取 csv 文件，带标题行" + " -" * 25)
 df = pd.read_csv(CSV_FILE_PATH)
+print("- head -" + "-"*50)
 print(df.head(5))
+print()
+
+print("- columns -" + "-"*50)
+df_columns = df.columns
+print(type(df_columns))
+print(df_columns)
+print()
+
+print("- index -" + "-"*50)
+df_index = df.index
+print(type(df_index))
+print(df_index)
+print()
+
+print("- info -" + "-"*50)
 df.info()
 
 del df
@@ -111,14 +127,31 @@ print("-"*40)
 print()
 
 
-
-
-
 print()
 print("|"*50)
 print()
 
+
 print("2、- " + "查看 dataframe 信息" + " -" * 25)
+print("- head -" + "-"*50)
+print(df.head(5))
+print()
+
+print("- index -" + "-"*50)
+df_index = df.index
+print(type(df_index))
+print(df_index)
+print()
+
+print("- columns -" + "-"*50)
+df_columns = df.columns
+print(type(df_columns))
+print(df_columns)
+print()
+
+
+
+
 
 
 
