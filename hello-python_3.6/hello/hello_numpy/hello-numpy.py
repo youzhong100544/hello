@@ -18,7 +18,6 @@ print('dtype:', a.dtype)
 # print('dtype:', numpy.dtype(a))
 
 
-
 b = np.array([[1, 2, 3], [4, 5, 6]], dtype=int)
 print(b)
 
