@@ -116,4 +116,5 @@ if __name__ == '__main__':
     frame = create_data_frame()
 
     print(frame)
+
     show_data_frame_info(frame)
