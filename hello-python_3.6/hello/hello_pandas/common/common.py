@@ -32,8 +32,22 @@ def create_data_frame():
     return df
 
 
-def create_data_frame_from_csv(file_path):
+def create_data_frame_from_csv_with_head(file_path: str):
     df = pd.read_csv(file_path)
     return df
 
 
+def create_data_frame_from_csv_without_head(file_path: str, columns_list: list = None):
+    df = pd.read_csv(file_path)
+
+    if columns_list:
+        print('Not Null')
+    else:
+        print('Is Null')
+
+    # df.columns = columns_list
+
+    return df
+
+
+head = create_data_frame_from_csv_without_head('../../data/iris-no-header.csv')
