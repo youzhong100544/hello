@@ -113,5 +113,7 @@ def show_data_frame_info(data_frame: pd.core.frame.DataFrame):
 
 
 if __name__ == '__main__':
-    create_data_frame()
+    frame = create_data_frame()
+    print(frame)
 
+    show_data_frame_info(frame)
