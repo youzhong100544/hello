@@ -2,8 +2,12 @@
 
 import pandas as pd
 
-import hello.hello_common.common
-from hello.hello_common import common
+
+# import hello.hello_common.common
+# from hello.hello_common import common
+
+import hello.hello_pandas.common.common
+from hello.hello_pandas.common import common
 
 print("pandas version: {}".format(pd.__version__))
 print()
