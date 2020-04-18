@@ -43,6 +43,22 @@ def create_data_frame() -> pd.core.frame.DataFrame:
     return df
 
 
+# 创建 DataFrame ：利用 pandas 的 series
+def create_data_frame_from_dict():
+    dict = {"name": ["xm", "xh", "xq"], "age": [1, 4, 7], "gender": ["female", "male", "female"]}
+
+    dict1 = {"name": pd.Series(["xm", "xh", "xq"]), "age": pd.Series([1, 4, 7]), "gender": pd.Series(["female", "male", "female"])}
+
+    dict2 = {"name": pd.Series(["xm", "xh", "xq"]), "age": pd.Series([1, 4, 7]), "gender": ["female", "male", "female"]}
+
+    dict3 = {"name": pd.Series(["xm", "xh", "xq"], index=[11, 22, 33]), "age": pd.Series([1, 4, 7], index=[111, 222, 333])}
+
+    dict4 = {"name": pd.Series(["xm", "xh", "xq"], index=[11, 22, 33]), "age": pd.Series([1, 4, 7])}
+
+    df = pd.DataFrame.from_dict(dict)
+    return df
+
+
 def create_data_frame_from_csv_with_head(file_path: str):
     df = pd.read_csv(file_path)
     return df
@@ -113,8 +129,8 @@ def show_data_frame_info(data_frame: pd.core.frame.DataFrame):
 
 
 if __name__ == '__main__':
-    frame = create_data_frame()
+    frame = create_data_frame_from_dict()
 
     print(frame)
 
-    show_data_frame_info(frame)
+    # show_data_frame_info(frame)

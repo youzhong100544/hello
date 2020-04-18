@@ -53,20 +53,118 @@ print("1、- " + "读取 csv 文件" + " -" * 25)
 sep分隔符，encoding编码header=None自动列名，names自定义列名，index_col作为行索引的列（主键）,skiprows跳过行索引,na_values缺失值的替代字符串
 """
 
+CSV_FILE_PATH = '../../data/iris.csv'
+CSV_FILE_NO_HEADER_PATH = '../../data/iris-no-header.csv'
 
-print("创建 DataFrame")
-
-ls_a = {"A": [1, 1, 2, 2, 2, 3], "B": [2, 5, 8, 7, 9, 4], "C": [3, 6, 9, 9, 9, 9]}
-df = pd.DataFrame(ls_a)
-
-print("打印数据" + " -" * 25)
-print("- head(5) -")
+print("1.1、- " + "读取 csv 文件，带标题行" + " -" * 25)
+df = pd.read_csv(CSV_FILE_PATH)
+print("- head -" + "-"*50)
 print(df.head(5))
 print()
 
-print("打印数据相关信息" + " -" * 25)
+print("- columns -" + "-"*50)
+df_columns = df.columns
+print(type(df_columns))
+print(df_columns)
+print()
 
-print("- index -")
+print("- index -" + "-"*50)
+df_index = df.index
+print(type(df_index))
+print(df_index)
+print()
+
+print("- info -" + "-"*50)
+df.info()
+
+del df
+
+print()
+print("-"*40)
+print()
+
+
+print("1.2、- " + "读取 csv 文件, 不带标题行" + " -" * 25)
+df = pd.read_csv(CSV_FILE_NO_HEADER_PATH)
+print(df.head(5))
+df.info()
+
+del df
+
+print()
+print("-"*40)
+print()
+
+
+print("1.3、- " + "读取 csv 文件, 不带标题行，添加列名" + " -" * 25)
+df = pd.read_csv(CSV_FILE_NO_HEADER_PATH)
+print(df.head(5))
+df.info()
+
+
+print()
+print("- 设置列名" + " -" * 25)
+print()
+df.columns = ['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Species']
+print(df.head(5))
+df.info()
+
+del df
+
+print()
+print("-"*40)
+print()
+
+
+print("1.4、- " + "读取 csv 文件, 不带标题行，添加列名" + " -" * 25)
+df = pd.read_csv(CSV_FILE_NO_HEADER_PATH, header=None)
+print(df.head(5))
+df.info()
+
+print()
+print("- 设置列名" + " -" * 25)
+print()
+df.columns = ['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Species']
+print(df.head(5))
+df.info()
+
+# del df
+
+print()
+print("-"*40)
+print()
+
+
+print()
+print("|"*50)
+print()
+
+"""
+frame = hello.hello_common.common.get_data_frame()
+print(frame)
+print()
+
+
+print()
+print("|"*50)
+print()
+
+frame = common.get_data_frame()
+print(frame)
+print()
+"""
+
+print()
+print("|"*50)
+print()
+
+
+print("2、- " + "查看 dataframe 信息" + " -" * 25)
+print("- head -" + "-"*50)
+print(df.head(5))
+print()
+
+print("- index -" + "-"*50)
 df_index = df.index
 print(type(df_index))
 print(df_index)
@@ -79,13 +177,10 @@ print(df_columns)
 print()
 
 
-print("- info -" + "-"*50)
-df.info()
 
 
-print()
-print("-"*40)
-print()
+
+
 
 
 
