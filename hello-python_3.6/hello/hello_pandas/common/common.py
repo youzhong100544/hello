@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import numpy as np
 import pandas as pd
 
 print("common")
@@ -38,9 +39,23 @@ pd.set_option('display.width', 1024)
 
 
 def create_data_frame() -> pd.core.frame.DataFrame:
-    ls = {"A": [1, 4, 7], "B": [2, 5, 8], "C": [3, 6, 9]}
-    df = pd.DataFrame(ls)
-    return df
+    # test_dict = {'id': [1, 2, 3, 4, 5, 6], 'class': [1, 2, 1, 2, 2, 3], 'name': ['Alice','Bob','Cindy','Eric','Helen','Grace '], 'math': [90, 89, 99, 78, 97, 93], 'english': [89, 94, 80, 94, 94, 90]}
+    test_dict = {'id': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'class': [1, 2, 1, 2, 2, 3, 1, 3, 2, 3], 'name': ['aa', 'bb', 'cc', 'dd', 'ee', 'ff', 'gg', 'hh', 'ii', 'jj'], 'math': [90, 89, 99, 78, 97, 93, 44, 78, 97, 93], 'english': [89, 94, 80, 94, 94, 90, 80, 94, 94, 90]}
+
+    # 1.直接写入参数test_dict
+    test_dict_df_00 = pd.DataFrame(test_dict)
+    # test_dict_df_01 = pd.DataFrame(test_dict, index=False) # 会报错
+
+    test_dict_df_03 = pd.DataFrame(test_dict, [00, 11, 22, 33, 44, 55, 66, 77, 88, 99])
+    test_dict_df_04 = pd.DataFrame(test_dict, index=[00, 11, 22, 33, 44, 55, 66, 77, 88, 99])
+
+    # 2.字典型赋值
+    test_dict_df_10 = pd.DataFrame(data=test_dict)
+    test_dict_df_11 = pd.DataFrame(data=test_dict, index=[00, 11, 22, 33, 44, 55, 66, 77, 88, 99])
+
+    test_dict_df = test_dict_df_00
+
+    return test_dict_df
 
 
 # 创建 DataFrame ：利用 pandas 的 series
@@ -55,7 +70,47 @@ def create_data_frame_from_dict():
 
     dict4 = {"name": pd.Series(["xm", "xh", "xq"], index=[11, 22, 33]), "age": pd.Series([1, 4, 7])}
 
-    df = pd.DataFrame.from_dict(dict)
+    df = pd.DataFrame.from_dict(dict3)
+    return df
+
+
+# 创建 DataFrame ：利用 numpy 的 random
+def create_data_frame_from_dict_of_numpy_random():
+
+    dict_0 = {'item': np.random.randint(0, 4, 50),
+            'level': np.random.randint(0, high=3, size=50),
+            'price': np.random.rand(50)*100,
+            'price_1': np.random.rand(50)*100,
+            'price_2': np.around(np.random.rand(50)*100, 4), # 保留 4 位小数
+            'weight': np.random.randint(50, 100, size=50),
+            'sailer': np.random.randint(0, 3, size=50, dtype=int)}
+
+    dict = {'item': np.random.randint(0, 4, 50),
+            'level': np.random.randint(0, high=3, size=50),
+            'price': np.random.rand(50)*100,
+            'weight': np.random.randint(50, 100, size=50),
+            'sailer': np.random.randint(0, 3, size=50, dtype=int)}
+
+    dict_price = {
+            'price_1': np.random.rand(50)*100,
+            'price_2': np.around(np.random.rand(50)*100, 4) # 保留 4 位小数
+            }
+
+
+
+    df_0 = pd.DataFrame(dict)
+    df_1 = pd.DataFrame.from_dict(dict)
+
+    df = df_0
+
+    # 赋值转换
+    df['item'] = df['item'].map({0:'萝卜',1:'白菜',2:'西红柿',3:'黄瓜'})
+    df['level'] = df['level'].map({0:'差',1:'中',2:'优'})
+    df['sailer'] = df['sailer'].map({0:'张大妈',1:'李大妈',2:'赵大叔'})
+
+    # 添加列
+    df_0 = pd.DataFrame(dict_price)
+
     return df
 
 
@@ -129,7 +184,7 @@ def show_data_frame_info(data_frame: pd.core.frame.DataFrame):
 
 
 if __name__ == '__main__':
-    frame = create_data_frame_from_dict()
+    frame = create_data_frame_from_dict_of_numpy_random()
 
     print(frame)
 
