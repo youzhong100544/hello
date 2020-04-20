@@ -37,6 +37,11 @@ pd.set_option('max_colwidth', 10000)
 # 横向最多显示多少个字符， 一般80不适合横向的屏幕，平时多用200.
 pd.set_option('display.width', 1024)
 
+# 输出时列名对齐列数据
+# 这两个参数的默认设置都是False
+pd.set_option('display.unicode.ambiguous_as_wide', True)
+pd.set_option('display.unicode.east_asian_width', True)
+
 
 def create_data_frame() -> pd.core.frame.DataFrame:
     # test_dict = {'id': [1, 2, 3, 4, 5, 6], 'class': [1, 2, 1, 2, 2, 3], 'name': ['Alice','Bob','Cindy','Eric','Helen','Grace '], 'math': [90, 89, 99, 78, 97, 93], 'english': [89, 94, 80, 94, 94, 90]}
@@ -78,25 +83,25 @@ def create_data_frame_from_dict():
 def create_data_frame_from_dict_of_numpy_random():
 
     dict_0 = {'item': np.random.randint(0, 4, 50),
-            'level': np.random.randint(0, high=3, size=50),
-            'price': np.random.rand(50)*100,
-            'price_1': np.random.rand(50)*100,
-            'price_2': np.around(np.random.rand(50)*100, 4), # 保留 4 位小数
-            'weight': np.random.randint(50, 100, size=50),
-            'sailer': np.random.randint(0, 3, size=50, dtype=int)}
+              'level': np.random.randint(0, high=3, size=50),
+              'price': np.random.rand(50)*100,
+              'price_1': np.random.rand(50)*100,
+              'price_2': np.around(np.random.rand(50)*100, 4), # 保留 4 位小数
+              'weight': np.random.randint(50, 100, size=50),
+              'sailer': np.random.randint(0, 3, size=50, dtype=int)
+              }
 
     dict = {'item': np.random.randint(0, 4, 50),
             'level': np.random.randint(0, high=3, size=50),
             'price': np.random.rand(50)*100,
             'weight': np.random.randint(50, 100, size=50),
-            'sailer': np.random.randint(0, 3, size=50, dtype=int)}
+            'sailer': np.random.randint(0, 3, size=50, dtype=int)
+            }
 
     dict_price = {
             'price_1': np.random.rand(50)*100,
             'price_2': np.around(np.random.rand(50)*100, 4) # 保留 4 位小数
             }
-
-
 
     df_0 = pd.DataFrame(dict)
     df_1 = pd.DataFrame.from_dict(dict)
@@ -104,9 +109,9 @@ def create_data_frame_from_dict_of_numpy_random():
     df = df_0
 
     # 赋值转换
-    df['item'] = df['item'].map({0:'萝卜',1:'白菜',2:'西红柿',3:'黄瓜'})
-    df['level'] = df['level'].map({0:'差',1:'中',2:'优'})
-    df['sailer'] = df['sailer'].map({0:'张大妈',1:'李大妈',2:'赵大叔'})
+    df['item'] = df['item'].map({0: '萝卜', 1: '白菜', 2: '西红柿', 3: '黄瓜'})
+    df['level'] = df['level'].map({0: '差', 1: '中', 2: '优'})
+    df['sailer'] = df['sailer'].map({0: '张大妈', 1: '李大妈', 2: '赵大叔'})
 
     # 添加列
     df_0 = pd.DataFrame(dict_price)
