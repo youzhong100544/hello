@@ -63,6 +63,15 @@ def create_data_frame() -> pd.core.frame.DataFrame:
     return test_dict_df
 
 
+def create_data_frame_from_list() -> pd.core.frame.DataFrame:
+    df1 = pd.DataFrame(data = [[1, 2, 3], [4, 5, 6], [7, 8, 9]], index=[0, 1, 2], columns=['a', 'b', 'c'])
+    df2 = pd.DataFrame(data = [[1, 2, 3], [4, 5, 6], [7, 8, 9]], index=['e', 'f', 'g'], columns=['a', 'b', 'c'])
+
+    df = df2
+
+    return df
+
+
 # 创建 DataFrame ：利用 pandas 的 series
 def create_data_frame_from_dict():
     dict = {"name": ["xm", "xh", "xq"], "age": [1, 4, 7], "gender": ["female", "male", "female"]}
