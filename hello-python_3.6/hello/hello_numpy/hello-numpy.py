@@ -7,6 +7,7 @@ print("numpy version: {}".format(np.__version__))
 # NumPy Ndarray 对象
 a = np.array([1, 2, 3])
 print(a)
+print(type(a)) # 输出：<class 'numpy.ndarray'>
 
 print('shape:', a.shape)
 print('shape:', np.shape(a))
@@ -17,9 +18,13 @@ print('size:', np.size(a))
 print('dtype:', a.dtype)
 # print('dtype:', numpy.dtype(a))
 
+print()
+print("-" * 100)
+print()
 
 b = np.array([[1, 2, 3], [4, 5, 6]], dtype=int)
 print(b)
+print(type(b)) # 输出：<class 'numpy.ndarray'>
 
 print('shape:', b.shape)
 print('shape:', np.shape(b))
@@ -36,11 +41,18 @@ print('dtype:', b.dtype)
 # print('dtype:', numpy.dtype(b, 0))
 # print('dtype:', numpy.dtype(b, 0))
 
+print()
+print("|" * 100)
+print()
 
 a = np.arange(10).reshape(2, 5) # 创建2行5列的二维数组，
 # 也可以创建三维数组，
 # a = np.arange(12).reshape(2,3,2)
 print(a)
+
+print()
+print("|" * 100)
+print()
 
 
 a = np.random.random(6)
