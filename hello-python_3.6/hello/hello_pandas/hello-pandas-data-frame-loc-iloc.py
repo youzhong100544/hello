@@ -64,16 +64,12 @@ print("# 1.1、loc 索引单行数据")
 print("#" * 150)
 
 print("1.1.1、loc 索引行，label 是整型数字")
-
+print("1.1.1.1、df_1.loc[0]")
 loc_ = df_1.loc[0]
 print(type(loc_))
 '''
 <class 'pandas.core.series.Series'>
 '''
-
-for l in loc_:
-    print(l)
-
 print(loc_)
 '''
 A    21
@@ -83,6 +79,37 @@ D    51
 E    61
 Name: 0, dtype: int64
 '''
+
+print("~"*100)
+
+for l in loc_:
+    print(type(l))
+    print(l)
+
+print("~"*100)
+
+print("1.1.1.2、df_1.loc[[0]]")
+loc_ = df_1.loc[[0]]
+print(type(loc_))
+'''
+<class 'pandas.core.frame.DataFrame'>
+'''
+
+print(loc_)
+'''
+    A   B   C   D   E
+0  21  31  41  51  61
+'''
+
+print("~"*100)
+
+for l in loc_:
+    print(type(l))
+    print(len(l))
+    print(l)
+
+print("~"*100)
+
 
 print("-"*100)
 
@@ -177,7 +204,7 @@ print()
 
 
 print("#" * 150)
-print("# 1、iloc")
+print("# 2、iloc")
 print("#" * 150)
 
 print()

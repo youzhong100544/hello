@@ -60,6 +60,11 @@ ls_a = {"A": [1, 1, 2, 2, 2, 3], "B": [2, 5, 8, 7, 9, 4], "C": [3, 6, 9, 9, 9, 9
 df = pd.DataFrame(ls_a)
 
 print("打印数据" + " -" * 25)
+
+print("- df -")
+print(df)
+print()
+
 print("- head(5) -")
 print(df.head(5))
 print()
@@ -88,4 +93,33 @@ print("-"*40)
 print()
 
 
+print("遍历 data frame" + " -" * 25)
+print("方法一：df.iterrows()" + " -" * 25)
+for index, row in df.iterrows():
+    print(type(index))      # 输出：<class 'int'>
+    print(index)            # 输出每行的索引值
 
+    print(type(row))        # 输出：<class 'pandas.core.series.Series'>
+    print(row)              # 输出每行数据
+
+    print("------------------------------")
+
+    print(row["A"])
+    print(row["B"])
+    print(row["C"])
+
+    print("------------------------------")
+
+    for i in row:
+        print(i)
+    print("================================")
+
+print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||")
+
+print("方法二：df.iterrows" + " -" * 25)
+for index, row in df.iteritems():
+    print(type(index))      # 输出：<class 'int'>
+    print(index)            # 输出每行的索引值
+
+    print(type(row))        # 输出：<class 'pandas.core.series.Series'>
+    print(row)              # 输出每行数据
