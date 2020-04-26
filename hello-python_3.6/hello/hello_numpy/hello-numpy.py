@@ -5,8 +5,8 @@ import numpy as np
 print("numpy version: {}".format(np.__version__))
 
 # NumPy Ndarray 对象
-a = np.array([1, 2, 3])
-print(a)
+a: np.ndarray = np.array([1, 2, 3])
+print(a) # 输出：[1 2 3]
 print(type(a)) # 输出：<class 'numpy.ndarray'>
 
 print('shape:', a.shape)
