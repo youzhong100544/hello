@@ -3,11 +3,22 @@
 import numpy as np
 
 print("numpy version: {}".format(np.__version__))
+print()
 
+print("#" * 150)
+print("# demo 1")
+print("#" * 150)
 # NumPy Ndarray 对象
-a: np.ndarray = np.array([1, 2, 3])
-print(a) # 输出：[1 2 3]
-print(type(a)) # 输出：<class 'numpy.ndarray'>
+a: np.ndarray = np.array([13, 22, 30])
+print(a)                        # 输出:[13 22 30]
+print(type(a))                  # 输出:<class 'numpy.ndarray'>
+
+print('dtype:', a.dtype)
+print('dtype.name:', a.dtype.name)
+# print('dtype:', np.dtype(a))
+
+print('ndim:', a.ndim)
+print('ndim:', np.ndim(a))
 
 print('shape:', a.shape)
 print('shape:', np.shape(a))
@@ -15,16 +26,75 @@ print('shape:', np.shape(a))
 print('size:', a.size)
 print('size:', np.size(a))
 
-print('dtype:', a.dtype)
-# print('dtype:', numpy.dtype(a))
+print('itemsize:', a.itemsize)
+# print('itemsize:', np.itemsize(a))
 
-print()
-print("-" * 100)
-print()
+print('data:', a.data)
+# print('data:', np.data(a))
+
+print(a[0])
+
+
+print("#" * 150)
+print("# demo 2")
+print("#" * 150)
+
+
+b = np.array([[1., 2, 3]])
+print(b)                            # 输出:[[1. 2. 3.]]
+print(type(b))                      # 输出:<class 'numpy.ndarray'>
+
+print('dtype:', b.dtype)            # 输出:dtype: float64
+print('dtype.name:', b.dtype.name)  # 输出:dtype: float64
+
+
+print("#" * 150)
+print("# demo 3")
+print("#" * 150)
+
+
+b = np.array([[1.1, 2, 3]], dtype=int)
+print(b)                            # 输出:[1 2 3]
+print(type(b))                      # 输出:<class 'numpy.ndarray'>
+
+print('dtype:', b.dtype)            # 输出:dtype: int64
+print('dtype.name:', b.dtype.name)  # 输出:dtype: int64
+
+
+print("#" * 150)
+print("# demo 4")
+print("#" * 150)
+
+
+b = np.array([[1.1, 2, 3]], dtype=complex)
+print(b)                            # 输出:[[1.1+0.j 2. +0.j 3. +0.j]]
+print(type(b))                      # 输出:<class 'numpy.ndarray'>
+
+print('dtype:', b.dtype)            # 输出:dtype: complex128
+print('dtype.name:', b.dtype.name)  # 输出:dtype.name: complex128
+
+
+print("#" * 150)
+print("# demo 5")
+print("#" * 150)
+
+
+b = np.array([["1.1", 2, 3]], dtype=str)
+print(b)                            # 输出:[['1.1' '2' '3']]
+print(type(b))                      # 输出:<class 'numpy.ndarray'>
+
+print('dtype:', b.dtype)            # 输出:dtype: <U3
+print('dtype.name:', b.dtype.name)  # 输出:dtype.name: str96
+
+
+print("#" * 150)
+print("# demo 6")
+print("#" * 150)
+
 
 b = np.array([[1, 2, 3], [4, 5, 6]], dtype=int)
 print(b)
-print(type(b)) # 输出：<class 'numpy.ndarray'>
+print(type(b))                      # 输出:<class 'numpy.ndarray'>
 
 print('shape:', b.shape)
 print('shape:', np.shape(b))
@@ -84,12 +154,12 @@ def randint(low, high=None, size=None, dtype='l'):
 """
 a = np.random.randint(4)
 print(a)
-# 输出：3
+# 输出:3
 print("-" * 100)
 
 a = np.random.randint(low=4)
 print(a)
-# 输出：3
+# 输出:3
 print("-" * 100)
 
 
@@ -105,17 +175,17 @@ TypeError: randint() takes at least 1 positional argument (0 given)
 
 a = np.random.randint(0, 10)
 print(a)
-# 输出：5
+# 输出:5
 print("-" * 100)
 
 a = np.random.randint(0, 10, 3)
 print(a)
-# 输出：[5 2 6]
+# 输出:[5 2 6]
 print("-" * 100)
 
 a = np.random.randint(0, 10, [3, 2])
 print(a)
-# 输出：
+# 输出:
 #  [[2 1]
 #  [6 3]
 #  [1 5]]
@@ -123,7 +193,7 @@ print("-" * 100)
 
 a = np.random.randint(0, 10, [3, 2, 3])
 print(a)
-# 输出：
+# 输出:
 # [[[2 8 8]
 #   [6 2 7]]
 #

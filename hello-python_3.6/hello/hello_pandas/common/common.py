@@ -145,6 +145,33 @@ def create_data_frame_from_dict_of_numpy_random():
     return df
 
 
+def create_data_frame_from_numpy_random():
+    data = np.random.rand(6, 3)
+    data_1 = np.random.rand(6, 3) * 10
+
+    index = pd.date_range("2020-04-28", periods=6)
+    column = ["apple", "banana", "watermelon"]
+
+    df_1 = pd.DataFrame(data=data, index=index, columns=column)
+    df_2 = pd.DataFrame(data=data_1, index=index, columns=column)
+
+    df = df_2
+    return df
+
+
+def create_data_frame_from_numpy_arange_reshape():
+    data = np.arange(15).reshape(5, 3)
+    index = pd.date_range("2020-04-28", periods=5)
+    column = ["apple", "banana", "watermelon"]
+
+    df_1 = pd.DataFrame(data=data, index=index, columns=column)
+
+    df_2 = pd.DataFrame(data=data, columns=colums)
+
+    df = df_2
+    return df
+
+
 def create_data_frame_from_csv_with_head(file_path: str):
     df = pd.read_csv(file_path)
     return df
@@ -215,7 +242,7 @@ def show_data_frame_info(data_frame: pd.core.frame.DataFrame):
 
 
 if __name__ == '__main__':
-    frame = create_data_frame_from_list()
+    frame = create_data_frame_from_numpy_arange_reshape()
 
     print(frame)
 
