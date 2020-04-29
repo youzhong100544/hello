@@ -26,26 +26,47 @@ with open(path, encoding='utf-8') as file:
 
     data = np.loadtxt(file, str, delimiter=",", skiprows=1)
 
+    print("type(data)")
     print(type(data))
     print()
 
     # 取第一行
+    print("取第一行")
     print(data[1])
     print()
 
-    # 取第一列
-    print(data[:, 1])
-    print()
-
     # 取前5行
+    print("取前5行")
     print(data[:5])
     print()
 
+    # 取前5行的第2列
+    print("取前5行的第2列")
+    print(data[:5, 1])
+    print()
+
+    # 取具体的第5行第3列
+    print("取具体的第5行第3列")
+    print(data[4, 2])
+    print()
+
+    # 取第1列
+    print("取第2列")
+    print(data[:, 1])
+    print()
+
+    # 取第3列
+    print("取第3列")
+    print(data[:, 2])
+    print()
+
     # 取第0、2、3列数据
+    print("取第0、2、3列数据")
     print(data[:, [0, 2, 3]])
     print()
 
     # 取第0、2、3列数据的前5行
+    print("取第0、2、3列数据的前5行")
     print(data[:, [0, 2, 3]][:5])
     print()
 
