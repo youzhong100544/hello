@@ -166,7 +166,7 @@ def create_data_frame_from_numpy_arange_reshape():
 
     df_1 = pd.DataFrame(data=data, index=index, columns=column)
 
-    df_2 = pd.DataFrame(data=data, columns=colums)
+    df_2 = pd.DataFrame(data=data, columns=column)
 
     df = df_2
     return df
