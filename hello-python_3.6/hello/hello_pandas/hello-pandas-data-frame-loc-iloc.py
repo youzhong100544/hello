@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import numpy as np
 import pandas as pd
 
 
@@ -22,29 +23,56 @@ pd.set_option('display.unicode.east_asian_width', True)
 
 print()
 
+'''
+Pandas中关于 loc \ iloc 用法的理解
+https://www.cnblogs.com/loubin/p/11299214.html
+'''
+
+'''
+loc和iloc的区别
+
+pandas以类似字典的方式来获取某一列的值，比如df[‘A’]，这会得到df的A列。
+如果我们对某一行感兴趣呢？
+这个时候有两种方法，一种是iloc方法，另一种方法是loc方法。
+loc是指location的意思，iloc中的i是指integer。
+
+这两者的区别如下：
+    loc：works on labels in the index.
+    iloc：works on the positions in the index (so it only takes integers).
+
+也就是说loc是根据index来索引，比如下边的df定义了一个index，那么loc就根据这个index来索引对应的行。
+iloc并不是根据index来索引，而是根据行号来索引，行号从0开始，逐次加1。
+'''
 
 print("创建 DataFrame")
 print()
-dict_1 = {"A": [21, 22, 23, 24, 25, 26, 27], "B": [31, 32, 33, 34, 35, 36, 37], "C": [41, 42, 43, 44, 45, 46, 47], "D": [51, 52, 53, 54, 55, 56, 57], "E": [61, 62, 63, 64, 65, 66, 67]}
-df_1 = pd.DataFrame(dict_1)
 
-list_2 = [[21, 22, 23, 24, 25], [31, 32, 33, 34, 35], [41, 42, 43, 44, 45], [51, 52, 53, 54, 55], [61, 62, 26, 64, 65], [71, 72, 73, 74, 75], [81, 82, 83, 84, 85]]
-df_2 = pd.DataFrame(data=list_2, index=[11, 22, 33, 44, 55, 66, 77], columns=['AA', 'BB', 'CC', 'DD', 'EE'])
-
-list_3 = [[21, 22, 23, 24, 25], [31, 32, 33, 34, 35], [41, 42, 43, 44, 45], [51, 52, 53, 54, 55], [61, 62, 26, 64, 65], [71, 72, 73, 74, 75], [81, 82, 83, 84, 85]]
-df_3 = pd.DataFrame(data=list_3, index=['e', 'f', 'g', 'h', 'i', 'j', 'k'], columns=['AA', 'BB', 'CC', 'DD', 'EE'])
+ls = np.arange(56).reshape(8, 7)
+df_1 = pd.DataFrame(data=ls, columns=['c_1', 'c_2', 'c_3', 'c_4', 'c_5', 'c_6', 'c_7'])
+df_2 = pd.DataFrame(data=ls, index=[11, 12, 13, 14, 15, 16, 17, 18], columns=['c_1', 'c_2', 'c_3', 'c_4', 'c_5', 'c_6', 'c_7'])
+df_3 = pd.DataFrame(data=ls, index=[11, 12, 15, 14, 13, 16, 17, 18], columns=['c_1', 'c_2', 'c_3', 'c_4', 'c_5', 'c_6', 'c_7'])
+df_4 = pd.DataFrame(data=ls, index=['e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'], columns=['c_1', 'c_2', 'c_3', 'c_4', 'c_5', 'c_6', 'c_7'])
+df_5 = pd.DataFrame(data=ls, index=['e', 'f', 'i', 'h', 'g', 'j', 'k', 'l'], columns=['c_1', 'c_2', 'c_3', 'c_4', 'c_5', 'c_6', 'c_7'])
 
 print("打印数据")
-print("- data frame 1 -")
+print("- data frame 1 -" + "-" * 100)
 print(df_1)
 print()
 
-print("- data frame 2 -")
+print("- data frame 2 -" + "-" * 100)
 print(df_2)
 print()
 
-print("- data frame 3 -")
+print("- data frame 3 -" + "-" * 100)
 print(df_3)
+print()
+
+print("- data frame 4 -" + "-" * 100)
+print(df_4)
+print()
+
+print("- data frame 5 -" + "-" * 100)
+print(df_5)
 print()
 
 
@@ -65,141 +93,157 @@ print("#" * 150)
 
 print("1.1.1、loc 索引行，label 是整型数字")
 print("1.1.1.1、df_1.loc[0]")
-loc_ = df_1.loc[0]
-print(type(loc_))
+print("获取 df_1 的第一行数据")
+_loc = df_1.loc[0]
+print(type(_loc))
 '''
 <class 'pandas.core.series.Series'>
 '''
-print(loc_)
+print(_loc)
 '''
-A    21
-B    31
-C    41
-D    51
-E    61
+c_1    0
+c_2    1
+c_3    2
+c_4    3
+c_5    4
+c_6    5
+c_7    6
 Name: 0, dtype: int64
 '''
 
-print("~"*100)
+print("-"*100)
 
-for l in loc_:
-    print(type(l))
-    print(l)
+print("1.1.1.2、df_2.loc[13]")
+print("loc 索引行，label 是整型数字")
+print("获取 df_2 的第3行数据")
+# 如果对 df_2 这么写：df_2.loc[0]会报错，因为loc索引的是label，显然在 df_2 的行的名字中没有叫0的。
+print(df_2.loc[13])
+'''
+c_1    14
+c_2    15
+c_3    16
+c_4    17
+c_5    18
+c_6    19
+c_7    20
+Name: 13, dtype: int64
+'''
 
-print("~"*100)
+print("-"*100)
 
-print("1.1.1.2、df_1.loc[[0]]")
-loc_ = df_1.loc[[0]]
-print(type(loc_))
+print("1.1.1.3、df_4.loc[\"g\"]")
+print("loc 索引行，label 是字符型")
+print("获取 df_4 的索引的 'g' 的那行数据")
+print(df_4.loc["g"])
+'''
+c_1    14
+c_2    15
+c_3    16
+c_4    17
+c_5    18
+c_6    19
+c_7    20
+Name: g, dtype: int64
+'''
+
+print("-"*100)
+
+print("1.1.1.4、df_1.loc[1, 3]")
+print("获取索引为 1 和 3 的行的数据")
+# print(df_1.loc[1, 3]) # TypeError: cannot do label indexing on <class 'pandas.core.indexes.base.Index'> with these indexers [3] of <class 'int'>
+_loc = df_1.loc[[1, 3]]
+print(type(_loc))
+'''
+<class 'pandas.core.frame.DataFrame'>
+'''
+print(_loc)
+'''
+   c_1  c_2  c_3  c_4  c_5  c_6  c_7
+1    7    8    9   10   11   12   13
+3   21   22   23   24   25   26   27
+'''
+
+print("-"*100)
+
+
+print("1.1.2、df_1.loc[[0]]")
+print("返回值为 DataFrame")
+_loc = df_1.loc[[0]]
+print(type(_loc))
 '''
 <class 'pandas.core.frame.DataFrame'>
 '''
 
-print(loc_)
+print(_loc)
 '''
-    A   B   C   D   E
-0  21  31  41  51  61
-'''
-
-print("~"*100)
-
-for l in loc_:
-    print(type(l))
-    print(len(l))
-    print(l)
-
-print("~"*100)
-
-
-print("-"*100)
-
-# loc 索引行，label 是整型数字
-# 如果对 df1 这么写：df1.loc[0]会报错，因为loc索引的是label，显然在df2的行的名字中没有叫0的。
-print(df_2.loc[33])
-'''
-aa    11
-bb    12
-cc    13
-Name: 11, dtype: int64
-'''
-
-print("-"*100)
-
-# loc 索引行，label 是字符型
-print(df_3.loc["g"])
-'''
-aa    10
-bb    20
-cc    30
-Name: e, dtype: int64
+   c_1  c_2  c_3  c_4  c_5  c_6  c_7
+0    0    1    2    3    4    5    6
 '''
 
 print("#" * 150)
-print("loc 索引多行数据")
+print("# 1.2、loc 索引多行数据")
 print("#" * 150)
 
 # loc 索引多行数据
-print(df_1.loc[:1])
+print("loc 索引多行数据")
+print("从第一行开始到索引为 1 的那行")
+_loc = df_1.loc[:1]
+print(type(_loc))
+print()
 '''
-   A  B  C
-0  1  4  7
-1  2  5  8
+<class 'pandas.core.frame.DataFrame'>
+'''
+print(_loc)
+'''
+   c_1  c_2  c_3  c_4  c_5  c_6  c_7
+0    0    1    2    3    4    5    6
+1    7    8    9   10   11   12   13
 '''
 
 print("-"*100)
 
+print("loc 索引多行数据")
+print("从索引为 1 的那行开始到最后")
 print(df_1.loc[1:])
 '''
-   A  B  C
-1  2  5  8
-2  3  6  9
-'''
-
-print("-"*100)
-
-print(df_2.loc[:1])
-'''
-Empty DataFrame
-Columns: [aa, bb, cc]
-Index: []
-'''
-
-print("-"*100)
-
-print(df_2.loc[1:])
-'''
-    aa  bb  cc
-11  11  12  13
-22  14  15  16
-33  17  18  19
+   c_1  c_2  c_3  c_4  c_5  c_6  c_7
+1    7    8    9   10   11   12   13
+2   14   15   16   17   18   19   20
+3   21   22   23   24   25   26   27
+4   28   29   30   31   32   33   34
+5   35   36   37   38   39   40   41
+6   42   43   44   45   46   47   48
+7   49   50   51   52   53   54   55
 '''
 
 print("-"*100)
 
 
-# print(df2.loc[:1]) # 会报错
-# print(df2.loc[1:]) # 会报错
-
-print(df_2.loc[:'f'])
+print(df_4.loc[:'f'])
 '''
-   aa  bb  cc
-e  10  20  30
-f  40  50  60
+   c_1  c_2  c_3  c_4  c_5  c_6  c_7
+e    0    1    2    3    4    5    6
+f    7    8    9   10   11   12   13
 '''
 print("-"*100)
 
-print(df_3.loc['f':])
+print(df_4.loc['f':])
 '''
-   aa  bb  cc
-f  40  50  60
-g  70  80  90
+   c_1  c_2  c_3  c_4  c_5  c_6  c_7
+f    7    8    9   10   11   12   13
+g   14   15   16   17   18   19   20
+h   21   22   23   24   25   26   27
+i   28   29   30   31   32   33   34
+j   35   36   37   38   39   40   41
+k   42   43   44   45   46   47   48
+l   49   50   51   52   53   54   55
 '''
 
 print("-"*100)
 
 
 print()
-print("｜"*100)
+print("|"*150)
 print()
 
 
@@ -210,6 +254,6 @@ print("#" * 150)
 print()
 
 print("#" * 150)
-print("# iloc 索引单行数据")
+print("# 2.1、iloc 索引单行数据")
 print("#" * 150)
 
