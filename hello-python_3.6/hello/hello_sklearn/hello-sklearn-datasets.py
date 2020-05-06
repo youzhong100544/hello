@@ -247,3 +247,58 @@ print(X)
 print(y)
 plt.scatter(X[:, 0], X[:, 1], c=y, s=8)
 plt.show()
+
+
+'''
+2.2、产生同心圆样本点
+
+datasets.make_circles(n_samples=100, shuffle=True, noise=0.04, random_state=None, factor=0.8)
+
+n_samples：控制样本点总数
+noise：控制属于同一个圈的样本点附加的漂移程度
+factor：控制内外圈的接近程度，越大越接近，上限为1
+
+'''
+print("2.2、产生同心圆样本点")
+print()
+
+X, y = datasets.make_circles(n_samples=10000, shuffle=True, noise=0.04, random_state=None, factor=0.8)
+
+plt.scatter(X[:, 0], X[:, 1], c=y, s=8)
+plt.show()
+
+
+'''
+2.3、生成模拟分类数据集
+
+datasets.make_classification(n_samples=100, n_features=20, n_informative=2, n_redundant=2, n_repeated=0, n_classes=2, n_clusters_per_class=2, weights=None, flip_y=0.01, class_sep=1.0, hypercube=True, shift=0.0, scale=1.0, shuffle=True, random_state=None)
+
+n_samples：控制生成的样本点的个数
+n_features：控制与类别有关的自变量的维数
+n_classes：控制生成的分类数据类别的数量
+
+'''
+print("2.3、生成模拟分类数据集")
+print()
+
+X, y = datasets.make_classification(n_samples=100, n_features=20, n_informative=2, n_redundant=2, n_repeated=0, n_classes=2, n_clusters_per_class=2, weights=None, flip_y=0.01, class_sep=1.0, hypercube=True, shift=0.0, scale=1.0, shuffle=True, random_state=None)
+
+print(X.shape)
+print(y.shape)
+set(y)
+
+
+'''
+2.4、生成太极型非凸集样本点
+
+datasets.make_moons(n_samples,shuffle,noise,random_state)
+
+'''
+print("2.4、生成太极型非凸集样本点")
+print()
+
+X, y = datasets.make_moons(n_samples=1000, shuffle=True, noise=0.05, random_state=None)
+
+plt.scatter(X[:, 0], X[:, 1], c=y, s=8)
+plt.show()
+
