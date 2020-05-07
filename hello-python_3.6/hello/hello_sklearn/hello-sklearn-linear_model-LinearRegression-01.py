@@ -7,12 +7,13 @@ import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn.datasets import load_boston
 
-from sklearn import linear_model
-from sklearn.linear_model import LinearRegression
-
 from sklearn import model_selection
 from sklearn.model_selection import train_test_split
 
+from sklearn import linear_model
+from sklearn.linear_model import LinearRegression
+
+from sklearn import metrics
 from sklearn.metrics import mean_squared_error
 
 pd.set_option('expand_frame_repr', False)
@@ -66,7 +67,21 @@ print()
 print(data_frame.describe())
 print()
 
+''' 绘图分析 '''
+print("绘图分析")
+# 指定线条粗细
+plt.plot(y, linewidth=2)
+# 设置标题
+plt.title("房价", fontsize=12)
+# 设置x轴
+plt.xlabel("xlabel", fontsize=12)
+# 设置y轴
+plt.ylabel("ylabel", fontsize=12)
+# 显示
+plt.show()
+
 ''' 划分训练集和检验集 '''
+print("划分训练集和检验集")
 '''
 def train_test_split(*arrays, **options):
 
@@ -105,5 +120,5 @@ y_predict = lr.predict(X_test)
 
 ''' 计算模型的预测值与真实值之间的均方误差MSE '''
 print("计算模型的预测值与真实值之间的均方误差MSE")
-error = mean_squared_error(y_test, y_predict)
+error = metrics.mean_squared_error(y_test, y_predict)
 print(error)

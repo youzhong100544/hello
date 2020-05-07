@@ -26,6 +26,7 @@ X = boston.data
 y = boston.target
 
 ''' 划分训练集和检验集 '''
+print("划分训练集和检验集")
 '''
 def train_test_split(*arrays, **options):
 
