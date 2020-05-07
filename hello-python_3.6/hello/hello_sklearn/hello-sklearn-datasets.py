@@ -55,7 +55,9 @@ print(type(boston))         # 输出:<class 'sklearn.utils.Bunch'>
 print("-" * 100)
 print("数据 - filename")
 boston_filename = boston.filename
-print(boston_filename)             # 输出:/Users/hiahia/develop/github/hello/venv/lib/python3.8/site-packages/sklearn/datasets/data/boston_house_prices.csv
+print(boston_filename)
+# 输出:/Users/hiahia/develop/github/hello/venv/lib/python3.8/site-packages/sklearn/datasets/data/boston_house_prices.csv
+# 输出:C:\develop\Python\Python36\lib\site-packages\sklearn\datasets\data\boston_house_prices.csv
 print(type(boston_filename))       # 输出:<class 'str'>
 
 print("-" * 100)
