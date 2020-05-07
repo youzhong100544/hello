@@ -47,20 +47,6 @@ print()
 print("1.1、波士顿房价数据（适用于回归任务）")
 print()
 
-'''载入波士顿房价数据'''
-X, y = datasets.load_boston(return_X_y=True)
-
-'''打印自变量数据'''
-print(X)
-print(type(X))
-print(X.shape)
-
-'''打印因变量数据'''
-print(y)
-print(type(y))
-print(y.shape)
-
-print("~" * 100)
 print("加载数据")
 boston = datasets.load_boston()
 print(boston)
@@ -95,6 +81,21 @@ print("数据 - DESCR")
 boston_DESCR = boston.DESCR
 print(boston_DESCR)             # 输出:
 print(type(boston_DESCR))       # 输出:<class 'str'>
+
+print("~" * 100)
+
+'''载入波士顿房价数据'''
+X, y = datasets.load_boston(return_X_y=True)
+
+'''打印自变量数据'''
+print(X)
+print(type(X))
+print(X.shape)
+
+'''打印因变量数据'''
+print(y)
+print(type(y))
+print(y.shape)
 
 
 '''
