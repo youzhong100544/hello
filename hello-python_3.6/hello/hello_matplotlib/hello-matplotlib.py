@@ -207,4 +207,3 @@ ax1 = fig.add_subplot(2, 1, 1)                      # 通过fig添加子图，�
 ax2 = fig.add_subplot(2, 1, 2)                      # 通过fig添加子图，参数：行数，列数，第几个。
 print(fig, ax1, ax2)
 plt.show()
-
