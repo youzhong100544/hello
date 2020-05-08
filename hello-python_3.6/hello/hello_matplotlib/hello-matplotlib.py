@@ -149,12 +149,15 @@ ax4.plot(A, C, label='A-C')
 
 plt.show()
 
+
+
 fig = plt.figure()               # 开启一个窗口，同时设置大小，分辨率
-ax1 = fig.add_subplot(2, 2, 1)   # 通过fig添加子图，参数：行数，列数，第几个。
-ax2 = fig.add_subplot(2, 2, 2)   # 通过fig添加子图，参数：行数，列数，第几个。
-ax3 = fig.add_subplot(2, 2, 3)   # 通过fig添加子图，参数：行数，列数，第几个。
-ax4 = fig.add_subplot(2, 2, 4)   # 通过fig添加子图，参数：行数，列数，第几个。
-print(fig, ax1, ax2, ax3, ax4)
+ax1 = fig.add_subplot(2, 3, 1)   # 通过fig添加子图，参数：行数，列数，第几个。
+ax2 = fig.add_subplot(2, 3, 2)   # 通过fig添加子图，参数：行数，列数，第几个。
+ax3 = fig.add_subplot(2, 3, 3)   # 通过fig添加子图，参数：行数，列数，第几个。
+ax4 = fig.add_subplot(2, 3, 4)   # 通过fig添加子图，参数：行数，列数，第几个。
+ax5 = fig.add_subplot(2, 3, 5)   # 通过fig添加子图，参数：行数，列数，第几个。
+ax6 = fig.add_subplot(2, 3, 6)   # 通过fig添加子图，参数：行数，列数，第几个。
 
 # 设置子图的基本元素
 ax1.set_title('python-drawing')     # 设置图体,plt.title
