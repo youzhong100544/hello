@@ -152,6 +152,12 @@ subplot_kw: 用于创建各 subplot 的关键字字典
 
 subplot可以规划figure划分为n个子图，但每条subplot命令只会创建一个子图 ，
 '''
+
+'''
+fig, ax = plt.subplots()等价于：
+    1、fig = plt.figure()
+    2、ax = fig.add_subplot(1,1,1)
+'''
 fig, ax = plt.subplots(4, 1)     # 开一个新窗口，并添加4个子图，返回子图数组
 ax1 = ax[0]                      # 通过子图数组获取一个子图
 print(fig, ax1)

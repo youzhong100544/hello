@@ -87,14 +87,27 @@ dpi: 参数指定绘图对象的分辨率，即每英寸多少个像素，缺省
 facecolor:背景颜色
 edgecolor:边框颜色
 frameon:是否显示边框
+
+
+num = None,               # 设定figure名称。系统默认按数字升序命名的figure_num（透视表输出窗口）e.g. “figure1”。可自行设定figure名称，名称或是INT，或是str类型；
+figsize=None,             # 设定figure尺寸。系统默认命令是rcParams["figure.fig.size"] = [6.4, 4.8]，即figure长宽为6.4 * 4.8；
+dpi=None,                 # 设定figure像素密度。系统默命令是rcParams["sigure.dpi"] = 100；
+facecolor=None,           # 设定figure背景色。系统默认命令是rcParams["figure.facecolor"] = 'w'，即白色white；
+edgecolor=None, frameon=True,    # 设定要不要绘制轮廓&轮廓颜色。系统默认绘制轮廓，轮廓染色rcParams["figure.edgecolor"]='w',即白色white；
+FigureClass=<class 'matplotlib.figure.Figure'>,   # 设定使不使用一个figure模板。系统默认不使用；
+clear=False,                     # 设定当同名figure存在时，是否替换它。系统默认False，即不替换。
+
 '''
 
-fig = plt.figure()               # 开启一个窗口，同时设置大小，分辨率
+fig = plt.figure(figsize=(10, 40))               # 开启一个窗口，同时设置大小，分辨率
 ax1 = fig.add_subplot(4, 1, 1)   # 通过fig添加子图，参数：行数，列数，第几个。
 ax2 = fig.add_subplot(4, 1, 2)   # 通过fig添加子图，参数：行数，列数，第几个。
 ax3 = fig.add_subplot(4, 1, 3)   # 通过fig添加子图，参数：行数，列数，第几个。
 ax4 = fig.add_subplot(4, 1, 4)   # 通过fig添加子图，参数：行数，列数，第几个。
+
 print(fig, ax1, ax2, ax3, ax4)
+print(type(fig))                # <class 'matplotlib.figure.Figure'>
+print(type(ax1))                # <class 'matplotlib.axes._subplots.AxesSubplot'>
 
 ax1.plot(A, B)
 
