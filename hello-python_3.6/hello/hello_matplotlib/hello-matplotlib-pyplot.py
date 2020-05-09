@@ -24,6 +24,8 @@ print("matplotlib version: {}".format(mpl.__version__))
 print("seaborn version: {}".format(sb.__version__))
 print("sklearn version: {}".format(sklearn.__version__))
 
+np.set_printoptions(threshold=np.inf)  
+
 pd.set_option('expand_frame_repr', False)
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
