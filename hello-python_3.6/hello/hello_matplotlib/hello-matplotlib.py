@@ -49,6 +49,16 @@ y = x*3
 print(x)
 print(y)
 
+print("~" * 100)
+
+np.random.seed(0)
+a = np.random.randint(-10, 20, size=30)
+b = a
+print(a)
+print(b)
+
+print("~" * 100)
+
 A = np.arange(-4, 5)
 B = A**2
 C = A**3
@@ -56,7 +66,7 @@ print(A)
 print(B)
 print(C)
 
-
+print("-" * 100)
 
 '''
 在绘图结构中，figure创建窗口，subplot创建子图。
@@ -98,7 +108,9 @@ FigureClass=<class 'matplotlib.figure.Figure'>,   # 设定使不使用一个figu
 clear=False,                     # 设定当同名figure存在时，是否替换它。系统默认False，即不替换。
 
 '''
-
+'''
+add_subplot() 和 add_axes() 区别
+'''
 fig = plt.figure(figsize=(10, 40))               # 开启一个窗口，同时设置大小，分辨率
 ax1 = fig.add_subplot(4, 1, 1)   # 通过fig添加子图，参数：行数，列数，第几个。
 ax2 = fig.add_subplot(4, 1, 2)   # 通过fig添加子图，参数：行数，列数，第几个。
@@ -160,9 +172,10 @@ ax4.plot(A, A, marker='.', linestyle='--', alpha=0.5, color='r', label='A-A')
 ax4.plot(A, B, label='A-B')
 ax4.plot(A, C, label='A-C')
 
+# plt.savefig("/Users/hiahia/develop/out/python/matplotlib_1")
 plt.show()
 
-
+print("-" * 100)
 
 fig = plt.figure()               # 开启一个窗口，同时设置大小，分辨率
 ax1 = fig.add_subplot(2, 3, 1)   # 通过fig添加子图，参数：行数，列数，第几个。
@@ -173,10 +186,9 @@ ax5 = fig.add_subplot(2, 3, 5)   # 通过fig添加子图，参数：行数，列
 ax6 = fig.add_subplot(2, 3, 6)   # 通过fig添加子图，参数：行数，列数，第几个。
 
 # 设置子图的基本元素
-ax1.set_title('python-drawing')     # 设置图体,plt.title
-
-ax1.set_xlabel('x-name')            # 设置x轴名称,plt.xlabel
-ax1.set_ylabel('y-name')            # 设置y轴名称,plt.ylabel
+ax1.set_title('title 6-1')     # 设置图体,plt.title
+ax1.set_xlabel('x-label')            # 设置x轴名称,plt.xlabel
+ax1.set_ylabel('y-label')            # 设置y轴名称,plt.ylabel
 
 plt.axis([-6, 6, -10, 10])          # 设置横纵坐标轴范围，这个在子图中被分解为下面两个函数
 ax1.set_xlim(-5, 5)                 # 设置横轴范围，会覆盖上面的横坐标,plt.xlim
@@ -199,11 +211,14 @@ plot1 = ax1.plot(x, y, marker='o', color='g', label='legend1')   # 点图:marker
 
 plot2 = ax2.plot(x, y, linestyle='--', alpha=0.5, color='r', label='legend2')   # 线图:linestyle线性，alpha透明度，color颜色，label图例文本
 
+# plt.savefig("/Users/hiahia/develop/out/python/matplotlib_2")
 plt.show()
 
 
 fig = plt.figure(num=1, figsize=(15, 8), dpi=80)    # 开启一个窗口，同时设置大小，分辨率
 ax1 = fig.add_subplot(2, 1, 1)                      # 通过fig添加子图，参数：行数，列数，第几个。
 ax2 = fig.add_subplot(2, 1, 2)                      # 通过fig添加子图，参数：行数，列数，第几个。
-print(fig, ax1, ax2)
+
+
+
 plt.show()
