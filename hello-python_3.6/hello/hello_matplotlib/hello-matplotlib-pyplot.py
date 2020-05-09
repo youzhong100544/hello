@@ -55,8 +55,22 @@ print("~" * 100)
 # np.random.seed(0)
 a = np.random.randint(-10, 20, size=30)
 b = np.random.randint(-10, 20, size=30)
+c = np.arange(1,31)
+
+print("a")
 print(a)
+print("a.min()")
+print(a.min())
+print("a.max()")
+print(a.max())
+print("b")
 print(b)
+print("a.min()")
+print(b.min())
+print("b.max()")
+print(b.max())
+print("c")
+print(c)
 
 print("-" * 100)
 
@@ -133,16 +147,41 @@ ax4.plot(A, C, label="y = x**3")
 '''
 条状图
 '''
-fig = plt.figure(figsize=(15, 10))               # 开启一个窗口，同时设置大小，分辨率
-ax1 = fig.add_subplot(2, 2, 1)   # 通过fig添加子图，参数：行数，列数，第几个。
-ax2 = fig.add_subplot(2, 2, 2)   # 通过fig添加子图，参数：行数，列数，第几个。
-ax3 = fig.add_subplot(2, 2, 3)   # 通过fig添加子图，参数：行数，列数，第几个。
-ax4 = fig.add_subplot(2, 2, 4)   # 通过fig添加子图，参数：行数，列数，第几个。
+'''
+def bar(self, x, height, width=0.8, bottom=None, *, align="center", **kwargs):
+'''
+fig = plt.figure(figsize=(15, 15))               # 开启一个窗口，同时设置大小，分辨率
+ax1 = fig.add_subplot(3, 3, 1)   # 通过fig添加子图，参数：行数，列数，第几个。
+ax2 = fig.add_subplot(3, 3, 2)   # 通过fig添加子图，参数：行数，列数，第几个。
+ax3 = fig.add_subplot(3, 3, 3)   # 通过fig添加子图，参数：行数，列数，第几个。
+ax4 = fig.add_subplot(3, 3, 4)   # 通过fig添加子图，参数：行数，列数，第几个。
+ax5 = fig.add_subplot(3, 3, 5)   # 通过fig添加子图，参数：行数，列数，第几个。
+ax6 = fig.add_subplot(3, 3, 6)   # 通过fig添加子图，参数：行数，列数，第几个。
+ax7 = fig.add_subplot(3, 3, 7)   # 通过fig添加子图，参数：行数，列数，第几个。
+ax8 = fig.add_subplot(3, 3, 8)   # 通过fig添加子图，参数：行数，列数，第几个。
+ax9 = fig.add_subplot(3, 3, 9)   # 通过fig添加子图，参数：行数，列数，第几个。
 
-ax1.bar(range(len(a)), a, width=0.8)
 
-ax2.bar(range(len(a)), a, width=0.8, label='a')
-ax2.bar(range(len(b)), b, width=0.8, label='b')
+ax1.bar(c, c, width=0.8)
+ax2.bar(c, a, width=0.8)
+ax3.bar(a, c, width=0.8)
+
+ax4.bar(x=c, height=c, width=0.8)
+ax5.bar(x=c, height=a, width=0.8)
+
+index = np.arange(30)
+
+ax7.bar(x=index, height=c, width=0.8)
+ax7.bar(x=index+0.8, height=a, width=0.8)
+
+bar_width = 0.3
+ax8.bar(x=index, height=c, width=bar_width, label='c')
+ax8.bar(x=index + bar_width, height=a, width=bar_width, label='a')
+
+ax9.set_xticks(index.tolist())
+ax9.bar(x=index, height=c, width=bar_width, label='c')
+ax9.bar(x=index - bar_width, height=a, width=bar_width, label='a')
+
 plt.legend()
 plt.show()
 
