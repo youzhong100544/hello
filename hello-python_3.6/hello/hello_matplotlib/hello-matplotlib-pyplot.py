@@ -40,9 +40,10 @@ print(mpl.matplotlib_fname())
 print(mpl.get_cachedir())
 
 # 指定默认字体
+# win
 # plt.rcParams['font.sans-serif'] = ['SimHei']
 # plt.rcParams['font.family'] = 'sans-serif'
-
+# mac
 plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
 
 # 用来正常显示负号
