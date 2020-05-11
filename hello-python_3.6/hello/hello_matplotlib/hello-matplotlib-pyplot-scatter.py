@@ -128,6 +128,7 @@ for i in range(len(a)):
 ax3.scatter(a, b)
 ax3.scatter(b, a, s=100, color='r', marker='o', linewidth=1)
 
+
 ax4.scatter(a, b, label="a-b")
 txt = list(zip(a.tolist(), b.tolist()))
 for i in range(len(a)):
