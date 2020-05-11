@@ -40,8 +40,11 @@ print(mpl.matplotlib_fname())
 print(mpl.get_cachedir())
 
 # 指定默认字体
-plt.rcParams['font.sans-serif'] = ['SimHei']
-plt.rcParams['font.family'] = 'sans-serif'
+# plt.rcParams['font.sans-serif'] = ['SimHei']
+# plt.rcParams['font.family'] = 'sans-serif'
+
+plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
+
 # 用来正常显示负号
 plt.rcParams['axes.unicode_minus'] = False
 
@@ -128,6 +131,9 @@ ax4 = fig.add_subplot(2, 2, 4)   # 通过fig添加子图，参数：行数，列
 
 ax1.plot(A, A)
 ax2.plot(A, B)
+# 设置网格线
+ax2.grid(True)
+
 ax3.plot(A, C, marker='o', linestyle='--')
 
 ax4.plot(A, A,
