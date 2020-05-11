@@ -131,9 +131,11 @@ ax3 = fig.add_subplot(2, 2, 3)   # 通过fig添加子图，参数：行数，列
 ax4 = fig.add_subplot(2, 2, 4)   # 通过fig添加子图，参数：行数，列数，第几个。
 
 ax1.plot(A, A)
-ax2.plot(A, B)
+
 # 设置网格线
-ax2.grid(True)
+# ax2.grid(True)
+ax2.plot(A, B)
+
 
 ax3.plot(A, C, marker='o', linestyle='--')
 
@@ -172,8 +174,23 @@ ax8 = fig.add_subplot(3, 3, 8)   # 通过fig添加子图，参数：行数，列
 ax9 = fig.add_subplot(3, 3, 9)   # 通过fig添加子图，参数：行数，列数，第几个。
 
 ax1.bar(c, c, width=0.8)
+
 ax2.bar(c, a, width=0.8)
+'''
+def text(x,y,string,fontsize=15,verticalalignment="top",horizontalalignment="right"):
+
+x,y:表示坐标值上的值
+string:表示说明文字
+fontsize:表示字体大小
+verticalalignment：垂直对齐方式 ，参数：[ ‘center’ | ‘top’ | ‘bottom’ | ‘baseline’ ]
+horizontalalignment：水平对齐方式 ，参数：[ ‘center’ | ‘right’ | ‘left’ ]
+'''
+for index in range(len(c)):
+    ax2.text(c[index], a[index], s=a[index])
+
 ax3.bar(a, c, width=0.8)
+for index in range(len(a)):
+    ax3.text(x=a[index], y=c[index], s=(a[index], c[index]))
 
 ax4.bar(x=c, height=c, width=0.8)
 ax5.bar(x=c, height=a, width=0.8)
@@ -195,6 +212,7 @@ ax9.legend()
 
 plt.show()
 
+
 '''
 def barh(self, y, width, height=0.8, left=None, *, align="center", **kwargs):
 '''
@@ -215,8 +233,11 @@ ax1_barh = ax1.barh(region, price, height=0.3)
 ax1_barh[-1].set_color('green')
 ax1_barh[-4].set_color('r')
 # 给条形图添加数据标注
+'''
+def text(self, x, y, s, fontdict=None, withdash=False, **kwargs):
+'''
 for y, x in enumerate(price):
-    ax1.text(x+500, y-0.2, "%s" %x)
+    ax1.text(x+5, y-0.1, "%s" %x)
 
 plt.show()
 
@@ -261,6 +282,12 @@ print(type(zip_np))
 txt = list(zip_np)
 print(txt)
 print(type(txt))
+'''
+def annotate(self, s, xy, *args, **kwargs):
+s 为注释文本内容 
+xy 为被注释的坐标点
+xytext 为注释文字的坐标位置
+'''
 for i in range(len(a)):
     # 这里xy是需要标记的坐标，xytext是对应的标签坐标
     ax2.annotate(txt[i], xy=(a[i], b[i]), xytext=(a[i]+0.1, b[i]+0.1))
@@ -270,7 +297,17 @@ ax3.scatter(a, b)
 ax3.scatter(b, a, s=100, color='r', marker='o', linewidth=1)
 
 ax4.scatter(a, b, label="a-b")
+txt = list(zip(a.tolist(), b.tolist()))
+for i in range(len(a)):
+    # 这里xy是需要标记的坐标，xytext是对应的标签坐标
+    ax4.annotate(txt[i], xy=(a[i], b[i]), xytext=(a[i]+0.1, b[i]+0.1))
+
 ax4.scatter(b, a, label="b-a")
+txt = list(zip(b.tolist(), a.tolist()))
+for i in range(len(b)):
+    # 这里xy是需要标记的坐标，xytext是对应的标签坐标
+    ax4.annotate(txt[i], xy=(b[i], a[i]), xytext=(b[i]+0.1, a[i]+0.1))
+
 ax4.legend()
 
 
