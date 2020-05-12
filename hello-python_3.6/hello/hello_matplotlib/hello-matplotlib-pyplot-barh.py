@@ -49,52 +49,49 @@ plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
 # 用来正常显示负号
 plt.rcParams['axes.unicode_minus'] = False
 
+# 使用numpy产生数据
+A = np.arange(-4, 5)
+B = A**2
+C = A**3
+print(A)
+print(B)
+print(C)
+print("~" * 100)
 
 # np.random.seed(0)
 a = np.random.randint(-10, 20, size=30)
 b = np.random.randint(-10, 20, size=30)
-c = np.arange(0, 30)
+c = np.arange(1,31)
 
 print("a")
 print(a)
-print("a.len():" + str(len(a)))
-print("a.min():" + str(a.min()))
-print("a.max():" + str(a.max()))
+print("a.min()")
+print(a.min())
+print("a.max()")
+print(a.max())
 print("b")
 print(b)
-print("b.len():" + str(len(b)))
-print("b.min():" + str(b.min()))
-print("b.max():" + str(b.max()))
+print("a.min()")
+print(b.min())
+print("b.max()")
+print(b.max())
 print("c")
 print(c)
-print("c.len():" + str(len(c)))
 
 print("-" * 100)
 
 """
-python中'zip' is not subscriptable
-原因就是在Python3中，zip()返回值变了，Python2中zip()返回一个元组列表，但是Python3中返回一个迭代器，所以需要list(zip())返回一个列表。
+条形图／柱状图
+
+柱状图（纵向）
+条形图（横向）
+
+条形图和柱状图用来比较各独立类别下的单独数据的大小比较
 """
-zip_np = zip(a, b)
-print(zip_np)
-print(type(zip_np))
-
-txt = list(zip_np)
-print(txt)
-print(type(txt))
-
-print("-" * 100)
 
 """
-散点图/气泡图
+def barh(self, y, width, height=0.8, left=None, *, align="center", **kwargs):
 
-散点图作用：
-    单组数据，可以查看数据分布（不常用，最好使用直方图实现）
-    多组数据，可以插件各数据之间是否存在相关性
-
-def scatter(x, y, s=None, c=None, marker=None, cmap=None, norm=None,
-        vmin=None, vmax=None, alpha=None, linewidths=None, verts=None,
-        edgecolors=None, *, data=None, **kwargs):
 """
 fig = plt.figure(figsize=(15, 15))               # 开启一个窗口，同时设置大小，分辨率
 ax1 = fig.add_subplot(3, 3, 1)   # 通过fig添加子图，参数：行数，列数，第几个。
@@ -107,48 +104,18 @@ ax7 = fig.add_subplot(3, 3, 7)   # 通过fig添加子图，参数：行数，列
 ax8 = fig.add_subplot(3, 3, 8)   # 通过fig添加子图，参数：行数，列数，第几个。
 ax9 = fig.add_subplot(3, 3, 9)   # 通过fig添加子图，参数：行数，列数，第几个。
 
-ax1.scatter(a, b)
-
-
-ax2.set_title("标题 9-2")     # 设置图体,plt.title
-ax2.set_xlabel("x-label-a")    # 设置x轴名称,plt.xlabel
-ax2.set_ylabel("y-label-b")    # 设置y轴名称,plt.ylabel
-ax2.scatter(x=a, y=b)
-# python 散点图上给每个点打标签方便看到数据
+region = ["北京", "上海", "长春", "天津", "南京", "深圳"]
+price = [4313, 1222, 3424, 2234, 3334, 2934]
+ax1_barh = ax1.barh(region, price, height=0.3)
+ax1_barh[-1].set_color('green')
+ax1_barh[-4].set_color('r')
+# 给条形图添加数据标注
 """
-def annotate(self, s, xy, *args, **kwargs):
-s 为注释文本内容 
-xy 为被注释的坐标点
-xytext 为注释文字的坐标位置
+def text(self, x, y, s, fontdict=None, withdash=False, **kwargs):
 """
-for i in range(len(a)):
-    # 这里xy是需要标记的坐标，xytext是对应的标签坐标
-    ax2.annotate(s=txt[i], xy=(a[i], b[i]), xytext=(a[i]+0.1, b[i]+0.1))
-
-
-# 大小
-s = 100
-ax3.scatter(a, b, s=s, label="a-b")
-s = np.linspace(10, 200, 30)
-print(s)
-ax3.scatter(b, a, s=s, color='r', marker='o', linewidth=1, label="b-a")
-ax3.legend()
-
-
-ax4.scatter(a, b, label="a-b")
-# txt = list(zip(a.tolist(), b.tolist()))
-txt = list(zip(a, b))
-for i in range(len(a)):
-    # 这里xy是需要标记的坐标，xytext是对应的标签坐标
-    ax4.annotate(txt[i], xy=(a[i], b[i]), xytext=(a[i]+0.1, b[i]+0.1))
-
-ax4.scatter(b, a, label="b-a")
-txt = list(zip(b, a))
-for i in range(len(b)):
-    # 这里xy是需要标记的坐标，xytext是对应的标签坐标
-    ax4.annotate(txt[i], xy=(b[i], a[i]), xytext=(b[i]+0.1, a[i]+0.1))
-
-ax4.legend()
-
+for y, x in enumerate(price):
+    ax1.text(x+5, y-0.1, "%s" %x)
 
 plt.show()
+
+

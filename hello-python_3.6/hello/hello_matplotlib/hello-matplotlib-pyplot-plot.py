@@ -62,6 +62,8 @@ print("~" * 100)
 """
 折线图
 
+折线图用于显示随时间或有序类别的变化趋势
+
 def plot(self, *args, scalex=True, scaley=True, data=None, **kwargs):
 
 Plot y versus x as lines and/or markers.

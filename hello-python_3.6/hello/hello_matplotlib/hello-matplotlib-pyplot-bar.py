@@ -53,7 +53,7 @@ plt.rcParams['axes.unicode_minus'] = False
 # np.random.seed(0)
 a = np.random.randint(-10, 20, size=30)
 b = np.random.randint(-10, 20, size=30)
-c = np.arange(0, 30)
+c = np.arange(1, 31)
 
 print("a")
 print(a)
@@ -71,30 +71,26 @@ print("c.len():" + str(len(c)))
 
 print("-" * 100)
 
-"""
-python中'zip' is not subscriptable
-原因就是在Python3中，zip()返回值变了，Python2中zip()返回一个元组列表，但是Python3中返回一个迭代器，所以需要list(zip())返回一个列表。
-"""
-zip_np = zip(a, b)
-print(zip_np)
-print(type(zip_np))
-
-txt = list(zip_np)
-print(txt)
-print(type(txt))
-
-print("-" * 100)
 
 """
-散点图/气泡图
+条形图／柱状图
 
-散点图作用：
-    单组数据，可以查看数据分布（不常用，最好使用直方图实现）
-    多组数据，可以插件各数据之间是否存在相关性
+柱状图（纵向）
+条形图（横向）
 
-def scatter(x, y, s=None, c=None, marker=None, cmap=None, norm=None,
-        vmin=None, vmax=None, alpha=None, linewidths=None, verts=None,
-        edgecolors=None, *, data=None, **kwargs):
+条形图和柱状图用来比较各独立类别下的单独数据的大小比较
+"""
+
+"""
+def bar(self, x, height, width=0.8, bottom=None, *, align="center", **kwargs):
+
+x：x轴的位置序列，一般采用range函数产生一个序列，但是有时候可以是字符串
+height：y轴的数值序列，也就是柱形图的高度，一般就是我们需要展示的数据；
+width：为柱形图的宽度，一般这是为0.8即可；
+color或facecolor：柱形图填充的颜色；
+alpha：透明度，值越小越透明
+edgecolor：图形边缘颜色
+label：解释每个图像代表的含义，这个参数是为legend()函数做铺垫的，表示该次bar的标签，其中legend()函数loc参数如下：
 """
 fig = plt.figure(figsize=(15, 15))               # 开启一个窗口，同时设置大小，分辨率
 ax1 = fig.add_subplot(3, 3, 1)   # 通过fig添加子图，参数：行数，列数，第几个。
@@ -107,48 +103,42 @@ ax7 = fig.add_subplot(3, 3, 7)   # 通过fig添加子图，参数：行数，列
 ax8 = fig.add_subplot(3, 3, 8)   # 通过fig添加子图，参数：行数，列数，第几个。
 ax9 = fig.add_subplot(3, 3, 9)   # 通过fig添加子图，参数：行数，列数，第几个。
 
-ax1.scatter(a, b)
+ax1.bar(c, c, width=0.8)
 
-
-ax2.set_title("标题 9-2")     # 设置图体,plt.title
-ax2.set_xlabel("x-label-a")    # 设置x轴名称,plt.xlabel
-ax2.set_ylabel("y-label-b")    # 设置y轴名称,plt.ylabel
-ax2.scatter(x=a, y=b)
-# python 散点图上给每个点打标签方便看到数据
+ax2.bar(c, a, width=0.8)
 """
-def annotate(self, s, xy, *args, **kwargs):
-s 为注释文本内容 
-xy 为被注释的坐标点
-xytext 为注释文字的坐标位置
+def text(x,y, string, fontsize=15, verticalalignment="top", horizontalalignment="right"):
+
+x,y:表示坐标值上的值
+string:表示说明文字
+fontsize:表示字体大小
+verticalalignment：垂直对齐方式 ，参数：[ ‘center’ | ‘top’ | ‘bottom’ | ‘baseline’ ]
+horizontalalignment：水平对齐方式 ，参数：[ ‘center’ | ‘right’ | ‘left’ ]
 """
-for i in range(len(a)):
-    # 这里xy是需要标记的坐标，xytext是对应的标签坐标
-    ax2.annotate(s=txt[i], xy=(a[i], b[i]), xytext=(a[i]+0.1, b[i]+0.1))
+for index in range(len(c)):
+    ax2.text(c[index], a[index], s=a[index])
 
+ax3.bar(a, c, width=0.8)
+for index in range(len(a)):
+    ax3.text(x=a[index], y=c[index], s=(a[index], c[index]))
 
-# 大小
-s = 100
-ax3.scatter(a, b, s=s, label="a-b")
-s = np.linspace(10, 200, 30)
-print(s)
-ax3.scatter(b, a, s=s, color='r', marker='o', linewidth=1, label="b-a")
-ax3.legend()
+ax4.bar(x=c, height=c, width=0.8)
+ax5.bar(x=c, height=a, width=0.8)
 
+index = np.arange(30)
 
-ax4.scatter(a, b, label="a-b")
-# txt = list(zip(a.tolist(), b.tolist()))
-txt = list(zip(a, b))
-for i in range(len(a)):
-    # 这里xy是需要标记的坐标，xytext是对应的标签坐标
-    ax4.annotate(txt[i], xy=(a[i], b[i]), xytext=(a[i]+0.1, b[i]+0.1))
+ax7.bar(x=index, height=c, width=0.8)
+ax7.bar(x=index+0.8, height=a, width=0.8)
 
-ax4.scatter(b, a, label="b-a")
-txt = list(zip(b, a))
-for i in range(len(b)):
-    # 这里xy是需要标记的坐标，xytext是对应的标签坐标
-    ax4.annotate(txt[i], xy=(b[i], a[i]), xytext=(b[i]+0.1, a[i]+0.1))
+bar_width = 0.3
+ax8.bar(x=index, height=c, width=bar_width, label="c")
+ax8.bar(x=index + bar_width, height=a, width=bar_width, label="a")
+ax8.legend()
 
-ax4.legend()
+ax9.set_xticks(index.tolist())
+ax9.bar(x=index, height=c, width=bar_width, label='c')
+ax9.bar(x=index - bar_width, height=a, width=bar_width, label='a')
+ax9.legend()
 
 
 plt.show()
