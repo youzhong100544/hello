@@ -70,14 +70,35 @@ print()
 print("打印数据")
 print("- data frame a -")
 print(df_a)
+"""
+   id  class name  Score
+0   1      1   aa      3
+1   2      1   bb      6
+2   2      1   cc      9
+3   3      2   dd     10
+"""
 print()
 
 print("- data frame b -")
 print(df_b)
+"""
+   id  class name  mathematics
+0   1      1   aa            3
+1   2      1   bb            6
+2   2      1   cc            9
+3   3      2   dd           10
+"""
 print()
 
 print("- data frame c -")
 print(df_c)
+"""
+   id  class name  chinese
+0   1      1   aa        3
+1   1      1   bb        6
+2   2      1   cc        9
+3   4      2   dd       10
+"""
 print()
 
 
