@@ -30,8 +30,8 @@ sns.set(style="darkgrid")
 """
 加载内置数据
 """
-# data_anscombe = sns.load_dataset('../../dataset/seaborn-data/anscombe.csv')
-data_anscombe = sns.load_dataset('anscombe.csv')
+data_anscombe = sns.load_dataset('../../dataset/seaborn-data/anscombe.csv')
+# data_anscombe = sns.load_dataset('anscombe.csv')
 
 data_anscombe = sns.load_dataset('anscombe')
 data_attention = sns.load_dataset('attention')
