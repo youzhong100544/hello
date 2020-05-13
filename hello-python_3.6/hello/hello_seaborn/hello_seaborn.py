@@ -21,6 +21,13 @@ print("matplotlib version: {}".format(mpl.__version__))
 print("seaborn version: {}".format(sns.__version__))
 print("sklearn version: {}".format(sklearn.__version__))
 
+
+"""
+推荐博文
+	seaborn 常见绘图总结
+	https://blog.csdn.net/qq_40195360/article/details/86605860
+"""
+
 """
 seaborn 装载了一些默认主题风格，通过 sns.set() 方法实现。
 sns.set()可以设置5种风格的图表背景：darkgrid, whitegrid, dark, white, ticks，通过参数style设置，默认情况下为 darkgrid 风格：
@@ -29,10 +36,14 @@ sns.set(style="darkgrid")
 
 """
 加载内置数据
-"""
-data_anscombe = sns.load_dataset('../../dataset/seaborn-data/anscombe.csv')
-# data_anscombe = sns.load_dataset('anscombe.csv')
 
+解决超市问题
+	1、下载数据
+		https://github.com/mwaskom/seaborn-data
+		
+	2、把下载好的数据放到用户的家目录下
+"""
+data_anscombe = sns.load_dataset('anscombe')
 data_anscombe = sns.load_dataset('anscombe')
 data_attention = sns.load_dataset('attention')
 data_brain_networks = sns.load_dataset('brain_networks')
@@ -54,5 +65,5 @@ data_titanic = sns.load_dataset('titanic')
 """
 打印数据信息
 """
-print(data_titanic)
-print(type(data_titanic))
+print(data_anscombe)
+print(type(data_anscombe))		# 输出:<class 'pandas.core.frame.DataFrame'>
