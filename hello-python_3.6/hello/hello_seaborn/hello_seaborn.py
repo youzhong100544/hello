@@ -24,6 +24,9 @@ print("sklearn version: {}".format(sklearn.__version__))
 
 """
 推荐博文
+	seaborn 0.9 中文文档
+	https://www.cntofu.com/book/172/README.md
+	
 	seaborn 常见绘图总结
 	https://blog.csdn.net/qq_40195360/article/details/86605860
 """
@@ -32,7 +35,15 @@ print("sklearn version: {}".format(sklearn.__version__))
 seaborn 装载了一些默认主题风格，通过 sns.set() 方法实现。
 sns.set()可以设置5种风格的图表背景：darkgrid, whitegrid, dark, white, ticks，通过参数style设置，默认情况下为 darkgrid 风格：
 """
+sns.set() 						# 默认风格
 sns.set(style="darkgrid")
+
+# sns.set_style("whitegrid") 		# 设置风格，总共有5种
+# sns.despine(left=True) 			# 隐藏左边的轴（可以设置上下左右）
+# sns.set_context("paper") 		# 设置线条的粗细，共4种
+# sns.xkcd_rgb("pale red") 		# xkcd命令颜色
+# sns.color_palette() 			# 连续型画板设置
+
 
 """
 加载内置数据
