@@ -59,7 +59,24 @@ data_gammas = sns.load_dataset('gammas')
 data_iris = sns.load_dataset('iris')
 data_mpg = sns.load_dataset('mpg')
 data_planets = sns.load_dataset('planets')
+
+"""
+tips 数据集
+
+total_bill: 总账单
+tip: 小费
+sex: 性别;2种取值(Female 和 Female)
+smoker: 是否抽烟;2种取值(Yes 和 No)
+day: 日期;4种取值(Thur、Fri、Sat、Sun)
+time: 2种取值(Dinner 和 Lunch)
+size: 人数
+"""
 data_tips = sns.load_dataset('tips')
+
+"""
+titanic 数据集
+
+"""
 data_titanic = sns.load_dataset('titanic')
 
 """
