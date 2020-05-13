@@ -111,7 +111,7 @@ clear=False,                     # 设定当同名figure存在时，是否替换
 '''
 add_subplot() 和 add_axes() 区别
 '''
-fig = plt.figure(figsize=(10, 40))               # 开启一个窗口，同时设置大小，分辨率
+fig = plt.figure(figsize=(10, 40), dpi=144)               # 开启一个窗口，同时设置大小，分辨率
 ax1 = fig.add_subplot(4, 1, 1)   # 通过fig添加子图，参数：行数，列数，第几个。
 ax2 = fig.add_subplot(4, 1, 2)   # 通过fig添加子图，参数：行数，列数，第几个。
 ax3 = fig.add_subplot(4, 1, 3)   # 通过fig添加子图，参数：行数，列数，第几个。
