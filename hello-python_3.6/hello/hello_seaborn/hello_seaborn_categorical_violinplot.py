@@ -71,26 +71,34 @@ Categorical plots（分类图）可以具体分为下面三种类型，8个小�
 """
 """
 2.2 Categorical distribution plots（分类分布图）
-2.2.1 boxplot（箱线图）
-boxplot（箱线图，又称为盒须图、盒式图）便于在变量之间或跨类别变量级别比较的方式,显示定量数据的分布情况。
-框显示数据集的四分位数，线显示分布的其余部分，它能显示出一组数据的最大值、最小值、中位数及上下四分位数，使用四分位数范围函数的方法可以确定“离群值”的点。
+2.2.2 violinplot（小提琴图）
+violinplot 与 boxplot 扮演类似的角色，箱线图展示了分位数的位置，它显示了定量数据在一个（或多个）分类变量的多个层次上的分布，这些分布可以进行比较。
+不像箱形图中所有绘图组件都对应于实际数据点，小提琴绘图以基础分布的核密度估计为特征，通过小提琴图可以知道哪些位置的密度较高。
+在图中，白点是中位数，黑色盒型的范围是下四分位点到上四分位点，细黑线表示须。
+外部形状即为核密度估计。
+
+这是一种可以同时显示多个数据分布的有效和有吸引力的方法，但请记住，估计过程受样本大小的影响，相对较小的样本的小提琴手看起来可能会显得非常平滑。
 
 """
 
 """
 categorical.py
 
-def boxplot(x=None, y=None, hue=None, data=None, order=None, hue_order=None,
-            orient=None, color=None, palette=None, saturation=.75,
-            width=.8, dodge=True, fliersize=5, linewidth=None,
-            whis=1.5, ax=None, **kwargs):
+def violinplot(x=None, y=None, hue=None, data=None, order=None, hue_order=None,
+               bw="scott", cut=2, scale="area", scale_hue=True, gridsize=100,
+               width=.8, inner="box", split=False, dodge=True, orient=None,
+               linewidth=None, color=None, palette=None, saturation=.75,
+               ax=None, **kwargs):
 """
 """
-saturation：饱和度，可设置为1；
-width：float，控制箱型图的宽度大小；
-fliersize：float，用于指示离群值观察的标记大小；
-whis：可理解为异常值的上限IQR比例；
-notch：我也不知道……
+bw："scott", "silverman", float，控制拟合程度。在计算内核带宽时，可以引用规则的名称（"scott", "silverman"）或者使用比例（float）。实际内核大小将通过将比例乘以每个bin内数据的标准差来确定；
+cut：空值外壳的延伸超过极值点的密度，float；
+scale："area", "count", "width"，用来缩放每把小提琴的宽度的方法；
+scale_hue：当使用hue分类后，设置为True时，此参数确定是否在主分组变量进行缩放；
+gridsize：设置小提琴图的平滑度，越高越平滑；
+inner："box", "quartile", "point", "stick", None,小提琴内部数据点的表示。分别表示：箱子，四分位，点，数据线和不表示；
+split：是否拆分，当设置为True时，绘制经hue分类的每个级别画出一半的小提琴；
+
 """
 
 
@@ -133,24 +141,19 @@ ax4 = f.add_subplot(3, 3, 4)
 ax5 = f.add_subplot(3, 3, 5)
 ax6 = f.add_subplot(3, 3, 6)
 
+ax1.set_title("标题 9-1")
+sns.violinplot(x="day", y="total_bill", data=data, ax=ax1)
 
-sns.boxplot(x="day", y="total_bill", data=data, ax=ax1)
-
-
-# 这些参数不一定要加，简单最好，这里只是为了展示参数的含义
-sns.boxplot(x="day", y="total_bill", hue="time", data=data, ax=ax2)
-sns.boxplot(x="day", y="total_bill", hue="time", dodge=True, data=data, ax=ax3)
-
-
-sns.boxplot(x="day", y="total_bill", hue="time", dodge=True, data=data, linewidth=0.5, saturation=1, width=1, fliersize=3, ax=ax4)
-
-sns.boxplot(x="day", y="total_bill", data=data, ax=ax5)
-sns.boxplot(x="day", y="tip", data=data, ax=ax5)
+# 设置按性别分类，调色为“Set2”，分割，以计数的方式，不表示内部。
+sns.violinplot(x="day", y="total_bill", hue="sex", data=data, ax=ax2)
+sns.violinplot(x="day", y="total_bill", hue="sex", dodge=True, data=data, ax=ax3)
 
 
-ax = sns.boxplot(x="day", y="total_bill", data=data, ax=ax6)
-print(type(ax))
-print(ax)
+sns.violinplot(x="day", y="total_bill", hue="sex", data=data, split=True, scale="count", ax=ax4)
+
+sns.violinplot(x="day", y="total_bill", hue="sex", data=data, split=True, scale="count", inner=None, ax=ax5)
+
+sns.violinplot(x="day", y="total_bill", hue="sex", data=data, palette="Set2", split=True, scale="count", inner=None, ax=ax6)
 
 
 plt.show()

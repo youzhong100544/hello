@@ -21,6 +21,35 @@ print("matplotlib version: {}".format(mpl.__version__))
 print("seaborn version: {}".format(sns.__version__))
 print("sklearn version: {}".format(sklearn.__version__))
 
+
+# True就是可以换行显示。设置成False的时候不允许换行
+pd.set_option('expand_frame_repr', False)
+# 显示所有列
+pd.set_option('display.max_columns', None)
+# 显示所有行
+pd.set_option('display.max_rows', None)
+# 列长度
+# 设置 value 的显示长度为100，默认为50
+pd.set_option('max_colwidth', 10000)
+# 横向最多显示多少个字符， 一般80不适合横向的屏幕，平时多用200.
+pd.set_option('display.width', 1024)
+# 输出时列名对齐列数据
+# 这两个参数的默认设置都是False
+pd.set_option('display.unicode.ambiguous_as_wide', True)
+pd.set_option('display.unicode.east_asian_width', True)
+
+
+# 指定默认字体
+# win
+# plt.rcParams['font.sans-serif'] = ['SimHei']
+# plt.rcParams['font.family'] = 'sans-serif'
+# mac
+plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
+
+# 用来正常显示负号
+plt.rcParams['axes.unicode_minus'] = False
+
+
 """
 1.Relational plots（关系图）
 Seaborn中介绍的第一种类型的图就是Relational plots（关系图），这里翻译一下官网对他的解释：“统计分析是理解数据集中变量如何相互关联以及这些关系如何依赖于其他变量的过程。可视化可能是这个过程的核心部分，因为当数据被正确地可视化时，人类视觉系统可以看到指示某种关系的趋势和模式。”
