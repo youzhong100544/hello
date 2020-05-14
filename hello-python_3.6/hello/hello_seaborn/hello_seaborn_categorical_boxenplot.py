@@ -62,7 +62,7 @@ Categorical plots（分类图）可以具体分为下面三种类型，8个小�
 	2、Categorical distribution plots（分类分布图）
 		boxplot（箱线图）
 		violinplot（小提琴图）
-		boxenplot（字母价值图？？？）
+		boxenplot（增强的箱型图）
 		
 	3、Categorical estimate plots（分类估计图）
 		pointplot（点图）
@@ -72,7 +72,10 @@ Categorical plots（分类图）可以具体分为下面三种类型，8个小�
 """
 2.2 Categorical distribution plots（分类分布图）
 2.2.3 boxenplot
-
+boxenplot是为更大的数据集绘制增强的箱型图。
+这种风格的绘图最初被命名为“信值图"，因为它显示了大量被定义为“置信区间"的分位数。
+它类似于绘制分布的非参数表示的箱形图，其中所有特征对应于实际观察的数值点。
+通过绘制更多分位数，它提供了有关分布形状的更多信息，特别是尾部数据的分布。
 
 """
 
@@ -86,6 +89,16 @@ def boxenplot(x=None, y=None, hue=None, data=None, order=None, hue_order=None,
               **kwargs):
 """
 """
+作为增强版的boxplot，boxenplot很多参数和boxplot是相似的。现在就剩下不同的参数进行详解
+
+k_depth："proportion" 或 "tukey" 或 "trustworthy"；
+通过增大百分比的粒度控制绘制的盒形图数目。每个参数代表利用不同的统计特性对异常值的数量做出不同的假设。
+
+scale："linear" 或 "exponential" 或 "area"；
+用于控制增强箱型图宽度的方法。所有参数都会给显示效果造成影响。 "linear" 通过恒定的线性因子减小宽度，"exponential" 使用未覆盖的数据的比例调整宽度， "area" 与所覆盖的数据的百分比成比例。
+
+outlier_prop：float；
+被认为是异常值的数据比例。与 k_depth 结合使用以确定要绘制的百分位数。默认值为 0.007 作为异常值的比例。该参数取值应在[0,1]范围内。
 
 """
 

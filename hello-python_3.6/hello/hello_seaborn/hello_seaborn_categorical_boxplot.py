@@ -62,7 +62,7 @@ Categorical plots（分类图）可以具体分为下面三种类型，8个小�
 	2、Categorical distribution plots（分类分布图）
 		boxplot（箱线图）
 		violinplot（小提琴图）
-		boxenplot（字母价值图？？？）
+		boxenplot（增强的箱型图）
 		
 	3、Categorical estimate plots（分类估计图）
 		pointplot（点图）
