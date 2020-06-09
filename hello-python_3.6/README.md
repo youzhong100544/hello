@@ -13,5 +13,16 @@ pip install numpy pandas scipy matplotlib ipython jupyter sympy nose sklearn
 pip install numpy
 pip install pandas
 
+pip3 install pyecharts
+pip3 install echarts-countries-pypkg 
+pip3 install echarts-china-provinces-pypkg  
+pip3 install echarts-china-cities-pypkg
+
+pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple pyecharts echarts-countries-pypkg echarts-china-provinces-pypkg echarts-china-cities-pypkg
+
 
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple numpy pandas scipy matplotlib ipython jupyter sympy nose sklearn
+
+
+pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple xlrd
+
