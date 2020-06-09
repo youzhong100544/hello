@@ -50,21 +50,14 @@ Python webbrowser.open()打开Chrome浏览器
 http://www.voidcn.com/article/p-hqbprxnr-btt.html
 """
 # MacOS
-chrome_path = 'open -a /Applications/Google\ Chrome.app %s'
+MacOS_chrome_path = 'open -a /Applications/Google\ Chrome.app %s'
 
 # Windows
-# chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe %s'
+Windows_chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
 
 # Linux
-# chrome_path = '/usr/bin/google-chrome %s'
+Linux_chrome_path = '/usr/bin/google-chrome %s'
 
-
-
-
-df = pd.read_excel(r'/Users/hiahia/Downloads/pycharts.xlsx')
-print(df)
-print(df.columns)
-print(df.columns.values)
 
 """
 柱状图
@@ -84,7 +77,6 @@ bar.render()
 
 pyecharts graph（关系图） 官网例子weibo.json详解
 https://blog.csdn.net/Kevin_HZH/article/details/91043392
-
 
 """
 
@@ -517,5 +509,6 @@ print(json_content)
 
 """
 
-webbrowser.get(chrome_path).open("render.html")
+# webbrowser.get(chrome_path).open("render.html")
+webbrowser.get().open("render.html")
 
