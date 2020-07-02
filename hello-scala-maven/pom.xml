@@ -58,7 +58,7 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.12</version>
+      <version>8.0.16</version>
     </dependency>
 
     <!-- 导入slf4j的接口包以及对应日志框架的驱动包 -->
